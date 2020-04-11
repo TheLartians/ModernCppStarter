@@ -3,35 +3,31 @@
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 
-# Greeter
+# CMakeStarter
 
-A best-practice git template for modern C++ libraries and projects.
+A template for modern C++ libraries and projects.
 
 ## Features
 
-- Modern CMakeLists.txt
+- Modern CMake practices
 - Suited for single header libraries and larger projects
-- Creates a library that can be installed or included locally
 - Integrated test suite
+- Preconfigured for continuous integration with multiplatform tests via GitHub Workflows
 - Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html)/[Format.cmake](https://github.com/TheLartians/Format.cmake)
-- Continuous integration via GitHub Workflows
-- Reliable dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
-- Check compiler warnings
+- Reliable dependency management that works everywhere via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 
-## Roadmap
-
-- Add code coverage checks
-- Add a script to automatically rename project / switch to single-header mode
- 
 ## Usage
 
 ### Adjust the template to your needs
 
-- Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt)
-- Single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
+- Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
+- Replace the source files with your own
+- For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Have fun!
 
 ### Build and run test suite
+
+Use the following commands from the project's root directory to run the test suite.
 
 ```bash
 cmake -Htest -Bbuild
@@ -43,6 +39,8 @@ CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test
 
 ### Run clang-format
 
+Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
+
 ```bash
 cmake -Htest -Bbuild
 # view changes
@@ -52,3 +50,8 @@ cmake --build build --target fix-format
 ```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
+
+## Coming soon
+
+- Code coverage
+
