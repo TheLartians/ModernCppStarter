@@ -27,8 +27,8 @@ A best-practice git template for modern C++ libraries and projects.
 
 ### Adjust the template to your needs
 
-- Copy this repo and replace all occurrences of "Greeter" in the CMakeLists and Readme with project's name.
-- Note the comments in the CMakeLists for single-header libraries
+- Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt)
+- Single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Have fun!
 
 ### Build and run test suite
