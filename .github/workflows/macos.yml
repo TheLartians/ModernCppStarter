@@ -1,0 +1,25 @@
+name: Style
+
+on: [push]
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: configure
+      run: cmake -Htest -Bbuild
+
+    - name: build
+      run: cmake --build build --config Debug
+
+    - name: test
+      run: |
+        cd build/debug
+        ctest --build-config Debug
