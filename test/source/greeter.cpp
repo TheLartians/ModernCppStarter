@@ -1,6 +1,8 @@
 #include <doctest/doctest.h>
 #include <greeter.h>
 
+#include <sstream>
+
 TEST_CASE("Greeter") {
   using namespace greeter;
 
