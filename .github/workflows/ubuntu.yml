@@ -21,5 +21,5 @@ jobs:
 
     - name: test
       run: |
-        cd build/debug
+        cd build
         ctest --build-config Debug

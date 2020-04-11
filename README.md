@@ -13,7 +13,7 @@ A best-practice git template for modern C++ libraries and projects.
 - Suited for single header libraries and larger projects
 - Creates a library that can be installed or included locally
 - Integrated test suite
-- Code formatting via clang-format via [Format.cmake](https://github.com/TheLartians/Format.cmake)
+- Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html)/[Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Continuous integration via GitHub Workflows
 - Reliable dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Check compiler warnings
