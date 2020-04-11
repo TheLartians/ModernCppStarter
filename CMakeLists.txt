@@ -37,8 +37,9 @@ FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
 # ---- Create library ----
 
-# Note: for single header libraries use the following instead:
-# add_library(Greeter INTERFACE) 
+# Notes:
+# for single header libraries use `add_library(Greeter INTERFACE)` instead 
+# To create an executable use `add_executable(Greeter ${headers} ${sources})`
 add_library(Greeter ${headers} ${sources})
 
 # Note: for single header libraries use the following instead:
