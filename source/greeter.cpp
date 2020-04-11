@@ -13,6 +13,10 @@ std::string Greeter::greet(LanguageCode lang) const {
     case LanguageCode::ES:
       return "¡Hola " + name + "!";
     case LanguageCode::FR:
+#if defined(_WIN32) || defined(WIN32)
+    // this silences a warning as MSVC does not seem to understand strongly-typed enums
+    default:
+#endif
       return "Bonjour " + name + "!";
   }
 }
