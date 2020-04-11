@@ -7,7 +7,7 @@ TEST_CASE("Greeter") {
   Greeter greeter("World");
 
   CHECK(greeter.greet(LanguageCode::EN) == "Hello, World!");
-  CHECK(greeter.greet(LanguageCode::DE) == "Hello, World!");
-  CHECK(greeter.greet(LanguageCode::ES) == "Hello, World!");
-  CHECK(greeter.greet(LanguageCode::FR) == "Hello, World!");
+  CHECK(greeter.greet(LanguageCode::DE) == "Hallo World!");
+  CHECK(greeter.greet(LanguageCode::ES) == "¡Hola World!");
+  CHECK(greeter.greet(LanguageCode::FR) == "Bonjour World!");
 }
