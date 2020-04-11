@@ -1,10 +1,5 @@
 #include <greeter.h>
 
-#if defined(_WIN32) || defined(WIN32)
-// apparently this is required to concat strings
-#  include <sstream>
-#endif
-
 using namespace greeter;
 
 Greeter::Greeter(std::string _name) : name(_name) {}
