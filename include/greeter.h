@@ -10,7 +10,7 @@ namespace greeter {
     std::string name;
 
   public:
-    Greeter(std::string name = "World");
+    Greeter(std::string name);
     std::string greet(LanguageCode lang = LanguageCode::EN) const;
   };
 
