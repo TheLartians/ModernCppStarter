@@ -17,9 +17,9 @@ This template is a collection from learnings of previous projects and should all
 - Modern CMake practices
 - Suited for single header libraries and larger projects
 - Integrated test suite
-- Continuous integration via GitHub Workflows
-- Code coverage via codecov
-- Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html) / [Format.cmake](https://github.com/TheLartians/Format.cmake)
+- Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
+- Code coverage via [codecov](https://codecov.io)
+- Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 
 ## Usage
@@ -29,6 +29,7 @@ This template is a collection from learnings of previous projects and should all
 - Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
+- Replace the codecov token in the [ubuntu workflow](.github/workflows/ubuntu.yml) or remove the codecov step
 - Happy coding!
 
 ### Build and run test suite
