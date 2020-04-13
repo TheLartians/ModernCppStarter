@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
-    - name: install
+    - name: build and install library
       run: |
         cmake -H. -Bbuild
         sudo cmake --build build --target install

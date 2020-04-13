@@ -2,6 +2,7 @@
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Windows/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/Greeter/workflows/Install/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 
 # ModernCPPStarter
 
