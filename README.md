@@ -1,8 +1,8 @@
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
 [![codecov](https://codecov.io/gh/TheLartians/ModernCPPStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCPPStarter)
 
 # ModernCPPStarter
@@ -29,7 +29,7 @@ This template is a collection from learnings of previous projects and should all
 - Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
-- Add your project's codecov token to your projects github secrets under `CODECOV_TOKEN`
+- Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
 
 ### Build and run test suite
