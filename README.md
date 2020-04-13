@@ -29,7 +29,7 @@ This template is a collection from learnings of previous projects and should all
 - Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
-- Add your codecov token in the [ubuntu workflow](.github/workflows/ubuntu.yml) or remove the codecov step
+- Add your project's codecov token to your projects github secrets under `CODECOV_TOKEN`
 - Happy coding!
 
 ### Build and run test suite
