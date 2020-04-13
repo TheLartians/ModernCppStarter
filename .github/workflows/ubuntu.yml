@@ -4,7 +4,7 @@ on: [push]
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
-  CODECOV_TOKEN: "531dc9eb-3fa5-443e-a986-1eed3c795dee"
+  CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
 jobs:
   build:
