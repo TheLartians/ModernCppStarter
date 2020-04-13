@@ -44,6 +44,8 @@ CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test
 ./build/GreeterTests
 ```
 
+To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
+
 ### Run clang-format
 
 Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
