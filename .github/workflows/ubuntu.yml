@@ -4,6 +4,7 @@ on: [push]
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  CODECOV_TOKEN: "531dc9eb-3fa5-443e-a986-1eed3c795dee"
 
 jobs:
   build:
@@ -14,7 +15,7 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: configure
-      run: cmake -Htest -Bbuild
+      run: cmake -Htest -Bbuild -DENABLE_TEST_COVERAGE=1
 
     - name: build
       run: cmake --build build --config Debug
@@ -23,3 +24,6 @@ jobs:
       run: |
         cd build
         ctest --build-config Debug
+
+    - name: collect code coverage
+      run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
