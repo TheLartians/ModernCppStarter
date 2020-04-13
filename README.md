@@ -3,18 +3,21 @@
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 [![Actions Status](https://github.com/TheLartians/Greeter/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
 
-# CMakeStarter
+# ModernCPPStarter
 
-A template for modern C++ libraries and projects.
+A template for starting modern C++ libraries and projects.
+Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code.
+Even more so for modern C++ projects with tests and contiguous integration.
+This template is a collection from learnings of previous projects and should allow quick setting up new modern C++ projects.
 
 ## Features
 
 - Modern CMake practices
 - Suited for single header libraries and larger projects
 - Integrated test suite
-- Preconfigured for continuous integration with multiplatform tests via GitHub Workflows
-- Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html)/[Format.cmake](https://github.com/TheLartians/Format.cmake)
-- Reliable dependency management that works everywhere via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
+- Continuous integration via GitHub Workflows
+- Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html) / [Format.cmake](https://github.com/TheLartians/Format.cmake)
+- Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 
 ## Usage
 
@@ -23,7 +26,7 @@ A template for modern C++ libraries and projects.
 - Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
-- Have fun!
+- Happy coding!
 
 ### Build and run test suite
 
@@ -51,7 +54,25 @@ cmake --build build --target fix-format
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
 
+## FAQ
+
+  - Can I use this for header-only libraries?
+
+    Yes, however you will need to change the library type to an `INTERFACE` library as documented in the [CMakeLists.txt](CMakeLists.txt).
+
+  - You are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
+
+    Glob is considered bad because changes to source files won't be automatically caught by CMakes builders and you will need remember to invoke CMake on any changes.
+    I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
+
+  - I'm adding external dependencies to my project using CPM. Will this force users to use CPM as well?
+
+    CPM should be mostly invisible for your library users as it's self-contained and dependency free.
+    If problems do arise, they can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
+    If you are using `CPMFindPackage` instead of `CPMAddPackage`, CPM will always try to use `find_package` to add packages.
+    This approach should be compatible with any common C++ package manager without any user intervention, however at the cost of reproducible builds.
+
 ## Coming soon
 
 - Code coverage
-
+- Script to automatically update project-specific settings

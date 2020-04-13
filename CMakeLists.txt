@@ -21,9 +21,8 @@ FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
 FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
 # ---- Add dependencies via CPM (if required) ----
-
-# Example: cxxopts
 # see https://github.com/TheLartians/CPM.cmake for more info
+
 # include(cmake/CPM.cmake)
 
 # CPMAddPackage(
