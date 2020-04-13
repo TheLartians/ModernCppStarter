@@ -1,0 +1,30 @@
+name: Install
+
+on: [push]
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: 1
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: install
+      run: |
+        cmake -H. -Bbuild
+        cmake --build build --target install
+
+    - name: configure
+      run: cmake -Htest -Bbuild/test -DTEST_INSTALLED_VERSION=1
+
+    - name: build
+      run: cmake --build build/test --config Debug
+
+    - name: test
+      run: |
+        cd build/test
+        ctest --build-config Debug
