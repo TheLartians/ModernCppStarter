@@ -1,8 +1,14 @@
-[![Actions Status](https://github.com/TheLartians/Greeter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/Greeter/workflows/Windows/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/Greeter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/Greeter/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
-[![Actions Status](https://github.com/TheLartians/Greeter/workflows/Install/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter
+/workflows/MacOS/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter
+/workflows/Windows/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter
+/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter
+/workflows/Style/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCPPStarter
+/workflows/Install/badge.svg)](https://github.com/TheLartians/Greeter/actions)
+[![codecov](https://codecov.io/gh/TheLartians/ModernCPPStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCPPStarter)
 
 # ModernCPPStarter
 
@@ -17,6 +23,7 @@ This template is a collection from learnings of previous projects and should all
 - Suited for single header libraries and larger projects
 - Integrated test suite
 - Continuous integration via GitHub Workflows
+- Code coverage via codecov
 - Code formatting enforced via [clang-format](https://clang.llvm.org/docs/ClangFormat.html) / [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 
@@ -75,5 +82,4 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ## Coming soon
 
-- Code coverage
 - Script to automatically update project-specific settings
