@@ -32,8 +32,8 @@ CPMAddPackage(
 
 # ---- Create binary ----
 
-file(GLOB GreeterTests_sources ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
-add_executable(GreeterTests ${GreeterTests_sources})
+file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+add_executable(GreeterTests ${sources})
 target_link_libraries(GreeterTests doctest Greeter)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
