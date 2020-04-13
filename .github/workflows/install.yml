@@ -16,6 +16,7 @@ jobs:
     - name: install
       run: |
         cmake -H. -Bbuild
+        cmake --build build
         cmake --build build --target install
 
     - name: configure
