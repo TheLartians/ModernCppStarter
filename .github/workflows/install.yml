@@ -16,16 +16,16 @@ jobs:
     - name: install
       run: |
         cmake -H. -Bbuild
-        cmake --build build
-        cmake --build build --target install
+        sudo cmake --build build --target install
+        rm -rf build
 
     - name: configure
-      run: cmake -Htest -Bbuild/test -DTEST_INSTALLED_VERSION=1
+      run: cmake -Htest -Bbuild -DTEST_INSTALLED_VERSION=1
 
     - name: build
-      run: cmake --build build/test --config Debug
+      run: cmake --build build --config Debug
 
     - name: test
       run: |
-        cd build/test
+        cd build
         ctest --build-config Debug
