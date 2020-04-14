@@ -35,12 +35,11 @@ CPMAddPackage(
 
 # ---- Create library ----
 
-# Note:
-# for single header libraries use `add_library(Greeter INTERFACE)` instead 
-add_library(Greeter ${headers} ${sources})
-
-# Note: for single header libraries use the following instead:
+# Note: for single header libraries create an interface target instead:
+# add_library(Greeter INTERFACE)  
 # set_target_properties(Greeter PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
+
+add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 
 # Link dependencies (if required)
