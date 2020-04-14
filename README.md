@@ -87,6 +87,12 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
     Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
     I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
+  - I want to add additional targets to my project. Should I modify the main CMakeLists to conditionally include them?
+
+    If possible, avoid adding conditional includes to the CMakeLists (even though it is a common sight in the C++ world), as it makes the build system convoluted and hard to reason about.
+    Instead, create a new directory with a CMakeLists that adds the main project as a dependency (e.g. just copy the [standalone](standalone) directory).
+    Depending on the complexity of the project it might make sense move this to a separate repository and list a specific version or commit of the main project.
+
   - You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
 
     [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
