@@ -88,7 +88,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
   - You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
 
-    [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible for your library users as it's a self-contained CMake Script.
+    [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
     If problems do arise, users can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
     Alternatively, you could use `CPMFindPackage` instead of `CPMAddPackage`, which will try to use `find_package` before calling `CPMAddPackage` as a fallback.
     Both approaches should be compatible with common C++ package managers without modifications, however come with the cost of reproducible builds.
