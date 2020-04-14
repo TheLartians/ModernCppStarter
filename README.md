@@ -80,7 +80,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
   - How do I package my library / executable into an installer?
 
-    See the [CPack](https://cmake.org/cmake/help/latest/module/CPack.html) documentation.
+    As there are a lot of possible options and configurations, this is not in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more info.
 
 ## Coming soon
 

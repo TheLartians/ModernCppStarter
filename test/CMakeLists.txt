@@ -21,7 +21,7 @@ CPMAddPackage(
 )
 
 if (TEST_INSTALLED_VERSION)
-  find_package(Greeter)
+  find_package(Greeter REQUIRED)
 else()
   CPMAddPackage(
     NAME Greeter
