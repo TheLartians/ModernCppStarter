@@ -48,7 +48,7 @@ set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 # Link dependencies (if required)
 # target_link_libraries(Greeter cxxopts)
 
-# Node: change PUBLIC to INTERFACE for single header libraries  
+# Note: change PUBLIC to INTERFACE for single header libraries  
 target_include_directories(Greeter
   PUBLIC 
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
