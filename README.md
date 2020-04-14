@@ -15,7 +15,8 @@ This template is a collection from learnings of previous projects and should all
 ## Features
 
 - Modern CMake practices
-- Suited for single header libraries and larger projects
+- Suited for single header libraries and projects of any scale
+- Separation into library and executable code
 - Integrated test suite
 - Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
 - Code coverage via [codecov](https://codecov.io)
@@ -27,11 +28,13 @@ This template is a collection from learnings of previous projects and should all
 
 ### Adjust the template to your needs
 
-- Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in [both](test/CMakeLists.txt) [CMakeLists.txt](CMakeLists.txt) with the name of your project
+- Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in the relevant CMakeLists.txt with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
+
+Remember to eventually remove any unused files, such as the standalone directory or irrelevant tests for your project.
 
 ### Build and run the standalone target
 
