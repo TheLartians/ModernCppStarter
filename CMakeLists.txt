@@ -69,10 +69,10 @@ write_basic_package_version_file(
 install(
   TARGETS ${PROJECT_NAME}
   EXPORT ${PROJECT_NAME}Targets
-  LIBRARY DESTINATION lib COMPONENT Runtime
-  ARCHIVE DESTINATION lib COMPONENT Development
-  RUNTIME DESTINATION bin COMPONENT Runtime
-  PUBLIC_HEADER DESTINATION include COMPONENT Development
+  LIBRARY DESTINATION lib/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Runtime
+  ARCHIVE DESTINATION lib/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Development
+  RUNTIME DESTINATION bin/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Runtime
+  PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Development
   BUNDLE DESTINATION bin COMPONENT Runtime
 )
 
@@ -81,12 +81,12 @@ include(CMakePackageConfigHelpers)
 configure_package_config_file(
   "${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in"
   "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION lib/cmake
+  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
 )
 
 install(
   EXPORT ${PROJECT_NAME}Targets 
-  DESTINATION lib/cmake
+  DESTINATION lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
 )
 
 install(
@@ -94,10 +94,10 @@ install(
     "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
     "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
   DESTINATION 
-    lib/cmake
+    lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
 )
 
 install(
   DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-  DESTINATION include
+  DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
 )
