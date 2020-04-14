@@ -32,7 +32,7 @@ This template is the result of learnings from many previous projects and should 
 - Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
 
-Remember to eventually remove any unused files, such as the standalone directory or irrelevant tests for your project.
+Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
 
 ### Build and run the standalone target
 
@@ -81,18 +81,18 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
     Yes, however you will need to change the library type to an `INTERFACE` library as documented in the [CMakeLists.txt](CMakeLists.txt).
 
-  - You are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
+  - I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
-    Glob is considered bad because changes to source files won't be automatically caught by CMakes builders and you will need remember to invoke CMake on any changes.
+    Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
     I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
   - I'm adding external dependencies to my project using CPM. Will this force users to use CPM as well?
 
-    CPM should be mostly invisible for your library users as it's self-contained and dependency free.
+    CPM.cmake should be invisible for your library users as it's a self-contained CMake Script.
     If problems do arise, they can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
-    If you are using `CPMFindPackage` instead of `CPMAddPackage`, CPM will always try to use `find_package` to add packages.
-    This approach should be compatible with any common C++ package manager without any user intervention, however at the cost of reproducible builds.
-    For more info, see the [CPM.cmake documentation](https://github.com/TheLartians/CPM.cmake).
+    If you concerned about this, you should prefer using `CPMFindPackage` instead of `CPMAddPackage`, as then CPM will try to use `find_package` to add packages whenever possible.
+    `CPMFindPackage` approach should also be compatible with any common C++ package manager without modifications, however at the cost of reproducible builds.
+    For more information, see the [CPM.cmake documentation](https://github.com/TheLartians/CPM.cmake).
 
   - Can I configure and build my project offline?
 

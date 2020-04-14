@@ -16,10 +16,10 @@ endif()
 
 # ---- Add source files ----
 
-# Note: globbing sources is considered bad practice as CMake won't detect new files automatically.
-# Remember to always invoke cmake after changing files, or explicitly mention them here.
-FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
-FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
+# Note: globbing sources is considered bad practice as CMake's generators may not detect new files automatically.
+# Keep that in mind when changing files, or explicitly mention them here.
+FILE(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
+FILE(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
@@ -35,12 +35,11 @@ CPMAddPackage(
 
 # ---- Create library ----
 
-# Note:
-# for single header libraries use `add_library(Greeter INTERFACE)` instead 
-add_library(Greeter ${headers} ${sources})
-
-# Note: for single header libraries use the following instead:
+# Note: for single header libraries create an interface target instead:
+# add_library(Greeter INTERFACE)  
 # set_target_properties(Greeter PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
+
+add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 
 # Link dependencies (if required)

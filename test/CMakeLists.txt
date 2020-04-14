@@ -37,7 +37,7 @@ CPMAddPackage(
 
 # ---- Create binary ----
 
-file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(GreeterTests ${sources})
 target_link_libraries(GreeterTests doctest Greeter)
 

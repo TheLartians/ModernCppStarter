@@ -24,8 +24,14 @@ CPMAddPackage(
 
 # ---- Create standalone executable ----
 
-file(GLOB sources ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+
 add_executable(GreeterStandalone ${sources})
-set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-Wall -pedantic -Wextra")
-set_target_properties(GreeterStandalone PROPERTIES OUTPUT_NAME "Greeter")
+
+set_target_properties(GreeterStandalone PROPERTIES 
+  CXX_STANDARD 17 
+  COMPILE_FLAGS "-Wall -pedantic -Wextra"
+  OUTPUT_NAME "Greeter"
+)
+
 target_link_libraries(GreeterStandalone Greeter cxxopts)
