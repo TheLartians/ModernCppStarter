@@ -17,7 +17,7 @@ jobs:
       run: cmake -Htest -Bbuild
 
     - name: build
-      run: cmake --build build --config Debug
+      run: cmake --build build --config Debug -j4
 
     - name: test
       run: |

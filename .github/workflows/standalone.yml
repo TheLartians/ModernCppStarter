@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: configure
-      run: cmake -Hstandalone -Bbuild
+      run: cmake -Hstandalone -Bbuild -GNinja
 
     - name: build
       run: cmake --build build
