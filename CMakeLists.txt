@@ -23,7 +23,7 @@ FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 # ---- Add dependencies via CPM (if required) ----
 # see https://github.com/TheLartians/CPM.cmake for more info
 
-# include(cmake/CPM.cmake)
+include(cmake/CPM.cmake)
 
 # CPMAddPackage(
 #   NAME cxxopts
@@ -56,6 +56,18 @@ target_include_directories(Greeter
 )
 
 # ---- Create an installable target ----
-# this allows users install and find the library via `find_package(Greeter)`.
+# this allows users to install and find the library via `find_package()`.
 
-include(cmake/packaging.cmake)
+CPMAddPackage(
+  NAME PackageProject.cmake
+  GITHUB_REPOSITORY TheLartians/PackageProject.cmake
+  VERSION 1.0
+)
+
+packageProject(
+  NAME ${PROJECT_NAME}
+  VERSION ${PROJECT_VERSION}
+  BINARY_DIR ${PROJECT_BINARY_DIR}
+  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+)
