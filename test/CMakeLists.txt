@@ -16,8 +16,7 @@ include(../cmake/CPM.cmake)
 CPMAddPackage(
   NAME doctest
   GITHUB_REPOSITORY onqtam/doctest
-  VERSION 2.3.2
-  GIT_TAG 2.3.2
+  GIT_TAG 2.3.7
 )
 
 if (TEST_INSTALLED_VERSION)
@@ -50,7 +49,13 @@ endif()
 # ---- Add GreeterTests ----
 
 ENABLE_TESTING() 
-ADD_TEST(GreeterTests GreeterTests)
+
+# use doctest_discover_tests for better CTest support
+include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
+doctest_discover_tests(GreeterTests)
+
+# Note: for general testing frameworks use:
+# ADD_TEST(GreeterTests GreeterTests)
 
 # ---- code coverage ----
 
