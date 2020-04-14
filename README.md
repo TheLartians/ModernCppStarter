@@ -83,7 +83,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
   - I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
-    Glob is considered bad because changes to source files won't be automatically caught by CMakes builders and you will need remember to invoke CMake on any changes.
+    Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
     I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
   - I'm adding external dependencies to my project using CPM. Will this force users to use CPM as well?
