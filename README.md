@@ -26,7 +26,7 @@ This template is a collection from learnings of previous projects and should all
 
 ### Adjust the template to your needs
 
-- Clone this repo and replace all occurrences of "Greeter" in the [CMakeLists.txt](CMakeLists.txt) with the name of your project
+- Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in [both](test/CMakeLists.txt) [CMakeLists.txt](CMakeLists.txt) with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
@@ -80,4 +80,4 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ## Coming soon
 
-- Script to automatically update project-specific settings
+- Script to automatically adjust this template new projects
