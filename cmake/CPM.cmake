@@ -28,7 +28,7 @@
 
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-set(CURRENT_CPM_VERSION 0.17)
+set(CURRENT_CPM_VERSION 0.18)
 
 if(CPM_DIRECTORY)
   if(NOT ${CPM_DIRECTORY} MATCHES ${CMAKE_CURRENT_LIST_DIR})
@@ -70,7 +70,7 @@ endif()
 
 function(cpm_find_package NAME VERSION)
   string(REPLACE " " ";" EXTRA_ARGS "${ARGN}")
-  find_package(${NAME} ${VERSION} ${EXTRA_ARGS})
+  find_package(${NAME} ${VERSION} ${EXTRA_ARGS} QUIET)
   if(${CPM_ARGS_NAME}_FOUND)
     message(STATUS "${CPM_INDENT} using local package ${CPM_ARGS_NAME}@${${CPM_ARGS_NAME}_VERSION}")
     CPMRegisterPackage(${CPM_ARGS_NAME} "${${CPM_ARGS_NAME}_VERSION}")
