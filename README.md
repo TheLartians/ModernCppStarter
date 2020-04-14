@@ -78,6 +78,10 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
     If you are using `CPMFindPackage` instead of `CPMAddPackage`, CPM will always try to use `find_package` to add packages.
     This approach should be compatible with any common C++ package manager without any user intervention, however at the cost of reproducible builds.
 
+  - How do I package my library / executable into an installer?
+
+    See the [CPack](https://cmake.org/cmake/help/latest/module/CPack.html) documentation.
+
 ## Coming soon
 
-- Script to automatically adjust this template new projects
+- Script to automatically adjust this template for new projects
