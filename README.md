@@ -21,7 +21,7 @@ This template is a collection from learnings of previous projects and should all
 - Code coverage via [codecov](https://codecov.io)
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
-- Installable target with versioning information
+- Installable target with versioning information via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 
 ## Usage
 
@@ -80,9 +80,16 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
     This approach should be compatible with any common C++ package manager without any user intervention, however at the cost of reproducible builds.
     For more info, see the [CPM.cmake documentation](https://github.com/TheLartians/CPM.cmake).
 
-  - How do I package my library / executable into an installer?
+  - Can I configure and build my project offline?
 
-    As there are a lot of possible options and configurations, this is not in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more info.
+    Using CPM, all missing dependencies are downloaded at configure time.
+    To avoid redundant downloads, it's recommended to set a CPM cache directory, e.g.: `export CPM_SOURCE_CACHE=$HOME/.cache/CPM`.
+    This will also allow offline configurations if all dependencies are present.
+    No internet connection is required for building.
+
+  - Can I use CPack to create a package installer for my project?
+
+    As there are a lot of possible options and configurations, this is not (yet) in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more information on setting up CPack installers.
 
 ## Coming soon
 

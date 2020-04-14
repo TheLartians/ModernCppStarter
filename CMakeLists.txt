@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 # ---- Project ----
 
+# Note: update this to your new project's name and version
 project(Greeter 
   VERSION 1.0
   LANGUAGES CXX
@@ -20,23 +21,21 @@ endif()
 FILE(GLOB_RECURSE headers "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
 FILE(GLOB_RECURSE sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
 
-# ---- Add dependencies via CPM (if required) ----
+# ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
 
 include(cmake/CPM.cmake)
 
-# CPMAddPackage(
-#   NAME cxxopts
-#   GITHUB_REPOSITORY jarro2783/cxxopts
-#   VERSION 2.2.0
-#   OPTIONS
-#     "CXXOPTS_BUILD_EXAMPLES Off"
-#     "CXXOPTS_BUILD_TESTS Off"
-# )
+# PackageProject.cmake will be used to make our target installable
+CPMAddPackage(
+  NAME PackageProject.cmake
+  GITHUB_REPOSITORY TheLartians/PackageProject.cmake
+  VERSION 1.0
+)
 
 # ---- Create library ----
 
-# Notes:
+# Note:
 # for single header libraries use `add_library(Greeter INTERFACE)` instead 
 # To create an executable use `add_executable(Greeter ${headers} ${sources})`
 add_library(Greeter ${headers} ${sources})
@@ -46,23 +45,17 @@ add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 
 # Link dependencies (if required)
-# target_link_libraries(Greeter cxxopts)
+# target_link_libraries(Greeter PUBLIC cxxopts)
 
 # Note: change PUBLIC to INTERFACE for single header libraries  
 target_include_directories(Greeter
-  PUBLIC 
+  PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
 )
 
 # ---- Create an installable target ----
 # this allows users to install and find the library via `find_package()`.
-
-CPMAddPackage(
-  NAME PackageProject.cmake
-  GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.0
-)
 
 packageProject(
   NAME ${PROJECT_NAME}
