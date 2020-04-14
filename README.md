@@ -5,7 +5,7 @@
 [![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
 [![codecov](https://codecov.io/gh/TheLartians/ModernCPPStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCPPStarter)
 
-# ModernCPPStarter
+# ModernCppStarter
 
 A template for starting modern C++ libraries and projects.
 Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code.
