@@ -58,46 +58,4 @@ target_include_directories(Greeter
 # ---- Create an installable target ----
 # this allows users install and find the library via `find_package(Greeter)`.
 
-include(CMakePackageConfigHelpers)
-
-write_basic_package_version_file(
-  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-  VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion
-)
-
-install(
-  TARGETS ${PROJECT_NAME}
-  EXPORT ${PROJECT_NAME}Targets
-  LIBRARY DESTINATION lib/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Runtime
-  ARCHIVE DESTINATION lib/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Development
-  RUNTIME DESTINATION bin/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Runtime
-  PUBLIC_HEADER DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION} COMPONENT Development
-  BUNDLE DESTINATION bin COMPONENT Runtime
-)
-
-include(CMakePackageConfigHelpers)
-
-configure_package_config_file(
-  "${PROJECT_SOURCE_DIR}/cmake/Config.cmake.in"
-  "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  INSTALL_DESTINATION lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
-)
-
-install(
-  EXPORT ${PROJECT_NAME}Targets 
-  DESTINATION lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
-)
-
-install(
-  FILES 
-    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
-    "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
-  DESTINATION 
-    lib/cmake/${PROJECT_NAME}-${PROJECT_VERSION}
-)
-
-install(
-  DIRECTORY ${PROJECT_SOURCE_DIR}/include/
-  DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
-)
+include(cmake/packaging.cmake)

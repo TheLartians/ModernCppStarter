@@ -21,6 +21,7 @@ This template is a collection from learnings of previous projects and should all
 - Code coverage via [codecov](https://codecov.io)
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
+- Installable target with versioning information
 
 ## Usage
 
@@ -77,6 +78,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
     If problems do arise, they can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
     If you are using `CPMFindPackage` instead of `CPMAddPackage`, CPM will always try to use `find_package` to add packages.
     This approach should be compatible with any common C++ package manager without any user intervention, however at the cost of reproducible builds.
+    For more info, see the [CPM.cmake documentation](https://github.com/TheLartians/CPM.cmake).
 
   - How do I package my library / executable into an installer?
 
@@ -84,4 +86,4 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ## Coming soon
 
-- Script to automatically adjust this template for new projects
+- Script to automatically adjust the template for new projects
