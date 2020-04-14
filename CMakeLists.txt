@@ -37,7 +37,6 @@ CPMAddPackage(
 
 # Note:
 # for single header libraries use `add_library(Greeter INTERFACE)` instead 
-# To create an executable use `add_executable(Greeter ${headers} ${sources})`
 add_library(Greeter ${headers} ${sources})
 
 # Note: for single header libraries use the following instead:

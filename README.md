@@ -15,7 +15,8 @@ This template is a collection from learnings of previous projects and should all
 ## Features
 
 - Modern CMake practices
-- Suited for single header libraries and larger projects
+- Suited for single header libraries and projects of any scale
+- Separation into library and executable code
 - Integrated test suite
 - Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
 - Code coverage via [codecov](https://codecov.io)
@@ -27,22 +28,35 @@ This template is a collection from learnings of previous projects and should all
 
 ### Adjust the template to your needs
 
-- Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in [both](test/CMakeLists.txt) [CMakeLists.txt](CMakeLists.txt) with the name of your project
+- Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in the relevant CMakeLists.txt with the name of your project
 - Replace the source files with your own
 - For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
+
+Remember to eventually remove any unused files, such as the standalone directory or irrelevant tests for your project.
+
+### Build and run the standalone target
+
+Use the following command to build and run the executable target.
+
+```bash
+cmake -Hstandalone -Bbuild/standalone
+cmake --build build/standalone
+./build/standalone/Greeter --help
+```
 
 ### Build and run test suite
 
 Use the following commands from the project's root directory to run the test suite.
 
 ```bash
-cmake -Htest -Bbuild
-cmake --build build
-CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test
+cmake -Htest -Bbuild/test
+cmake --build build/test
+CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
+
 # or simply call the executable: 
-./build/GreeterTests
+./build/test/GreeterTests
 ```
 
 To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
@@ -52,11 +66,13 @@ To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE
 Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
 
 ```bash
-cmake -Htest -Bbuild
+cmake -Htest -Bbuild/test
+
 # view changes
-cmake --build build --target format
+cmake --build build/test --target format
+
 # apply changes
-cmake --build build --target fix-format
+cmake --build build/test --target fix-format
 ```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
