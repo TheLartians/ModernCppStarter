@@ -23,7 +23,7 @@ jobs:
       run: cmake -Htest -Bbuild -DTEST_INSTALLED_VERSION=1
 
     - name: build
-      run: cmake --build build --config Debug
+      run: cmake --build build --config Debug -j4
 
     - name: test
       run: |
