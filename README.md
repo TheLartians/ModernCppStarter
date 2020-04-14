@@ -33,6 +33,7 @@ This template is the result of learnings from many previous projects and should 
 - Happy coding!
 
 Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
+Feel free to replace the License with one suited for your project.
 
 ### Build and run the standalone target
 
