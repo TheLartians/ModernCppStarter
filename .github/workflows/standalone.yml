@@ -14,7 +14,7 @@ jobs:
       run: cmake -Hstandalone -Bbuild
 
     - name: build
-      run: cmake --build build/standalone
+      run: cmake --build build
 
     - name: run
-      run: ./build/standalone/Greeter
+      run: ./build/Greeter
