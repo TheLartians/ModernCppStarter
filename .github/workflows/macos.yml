@@ -14,10 +14,10 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: configure
-      run: cmake -Htest -Bbuild -GNinja
+      run: cmake -Htest -Bbuild
 
     - name: build
-      run: cmake --build build --config Debug
+      run: cmake --build build --config Debug -j4
 
     - name: test
       run: |
