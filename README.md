@@ -33,16 +33,27 @@ This template is a collection from learnings of previous projects and should all
 - Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
 
+### Build and run the standalone target
+
+Use the following command to build and run the executable target.
+
+```bash
+cmake -Hstandalone -Bbuild/standalone
+cmake --build build/standalone
+./build/standalone/Greeter --help
+```
+
 ### Build and run test suite
 
 Use the following commands from the project's root directory to run the test suite.
 
 ```bash
-cmake -Htest -Bbuild
-cmake --build build
-CTEST_OUTPUT_ON_FAILURE=1 cmake --build build --target test
+cmake -Htest -Bbuild/test
+cmake --build build/test
+CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
+
 # or simply call the executable: 
-./build/GreeterTests
+./build/test/GreeterTests
 ```
 
 To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
@@ -52,11 +63,13 @@ To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE
 Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
 
 ```bash
-cmake -Htest -Bbuild
+cmake -Htest -Bbuild/test
+
 # view changes
-cmake --build build --target format
+cmake --build build/test --target format
+
 # apply changes
-cmake --build build --target fix-format
+cmake --build build/test --target fix-format
 ```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
