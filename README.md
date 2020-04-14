@@ -1,9 +1,9 @@
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
-[![Actions Status](https://github.com/TheLartians/ModernCPPStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCPPStarter/actions)
-[![codecov](https://codecov.io/gh/TheLartians/ModernCPPStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCPPStarter)
+[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/MacOS/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Windows/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Ubuntu/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Style/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
+[![Actions Status](https://github.com/TheLartians/ModernCppStarter/workflows/Install/badge.svg)](https://github.com/TheLartians/ModernCppStarter/actions)
+[![codecov](https://codecov.io/gh/TheLartians/ModernCppStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCppStarter)
 
 # ModernCppStarter
 
@@ -86,13 +86,12 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
     Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
     I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
-  - I'm adding external dependencies to my project using CPM. Will this force users to use CPM as well?
+  - You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
 
-    CPM.cmake should be invisible for your library users as it's a self-contained CMake Script.
-    If problems do arise, they can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
-    If you concerned about this, you should prefer using `CPMFindPackage` instead of `CPMAddPackage`, as then CPM will try to use `find_package` to add packages whenever possible.
-    `CPMFindPackage` approach should also be compatible with any common C++ package manager without modifications, however at the cost of reproducible builds.
-    For more information, see the [CPM.cmake documentation](https://github.com/TheLartians/CPM.cmake).
+    [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
+    If problems do arise, users can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
+    Alternatively, you could use `CPMFindPackage` instead of `CPMAddPackage`, which will try to use `find_package` before calling `CPMAddPackage` as a fallback.
+    Both approaches should be compatible with common C++ package managers without modifications, however come with the cost of reproducible builds.
 
   - Can I configure and build my project offline?
 
