@@ -55,12 +55,12 @@ endif()
 
 ENABLE_TESTING() 
 
-# use doctest_discover_tests for better CTest support
+# Note: doctest and similar testing frameworks can automatically configure CMake tests
+# For other testing frameworks add the tests target instead:
+# ADD_TEST(GreeterTests GreeterTests)
+
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
 doctest_discover_tests(GreeterTests)
-
-# Note: for general testing frameworks use:
-# ADD_TEST(GreeterTests GreeterTests)
 
 # ---- code coverage ----
 
