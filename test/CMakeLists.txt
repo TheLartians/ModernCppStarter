@@ -47,7 +47,7 @@ if (NOT TEST_INSTALLED_VERSION)
   if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     target_compile_options(Greeter PUBLIC -Wall -pedantic -Wextra -Werror)
   elseif(MSVC)
-    target_compile_options(Greeter PUBLIC /W4)
+    target_compile_options(Greeter PUBLIC /W4 /WX)
   endif()
 endif()
 
