@@ -42,10 +42,13 @@ target_link_libraries(GreeterTests doctest Greeter)
 
 set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
 
-if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-  target_compile_options(GreeterTests PRIVATE -Wall -pedantic -Wextra -Werror)
-elseif(MSVC)
-  target_compile_options(GreeterTests PRIVATE /W4)
+# enable compiler warnings
+if (NOT TEST_INSTALLED_VERSION)
+  if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+    target_compile_options(Greeter PUBLIC -Wall -pedantic -Wextra -Werror)
+  elseif(MSVC)
+    target_compile_options(Greeter PUBLIC /W4)
+  endif()
 endif()
 
 # ---- Add GreeterTests ----
@@ -62,6 +65,6 @@ doctest_discover_tests(GreeterTests)
 # ---- code coverage ----
 
 if (ENABLE_TEST_COVERAGE)
-  set_target_properties(Greeter PROPERTIES CXX_STANDARD 17 COMPILE_FLAGS "-O0 -g -fprofile-arcs -ftest-coverage --coverage")
+  target_compile_options(Greeter PRIVATE -O0 -g -fprofile-arcs -ftest-coverage --coverage)
   target_link_options(Greeter PUBLIC "--coverage")
 endif()
