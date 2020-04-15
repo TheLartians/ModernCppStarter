@@ -10,7 +10,7 @@ project(Greeter
 
 # ---- Include guards ----
 
-if(${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
+if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
     message(FATAL_ERROR "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there.")
 endif()
 
@@ -35,17 +35,20 @@ CPMAddPackage(
 
 # ---- Create library ----
 
-# Note: for single header libraries create an interface target instead:
+# Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
 # add_library(Greeter INTERFACE)  
 # set_target_properties(Greeter PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
 
 add_library(Greeter ${headers} ${sources})
+
 set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
+
+# beeing a cross-platform target, we enforce enforce standards conformance on MSVC
+target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
 
 # Link dependencies (if required)
 # target_link_libraries(Greeter PUBLIC cxxopts)
 
-# Note: change PUBLIC to INTERFACE for single header libraries  
 target_include_directories(Greeter
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
