@@ -78,38 +78,43 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ## FAQ
 
-  - Can I use this for header-only libraries?
+> Can I use this for header-only libraries?
 
-    Yes, however you will need to change the library type to an `INTERFACE` library as documented in the [CMakeLists.txt](CMakeLists.txt).
+Yes, however you will need to change the library type to an `INTERFACE` library as documented in the [CMakeLists.txt](CMakeLists.txt).
 
-  - I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
+> I don't need a standalone target. How can I get rid of it?
 
-    Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
-    I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
+Simply remove the standalone directory and github workflow file.
 
-  - I want to add additional targets to my project. Should I modify the main CMakeLists to conditionally include them?
+> I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
-    If possible, avoid adding conditional includes to the CMakeLists (even though it is a common sight in the C++ world), as it makes the build system convoluted and hard to reason about.
-    Instead, create a new directory with a CMakeLists that adds the main project as a dependency (e.g. just copy the [standalone](standalone) directory).
-    Depending on the complexity of the project it might make sense move this to a separate repository and list a specific version or commit of the main project.
+Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
+  I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
-  - You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
+> I want to add additional targets to my project. Should I modify the main CMakeLists to conditionally include them?
 
-    [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
-    If problems do arise, users can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
-    Alternatively, you could use `CPMFindPackage` instead of `CPMAddPackage`, which will try to use `find_package` before calling `CPMAddPackage` as a fallback.
-    Both approaches should be compatible with common C++ package managers without modifications, however come with the cost of reproducible builds.
+If possible, avoid adding conditional includes to the CMakeLists (even though it is a common sight in the C++ world), as it makes the build system convoluted and hard to reason about.
+Instead, create a new directory with a CMakeLists that adds the main project as a dependency (e.g. just copy the [standalone](standalone) directory).
+Depending on the complexity of the project it might make sense move the components into separate repositories and use CPM.cmake to add them as dependencies.
+This has the advantage that individual libraries and components can be improved and updated independently.
 
-  - Can I configure and build my project offline?
+> You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
 
-    Using CPM, all missing dependencies are downloaded at configure time.
-    To avoid redundant downloads, it's recommended to set a CPM cache directory, e.g.: `export CPM_SOURCE_CACHE=$HOME/.cache/CPM`.
-    This will also allow offline configurations if all dependencies are present.
-    No internet connection is required for building.
+[CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
+If problems do arise, users can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
+Alternatively, you could use `CPMFindPackage` instead of `CPMAddPackage`, which will try to use `find_package` before calling `CPMAddPackage` as a fallback.
+Both approaches should be compatible with common C++ package managers without modifications, however come with the cost of reproducible builds.
 
-  - Can I use CPack to create a package installer for my project?
+> Can I configure and build my project offline?
 
-    As there are a lot of possible options and configurations, this is not (yet) in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more information on setting up CPack installers.
+Using CPM, all missing dependencies are downloaded at configure time.
+To avoid redundant downloads, it's recommended to set a CPM cache directory, e.g.: `export CPM_SOURCE_CACHE=$HOME/.cache/CPM`.
+This will also allow offline configurations if all dependencies are present.
+No internet connection is required for building.
+
+> Can I use CPack to create a package installer for my project?
+
+As there are a lot of possible options and configurations, this is not (yet) in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more information on setting up CPack installers.
 
 ## Coming soon
 
