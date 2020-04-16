@@ -76,6 +76,15 @@ cmake --build build/test --target fix-format
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
 
+### Additional tools
+
+The project includes an [tools.cmake](cmake/tools.cmake) file that can be used to import additional tools on-demand through CMake configuration arguments.
+The following are currently supported.
+
+- `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`
+- `-DUSE_CCACHE=<YES | NO>`
+
+
 ## FAQ
 
 > Can I use this for header-only libraries?
