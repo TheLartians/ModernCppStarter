@@ -34,6 +34,14 @@ CPMAddPackage(
   VERSION 1.0
 )
 
+CPMAddPackage(
+  NAME StableCoder-cmake-scripts
+  GITHUB_REPOSITORY StableCoder/cmake-scripts
+  GIT_TAG 3a469d8251660a97dbf9e0afff0a242965d40277
+)
+
+include(${StableCoder-cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
+
 # ---- Create binary ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
