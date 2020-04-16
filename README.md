@@ -21,6 +21,7 @@ This template is the result of learnings from many previous projects and should 
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Installable target with versioning information via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
+- Support for [sanitizer tools and more](#additional-tools)
 
 ## Usage
 
@@ -75,6 +76,14 @@ cmake --build build/test --target fix-format
 ```
 
 See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
+
+### Additional tools
+
+The project includes an [tools.cmake](cmake/tools.cmake) file that can be used to import additional tools on-demand through CMake configuration arguments.
+The following are currently supported.
+
+- `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`
+- `-DUSE_CCACHE=<YES | NO>`
 
 ## FAQ
 
