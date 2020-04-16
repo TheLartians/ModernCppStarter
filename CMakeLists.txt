@@ -30,20 +30,15 @@ CPMAddPackage(
   VERSION 1.0
 )
 
-# ---- Add source files ----
-
-# Note: globbing sources is considered bad practice as CMake's generators may not detect new files automatically.
-# Keep that in mind when changing files, or explicitly mention them here.
-FILE(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
-FILE(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
-
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface target:
 # add_library(Greeter INTERFACE)  
 # set_target_properties(Greeter PROPERTIES INTERFACE_COMPILE_FEATURES cxx_std_17)
 
-add_library(Greeter ${headers} ${sources})
+add_library(Greeter 
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/greeter.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/source/greeter.cpp)
 
 set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 
