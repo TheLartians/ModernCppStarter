@@ -84,7 +84,6 @@ The following are currently supported.
 - `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`
 - `-DUSE_CCACHE=<YES | NO>`
 
-
 ## FAQ
 
 > Can I use this for header-only libraries?
