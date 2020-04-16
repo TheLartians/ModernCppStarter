@@ -12,7 +12,7 @@ This template is the result of learnings from many previous projects and should 
 
 ## Features
 
-- Modern CMake practices
+- [Modern CMake practices](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
 - Suited for single header libraries and projects of any scale
 - Separation into library and executable code
 - Integrated test suite
