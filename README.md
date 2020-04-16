@@ -21,6 +21,7 @@ This template is the result of learnings from many previous projects and should 
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Installable target with versioning information via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
+- Support for [sanitizer tools and more](#additional-tools)
 
 ## Usage
 
