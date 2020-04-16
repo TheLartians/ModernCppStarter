@@ -40,6 +40,8 @@ CPMAddPackage(
   GIT_TAG 3a469d8251660a97dbf9e0afff0a242965d40277
 )
 
+# adds support the the `USE_SANITIZER` flag
+# available options are: Address, Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
 include(${StableCoder-cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
 
 # ---- Create binary ----
