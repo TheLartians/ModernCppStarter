@@ -30,7 +30,6 @@ add_executable(GreeterStandalone ${sources})
 
 set_target_properties(GreeterStandalone PROPERTIES 
   CXX_STANDARD 17 
-  COMPILE_FLAGS "-Wall -pedantic -Wextra"
   OUTPUT_NAME "Greeter"
 )
 
