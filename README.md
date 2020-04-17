@@ -11,7 +11,7 @@
 
 # ModernCppStarter
 
-Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code, even more so for modern C++ projects with tests, executables and contiguous integration.
+Setting up a new C++ project usually requires a significant amount of preparation and boilerplate code, even more so for modern C++ projects with tests, executables and continuous integration.
 This template is the result of learnings from many previous projects and should help reduce the work required to setup up a modern C++ project.
 
 ## Features
@@ -33,8 +33,8 @@ This template is the result of learnings from many previous projects and should 
 
 - Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) and replace all occurrences of "Greeter" in the relevant CMakeLists.txt with the name of your project
 - Replace the source files with your own
-- For single-header libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
-- Add your project's codecov token to your project's github secrets under `CODECOV_TOKEN`
+- For header-only libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
+- Add [your project's codecov token](https://docs.codecov.io/docs/quick-start) to your project's github secrets under `CODECOV_TOKEN`
 - Happy coding!
 
 Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
