@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/TheLartians/ModernCppStarter/branch/master/graph/badge.svg)](https://codecov.io/gh/TheLartians/ModernCppStarter)
 
 <p align="center">
-  <img src="https://repository-images.githubusercontent.com/254842585/4dfa7580-7ffb-11ea-99d0-46b8fe2f4170" height="175" />
+  <img src="https://repository-images.githubusercontent.com/254842585/4dfa7580-7ffb-11ea-99d0-46b8fe2f4170" height="175" width="auto" />
 </p>
 
 # ModernCppStarter
@@ -18,7 +18,7 @@ This template is the result of learnings from many previous projects and should 
 
 - [Modern CMake practices](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
 - Suited for single header libraries and projects of any scale
-- Separation into library and executable code
+- Clean separation of library and executable code
 - Integrated test suite
 - Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
 - Code coverage via [codecov](https://codecov.io)
@@ -104,11 +104,11 @@ Simply remove the standalone directory and github workflow file.
 Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.
   I personally prefer the `GLOB` solution for its simplicity, but feel free to change it to explicitly listing sources.
 
-> I want to add additional targets to my project. Should I modify the main CMakeLists to conditionally include them?
+> I want create additional targets that depend on my library. Should I modify the main CMakeLists to include them?
 
-If possible, avoid adding conditional includes to the CMakeLists (even though it is a common sight in the C++ world), as it makes the build system convoluted and hard to reason about.
-Instead, create a new directory with a CMakeLists that adds the main project as a dependency (e.g. just copy the [standalone](standalone) directory).
-Depending on the complexity of the project it might make sense move the components into separate repositories and use CPM.cmake to add them as dependencies.
+Always avoid including derived projects from the from the libraries CMakeLists (even though it is a common sight in the C++ world), as this effectively inverts the dependency tree and makes the build system hard to reason about.
+Instead, create a new directory or project with a CMakeLists that adds the library as a dependency (e.g. like the [standalone](standalone/CMakeLists.txt) directory).
+Depending type it might make sense move these components into a separate repositories and reference a specific commit or version of the library.
 This has the advantage that individual libraries and components can be improved and updated independently.
 
 > You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
