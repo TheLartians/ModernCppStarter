@@ -94,6 +94,7 @@ The following are currently supported.
 > Can I use this for header-only libraries?
 
 Yes, however you will need to change the library type to an `INTERFACE` library as documented in the [CMakeLists.txt](CMakeLists.txt).
+See [here](https://github.com/TheLartians/StaticTypeInfo) for an example header-only library based on the template.
 
 > I don't need a standalone target. How can I get rid of it?
 
