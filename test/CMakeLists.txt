@@ -65,6 +65,6 @@ doctest_discover_tests(GreeterTests)
 # ---- code coverage ----
 
 if (ENABLE_TEST_COVERAGE)
-  target_compile_options(Greeter PRIVATE -O0 -g -fprofile-arcs -ftest-coverage --coverage)
-  target_link_options(Greeter PUBLIC "--coverage")
+  target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
 endif()
