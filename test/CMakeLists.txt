@@ -31,7 +31,7 @@ endif()
 CPMAddPackage(
   NAME Format.cmake
   GITHUB_REPOSITORY TheLartians/Format.cmake
-  VERSION 1.2
+  VERSION 1.3
 )
 
 # ---- Create binary ----
