@@ -3,7 +3,7 @@
 
 #if defined(_WIN32) || defined(WIN32)
 // apparently this is required to compile in MSVC++
-#  include <sstream>
+#  include <ostream>
 #endif
 
 TEST_CASE("Greeter") {
