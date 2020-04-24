@@ -1,10 +1,9 @@
+#if defined(_WIN32) || defined(WIN32)
+#  define DOCTEST_CONFIG_USE_STD_HEADERS
+#endif
+
 #include <doctest/doctest.h>
 #include <greeter.h>
-
-#if defined(_WIN32) || defined(WIN32)
-// apparently this is required to compile in MSVC++
-#  include <ostream>
-#endif
 
 TEST_CASE("Greeter") {
   using namespace greeter;
