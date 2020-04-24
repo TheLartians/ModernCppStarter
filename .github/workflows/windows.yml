@@ -1,6 +1,6 @@
 name: Windows
 
-on: [push]
+on: [push, pull_request]
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
