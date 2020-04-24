@@ -1,11 +1,6 @@
 #include <doctest/doctest.h>
 #include <greeter.h>
 
-#if defined(_WIN32) || defined(WIN32)
-// apparently this is required to compile in MSVC++
-#  include <sstream>
-#endif
-
 TEST_CASE("Greeter") {
   using namespace greeter;
 
