@@ -1,6 +1,12 @@
 name: MacOS
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
