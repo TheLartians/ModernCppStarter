@@ -107,7 +107,7 @@ Glob is considered bad because any changes to the source file structure [might n
 
 > I want create additional targets that depend on my library. Should I modify the main CMakeLists to include them?
 
-Always avoid including derived projects from the from the libraries CMakeLists (even though it is a common sight in the C++ world), as this effectively inverts the dependency tree and makes the build system hard to reason about.
+Always avoid including derived projects from the libraries CMakeLists (even though it is a common sight in the C++ world), as this effectively inverts the dependency tree and makes the build system hard to reason about.
 Instead, create a new directory or project with a CMakeLists that adds the library as a dependency (e.g. like the [standalone](standalone/CMakeLists.txt) directory).
 Depending type it might make sense move these components into a separate repositories and reference a specific commit or version of the library.
 This has the advantage that individual libraries and components can be improved and updated independently.
