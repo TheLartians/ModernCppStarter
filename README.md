@@ -130,6 +130,10 @@ No internet connection is required for building.
 
 As there are a lot of possible options and configurations, this is not (yet) in the scope of this template. See the [CPack documentation](https://cmake.org/cmake/help/latest/module/CPack.html) for more information on setting up CPack installers.
 
+> This is too much, I just want to play with C++ code and test some libraries.
+
+Perhaps the [MiniCppStarter](https://github.com/TheLartians/MiniCppStarter) is something for you!
+
 ## Coming soon
 
 - Script to automatically adjust the template for new projects
