@@ -38,3 +38,4 @@ set_target_properties(GreeterStandalone PROPERTIES
 )
 
 target_link_libraries(GreeterStandalone Greeter cxxopts)
+target_compile_definitions(GreeterStandalone PRIVATE -DGREETER_VERSION=\"${Greeter_VERSION}\")
