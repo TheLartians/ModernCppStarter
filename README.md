@@ -127,8 +127,8 @@ Simply remove the standalone / documentation directory and according github work
 > Can I build the standalone and tests at the same time?
 
 To keep the template modular, projects have been separated into their own CMake modules.
-However it's easy to create a new directory, say `all`, that uses CPM.cmake to add both the standalone and the tests (as well as any other subprojects).
-It's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project mode difficult to be used as a library.
+However it's easy to create a new directory, say `all`, that uses `CPMAddProject` to add both the standalone and the tests as well as any other subprojects to a single build.
+Note, that it's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project more difficult for others to be used as a library.
 
 > I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
