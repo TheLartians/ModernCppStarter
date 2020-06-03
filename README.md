@@ -24,8 +24,8 @@ This template is the result of learnings from many previous projects and should 
 - Code coverage via [codecov](https://codecov.io)
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
-- Installable target with versioning information via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
-- Automatic documentation generation and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
+- Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
+- Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
 
 ## Usage
