@@ -103,8 +103,8 @@ Features</h2>
 <li>Code coverage via <a href="https://codecov.io">codecov</a></li>
 <li>Code formatting enforced by <a href="https://clang.llvm.org/docs/ClangFormat.html">clang-format</a> via <a href="https://github.com/TheLartians/Format.cmake">Format.cmake</a></li>
 <li>Reproducible dependency management via <a href="https://github.com/TheLartians/CPM.cmake">CPM.cmake</a></li>
-<li>Installable target with versioning information via <a href="https://github.com/TheLartians/PackageProject.cmake">PackageProject.cmake</a></li>
-<li>Automatic documentation generation with <a href="https://www.doxygen.nl">Doxygen</a></li>
+<li>Installable target with automatic versioning information and header generation via <a href="https://github.com/TheLartians/PackageProject.cmake">PackageProject.cmake</a></li>
+<li>Automatic <a href="https://thelartians.github.io/ModernCppStarter">documentation</a> and deployment with <a href="https://www.doxygen.nl">Doxygen</a> and <a href="https://pages.github.com">GitHub Pages</a></li>
 <li>Support for <a href="#additional-tools">sanitizer tools, and more</a></li>
 </ul>
 <h2><a class="anchor" id="autotoc_md2"></a>
@@ -148,7 +148,7 @@ Run clang-format</h3>
 </div><!-- fragment --><p>See <a href="https://github.com/TheLartians/Format.cmake">Format.cmake</a> for more options.</p>
 <h3><a class="anchor" id="autotoc_md7"></a>
 Build the documentation</h3>
-<p>The documentation is automatically built and updated after every <a href="https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository">release</a>. To manually build documentation, call the following command.</p>
+<p>The documentation is automatically built and <a href="https://thelartians.github.io/ModernCppStarter">published</a> whenever a <a href="https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository">GitHub Release</a> is created. To manually build documentation, call the following command.</p>
 <div class="fragment"><div class="line">cmake -Hdocumentation -Bbuild/doc</div>
 <div class="line">cmake --build build/doc --target GenerateDocs</div>
 <div class="line"># view the docs</div>
@@ -221,4 +221,3 @@ Coming soon</h2>
 </div>
 </body>
 </html>
-
