@@ -100,6 +100,7 @@ The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake)
 The following are currently supported.
 
 #### Sanitizers
+
 Sanitizers can be enabled by configuring CMake with `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
 
 #### Static Analyzers
