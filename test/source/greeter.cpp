@@ -1,5 +1,4 @@
 #include <doctest/doctest.h>
-
 #include <greeter/greeter.h>
 #include <greeter/version.h>
 
