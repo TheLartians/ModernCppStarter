@@ -8,7 +8,7 @@ namespace greeter {
   enum class LanguageCode { EN, DE, ES, FR };
 
   /**
-   * A class for greeting in multiple languages
+   * A class for saying hello in multiple languages
    */
   class Greeter {
     std::string name;

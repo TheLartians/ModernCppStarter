@@ -123,6 +123,12 @@ See [here](https://github.com/TheLartians/StaticTypeInfo) for an example header-
 
 Simply remove the standalone / documentation directory and according github workflow file.
 
+> Can I build the standalone and tests at the same time?
+
+To keep the template modular, projects have been separated into their own CMake modules.
+However it's easy to create a new directory, say `all`, that uses CPM.cmake to add both the standalone and the tests (as well as any other subprojects).
+It's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project mode difficult to be used as a library.
+
 > I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
 Glob is considered bad because any changes to the source file structure [might not be automatically caught](https://cmake.org/cmake/help/latest/command/file.html#filesystem) by CMake's builders and you will need to manually invoke CMake on changes.

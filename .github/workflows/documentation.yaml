@@ -1,0 +1,27 @@
+name: Documentation
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    name: Build and publish documentation
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install doxygen
+        run: brew install doxygen
+
+      - name: Build
+        run: |
+          cmake -Hdocumentation -Bbuild
+          cmake --build build --target GenerateDocs
+
+      - name: Publish
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/doxygen/html

@@ -4,10 +4,10 @@
 TEST_CASE("Greeter") {
   using namespace greeter;
 
-  Greeter greeter("World");
+  Greeter greeter("Tests");
 
-  CHECK(greeter.greet(LanguageCode::EN) == "Hello, World!");
-  CHECK(greeter.greet(LanguageCode::DE) == "Hallo World!");
-  CHECK(greeter.greet(LanguageCode::ES) == "¡Hola World!");
-  CHECK(greeter.greet(LanguageCode::FR) == "Bonjour World!");
+  CHECK(greeter.greet(LanguageCode::EN) == "Hello, Tests!");
+  CHECK(greeter.greet(LanguageCode::DE) == "Hallo Tests!");
+  CHECK(greeter.greet(LanguageCode::ES) == "¡Hola Tests!");
+  CHECK(greeter.greet(LanguageCode::FR) == "Bonjour Tests!");
 }
