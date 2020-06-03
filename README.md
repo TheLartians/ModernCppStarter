@@ -25,7 +25,7 @@ This template is the result of learnings from many previous projects and should 
 - Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Installable target with versioning information via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
-- Automatic documentation generation with [Doxygen](https://www.doxygen.nl)
+- Automatic documentation generation and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
 
 ## Usage
@@ -84,7 +84,7 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ### Build the documentation
 
-The documentation is automatically built and updated after every [release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository).
+The documentation is automatically built and [published](https://thelartians.github.io/ModernCppStarter) whenever a [GitHub Release](https://help.github.com/en/github/administering-a-repository/managing-releases-in-a-repository) is created.
 To manually build documentation, call the following command.
 
 ```bash
