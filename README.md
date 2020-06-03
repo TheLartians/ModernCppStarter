@@ -128,7 +128,7 @@ Simply remove the standalone / documentation directory and according github work
 
 To keep the template modular, projects have been separated into their own CMake modules.
 However it's easy to create a new directory, say `all`, that uses `CPMAddProject` to add both the standalone and the tests as well as any other subprojects to a single build.
-Note, that it's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project more difficult for others to be used as a library.
+Note, that it's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project more difficult for others to use as a library.
 
 > I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
