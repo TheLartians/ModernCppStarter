@@ -10,14 +10,40 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
 # enables sanitizers support using the the `USE_SANITIZER` flag
 # available values are: Address, Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
-if (USE_SANITIZER)
+if (USE_SANITIZER OR USE_STATIC_ANALYZER)
   CPMAddPackage(
     NAME StableCoder-cmake-scripts
     GITHUB_REPOSITORY StableCoder/cmake-scripts
-    GIT_TAG 3a469d8251660a97dbf9e0afff0a242965d40277
+    GIT_TAG 3d2d5a9fb26f0ce24e3e4eaeeff686ec2ecfb3fb
   )
   
-  include(${StableCoder-cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
+  if (USE_SANITIZER)
+    include(${StableCoder-cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
+  endif()
+
+  if (USE_STATIC_ANALYZER)
+    if ("clang-tidy" IN_LIST USE_STATIC_ANALYZER)
+      SET(CLANG_TIDY ON CACHE INTERNAL "")
+    else()
+      SET(CLANG_TIDY OFF CACHE INTERNAL "")
+    endif()
+    if ("iwyu" IN_LIST USE_STATIC_ANALYZER)
+      SET(IWYU ON CACHE INTERNAL "")
+    else()
+      SET(IWYU OFF CACHE INTERNAL "")
+    endif()
+    if ("cppcheck" IN_LIST USE_STATIC_ANALYZER)
+      SET(CPPCHECK ON CACHE INTERNAL "")
+    else()
+      SET(CPPCHECK OFF CACHE INTERNAL "")
+    endif()
+
+    include(${StableCoder-cmake-scripts_SOURCE_DIR}/tools.cmake)
+
+    clang_tidy(${CLANG_TIDY_ARGS})
+    include_what_you_use(${IWYU_ARGS})
+    cppcheck(${CPPCHECK_ARGS})
+  endif()
 endif()
 
 # enables CCACHE support through the USE_CCACHE flag
