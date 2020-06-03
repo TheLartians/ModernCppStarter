@@ -1,4 +1,5 @@
-#include <greeter.h>
+#include <greeter/greeter.h>
+#include <greeter/version.h>
 
 #include <cxxopts.hpp>
 #include <iostream>

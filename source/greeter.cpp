@@ -1,4 +1,4 @@
-#include <greeter.h>
+#include <greeter/greeter.h>
 
 using namespace greeter;
 
