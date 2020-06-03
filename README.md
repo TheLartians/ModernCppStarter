@@ -83,11 +83,12 @@ See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options
 
 ### Additional tools
 
-The project includes an [tools.cmake](cmake/tools.cmake) file that can be used to import additional tools on-demand through CMake configuration arguments.
+The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
 The following are currently supported.
 
-- `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`
-- `-DUSE_CCACHE=<YES | NO>`
+- **Sanitizers**, by setting `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
+- **Static Analyzers**, by setting `-DUSE_STATIC_ANALYZER=<clang-tidy | iwyu | cppcheck>`, or a combination of those in quotation marks, separated by semicolons. Arguments can be passed to the analyzers by setting the `CLANG_TIDY_ARGS`, `IWYU_ARGS` or `CPPCHECK_ARGS` variables.
+- **Ccache**, by setting `-DUSE_CCACHE=<ON | OFF>`.
 
 ## FAQ
 
