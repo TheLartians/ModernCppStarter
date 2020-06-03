@@ -23,7 +23,7 @@ include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME PackageProject.cmake
   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.2.1
+  VERSION 1.3
 )
 
 # ---- Add source files ----
@@ -58,11 +58,16 @@ target_include_directories(Greeter
 # ---- Create an installable target ----
 # this allows users to install and find the library via `find_package()`.
 
+# the location where the project's version header will be placed
+# should match the project's regular header paths
+string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
+
 packageProject(
   NAME ${PROJECT_NAME}
   VERSION ${PROJECT_VERSION}
   BINARY_DIR ${PROJECT_BINARY_DIR}
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   DEPENDENCIES ""
 )
