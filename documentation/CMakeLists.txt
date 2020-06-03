@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
-project(GreeterDocumentation
-  LANGUAGES CXX
-)
+project(GreeterDocs)
 
 # ---- Dependencies ----
 
@@ -24,7 +22,12 @@ CPMAddPackage(
 set(BUILD_DOCUMENTATION ON CACHE INTERNAL "")
 include(${StableCoder-cmake-scripts_SOURCE_DIR}/doxygen.cmake)
 
-# see https://github.com/StableCoder/cmake-scripts#doxygen-doxygencmake for options
+# set Doxyfile variables
+set(DOXYGEN_PROJECT_NAME Greeter)
+set(DOXYGEN_PROJECT_VERSION ${Greeter_VERSION})
+set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
+
+# see https://github.com/StableCoder/cmake-scripts#doxygen-doxygencmake for additional options
 build_docs(
   TARGET_NAME GenerateDocs
   DOXYFILE_PATH ${CMAKE_CURRENT_LIST_DIR}/Doxyfile
