@@ -4,10 +4,6 @@ project(GreeterDocumentation
   LANGUAGES CXX
 )
 
-# --- Import tools ----
-
-include(../cmake/tools.cmake)
-
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
