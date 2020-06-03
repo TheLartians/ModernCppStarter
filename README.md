@@ -87,8 +87,8 @@ The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake)
 The following are currently supported.
 
 - **Sanitizers**, by setting `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
-- **Static Analyzers**, by setting `-DUSE_STATIC_ANALYZER=<clang-tidy | iwyu | cppcheck>`, or a combination in quotation marks, separated by semicolons. Arguments can be passed to the analyzers by setting the `CLANG_TIDY_ARGS`, `IWYU_ARGS` or `CPPCHECK_ARGS` variables.
-- **Ccache**, by setting `-DUSE_CCACHE=<YES | NO>`.
+- **Static Analyzers**, by setting `-DUSE_STATIC_ANALYZER=<clang-tidy | iwyu | cppcheck>`, or a combination of those in quotation marks, separated by semicolons. Arguments can be passed to the analyzers by setting the `CLANG_TIDY_ARGS`, `IWYU_ARGS` or `CPPCHECK_ARGS` variables.
+- **Ccache**, by setting `-DUSE_CCACHE=<ON | OFF>`.
 
 ## FAQ
 
