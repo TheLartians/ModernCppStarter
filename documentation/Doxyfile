@@ -1,0 +1,25 @@
+# Configuration for Doxygen for use with CMake
+# Only options that deviate from the default are included
+# To create a new Doxyfile containing all available options, call `doxygen -g`
+
+# Get Project name and version from CMake
+PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
+PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
+
+# Add sources
+INPUT = @DOXYGEN_PROJECT_ROOT@/README.md @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@/source
+EXTRACT_ALL = YES
+RECURSIVE = YES
+
+# We don't want local paths in the documentation
+FULL_PATH_NAMES = NO
+
+# Use the README as a main page
+USE_MDFILE_AS_MAINPAGE = @DOXYGEN_PROJECT_ROOT@/README.md
+
+# Create nicer looking HTML
+HTML_DYNAMIC_SECTIONS = YES
+GENERATE_TREEVIEW = YES
+
+# We don't need LaTeX generation
+GENERATE_LATEX = NO

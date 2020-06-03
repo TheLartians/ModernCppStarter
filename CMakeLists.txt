@@ -23,7 +23,7 @@ include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME PackageProject.cmake
   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.2
+  VERSION 1.2.1
 )
 
 # ---- Add source files ----
