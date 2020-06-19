@@ -1,0 +1,35 @@
+// This is the configuration file for the PVS-Studio static analyzer.
+// https://www.viva64.com/en/pvs-studio/
+//
+// This file can be used to suppress false positives in macros, annotate specific functions,
+// and so on. See the following documentation sections for details:
+//  * Suppression of false alarms          - https://www.viva64.com/en/m/0017/
+//  * Additional diagnostics configuration - https://www.viva64.com/en/m/0040/
+//
+// For instance, you can use this file to specify an alias for a system function.
+// Sometimes projects use custom implementations of certain system functions such as memcpy,
+// malloc, and so on. In this case, the analyzer will not be able to recognize their
+// behavior as that of their standard counterparts. Using the V_FUNC_ALIAS annotation,
+// you can specify which custom functions correspond to which system ones. Comment format:
+//   //V_FUNC_ALIAS, implementation:sysf, function:f, namespace:ns, class:c
+//
+// For example:
+//   //V_FUNC_ALIAS, implementation:memcpy, function:MyMemCpy
+//
+// Now the analyzer will process calls to the MyMemCpy function in the same way it processes
+// calls to memcpy. For example, the following code will trigger the V512 warning:
+//   int buf[] = { 1, 2, 3, 4 };
+//   int out[2];
+//   MyMemCpy (out, buf, 4 * sizeof(int)); // Warning!
+//
+// You can also use this file to suppress warnings on lines that contain a specific
+// character sequence. This option is typically useful for mass suppression of warnings
+// triggered by a certain macro.
+// //-V:TEST_MACRO:1001, 105, 201
+// This comment turns off the warnings V105, V201, and V1001 for the line where the macro
+// TEST_MACRO is used.
+//
+// As already mentioned, all these and other settings are described in detail in the
+// documentation sections the links to which are given at the beginning of this document.
+
+//-V:SUPPRESS_EXAMPLE_MY_MACROS:501
