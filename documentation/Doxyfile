@@ -3,10 +3,11 @@
 # To create a new Doxyfile containing all available options, call `doxygen -g`
 
 # Get Project name and version from CMake
-PROJECT_NAME = Greeter
+PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
+PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
 
 # Add sources
-INPUT = ../README.md ../include ../source
+INPUT = @DOXYGEN_PROJECT_ROOT@/README.md @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@/source
 EXTRACT_ALL = YES
 RECURSIVE = YES
 
@@ -14,7 +15,7 @@ RECURSIVE = YES
 FULL_PATH_NAMES = NO
 
 # Use the README as a main page
-USE_MDFILE_AS_MAINPAGE = ../README.md
+USE_MDFILE_AS_MAINPAGE = @DOXYGEN_PROJECT_ROOT@/README.md
 
 # Create nicer looking HTML
 HTML_DYNAMIC_SECTIONS = YES
@@ -22,3 +23,9 @@ GENERATE_TREEVIEW = YES
 
 # We don't need LaTeX generation
 GENERATE_LATEX = NO
+
+# Setup m.css
+GENERATE_HTML           = NO
+GENERATE_XML            = YES
+XML_PROGRAMLISTING      = NO
+OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIRECTORY@

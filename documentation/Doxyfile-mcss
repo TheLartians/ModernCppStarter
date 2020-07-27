@@ -1,5 +1,0 @@
-@INCLUDE                = Doxyfile
-GENERATE_HTML           = NO
-GENERATE_XML            = YES
-XML_PROGRAMLISTING      = NO
-OUTPUT_DIRECTORY        = ../build/doc/doxygen
