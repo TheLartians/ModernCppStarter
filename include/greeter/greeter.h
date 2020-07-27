@@ -1,5 +1,9 @@
 #pragma once
 
+/** @file
+ * @brief Class @ref greeter::Greeter
+ */
+
 #include <string>
 
 /**
