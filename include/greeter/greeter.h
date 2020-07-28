@@ -1,14 +1,7 @@
 #pragma once
 
-/** @file
- * @brief Class @ref greeter::Greeter
- */
-
 #include <string>
 
-/**
- * @brief The greeter namespace
- */
 namespace greeter {
 
   /**  Language codes to be used with the Greeter class */

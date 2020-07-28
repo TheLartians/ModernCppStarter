@@ -7,25 +7,24 @@ PROJECT_NAME = @DOXYGEN_PROJECT_NAME@
 PROJECT_NUMBER = @DOXYGEN_PROJECT_VERSION@
 
 # Add sources
-INPUT = @DOXYGEN_PROJECT_ROOT@/README.md @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@/source @DOXYGEN_PROJECT_ROOT@/documentation
+INPUT = @DOXYGEN_PROJECT_ROOT@/README.md @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@/documentation/pages
 EXTRACT_ALL = YES
 RECURSIVE = YES
+OUTPUT_DIRECTORY = @DOXYGEN_OUTPUT_DIRECTORY@
 
-# We don't want local paths in the documentation
-FULL_PATH_NAMES = NO
+# set relative include paths
+FULL_PATH_NAMES = YES
+STRIP_FROM_PATH = @DOXYGEN_PROJECT_ROOT@/include @DOXYGEN_PROJECT_ROOT@
 
 # Use the README as a main page
 USE_MDFILE_AS_MAINPAGE = @DOXYGEN_PROJECT_ROOT@/README.md
 
-# Create nicer looking HTML
-HTML_DYNAMIC_SECTIONS = YES
-GENERATE_TREEVIEW = YES
-
-# We don't need LaTeX generation
+# We use m.css to generate the html documentation, so we only need XML output
+GENERATE_XML = YES
+GENERATE_HTML = NO
 GENERATE_LATEX = NO
+XML_PROGRAMLISTING = NO
+CREATE_SUBDIRS = NO
 
-# Setup m.css
-GENERATE_HTML           = NO
-GENERATE_XML            = YES
-XML_PROGRAMLISTING      = NO
-OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIRECTORY@
+# without this option m.css will hide all files, namespaces etc. without explicit documentation
+M_SHOW_UNDOCUMENTED = YES

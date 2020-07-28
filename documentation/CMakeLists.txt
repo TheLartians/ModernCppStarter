@@ -13,12 +13,13 @@ CPMAddPackage(
 
 CPMAddPackage(
   NAME MCSS
-  GITHUB_REPOSITORY mosra/m.css
-  GIT_TAG e6eff549fb5edeabacf01369d6b845a2a59c2ebe
+  GITHUB_REPOSITORY TheLartians/m.css
+  # using a local patch until https://github.com/mosra/m.css/pull/171 is resolved
+  GIT_TAG 1bf162b96d5bfefc9967a80cef138f1270ffa415
   DOWNLOAD_ONLY YES
 )
 
-# ---- Doxygen + m.css ----
+# ---- Doxygen variables ----
 
 # set Doxyfile variables
 set(DOXYGEN_PROJECT_NAME Greeter)
