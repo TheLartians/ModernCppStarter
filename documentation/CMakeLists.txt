@@ -12,25 +12,35 @@ CPMAddPackage(
 )
 
 CPMAddPackage(
-  NAME StableCoder-cmake-scripts
-  GITHUB_REPOSITORY StableCoder/cmake-scripts
-  GIT_TAG 3d2d5a9fb26f0ce24e3e4eaeeff686ec2ecfb3fb
+  NAME MCSS
+  DOWNLOAD_ONLY YES
+  # patched version until https://github.com/mosra/m.css/pull/171 is resolved
+  GITHUB_REPOSITORY TheLartians/m.css
+  GIT_TAG 1bf162b96d5bfefc9967a80cef138f1270ffa415
 )
 
-# ---- Doxygen ----
-
-set(BUILD_DOCUMENTATION ON CACHE INTERNAL "")
-include(${StableCoder-cmake-scripts_SOURCE_DIR}/doxygen.cmake)
+# ---- Doxygen variables ----
 
 # set Doxyfile variables
 set(DOXYGEN_PROJECT_NAME Greeter)
 set(DOXYGEN_PROJECT_VERSION ${Greeter_VERSION})
 set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
+set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doxygen")
 
-# see https://github.com/StableCoder/cmake-scripts#doxygen-doxygencmake for additional options
-build_docs(
-  TARGET_NAME GenerateDocs
-  DOXYFILE_PATH ${CMAKE_CURRENT_LIST_DIR}/Doxyfile
-  OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/doxygen
-  PROCESS_DOXYFILE ON
+configure_file(
+  ${CMAKE_CURRENT_LIST_DIR}/Doxyfile
+  ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
+)
+
+configure_file(
+  ${CMAKE_CURRENT_LIST_DIR}/conf.py
+  ${CMAKE_CURRENT_BINARY_DIR}/conf.py
+)
+
+add_custom_target(
+  GenerateDocs
+  ${CMAKE_COMMAND} -E make_directory "${DOXYGEN_OUTPUT_DIRECTORY}"
+  COMMAND "${MCSS_SOURCE_DIR}/documentation/doxygen.py" "${CMAKE_CURRENT_BINARY_DIR}/conf.py"
+  COMMAND echo "Docs written to: ${DOXYGEN_OUTPUT_DIRECTORY}"
+  WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 )

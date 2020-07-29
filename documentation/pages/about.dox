@@ -1,0 +1,5 @@
+/** @page about About
+  @section doc ModernCppStarter Documentation 
+  This is the auto-generated documentation for the initial project of the ModernCppStater.
+  It shows how we can use Doxygen to automatically build a browsable documentation for your projects.
+*/
