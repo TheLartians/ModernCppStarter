@@ -94,6 +94,8 @@ cmake --build build/doc --target GenerateDocs
 open build/doc/doxygen/html/index.html
 ```
 
+To build the documentation locally, you will need Doxygen, jinja2 and Pygments on installed your system.
+
 ### Additional tools
 
 The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
