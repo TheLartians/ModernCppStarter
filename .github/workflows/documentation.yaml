@@ -12,8 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Install doxygen
-        run: brew install doxygen
+      - name: Install dependencies
+        run: |
+          brew install doxygen
+          pip install jinja2 Pygments
 
       - name: Build
         run: |
