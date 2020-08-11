@@ -6,10 +6,7 @@ project(GreeterDocs)
 
 include(../cmake/CPM.cmake)
 
-CPMAddPackage(
-  NAME Greeter
-  SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..
-)
+CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 CPMAddPackage(
   NAME MCSS
@@ -27,15 +24,9 @@ set(DOXYGEN_PROJECT_VERSION ${Greeter_VERSION})
 set(DOXYGEN_PROJECT_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
 set(DOXYGEN_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/doxygen")
 
-configure_file(
-  ${CMAKE_CURRENT_LIST_DIR}/Doxyfile
-  ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
-)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
-configure_file(
-  ${CMAKE_CURRENT_LIST_DIR}/conf.py
-  ${CMAKE_CURRENT_BINARY_DIR}/conf.py
-)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/conf.py ${CMAKE_CURRENT_BINARY_DIR}/conf.py)
 
 add_custom_target(
   GenerateDocs

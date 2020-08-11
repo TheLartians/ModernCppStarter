@@ -22,7 +22,7 @@ This template is the result of learnings from many previous projects and should 
 - Integrated test suite
 - Continuous integration via [GitHub Actions](https://help.github.com/en/actions/)
 - Code coverage via [codecov](https://codecov.io)
-- Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
+- Code formatting enforced by [clang-format](https://clang.llvm.org/docs/ClangFormat.html) and [cmake-format](https://github.com/cheshirekow/cmake_format) via [Format.cmake](https://github.com/TheLartians/Format.cmake)
 - Reproducible dependency management via [CPM.cmake](https://github.com/TheLartians/CPM.cmake)
 - Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
@@ -68,7 +68,8 @@ To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE
 
 ### Run clang-format
 
-Use the following commands from the project's root directory to run clang-format (must be installed on the host system).
+Use the following commands from the project's root directory to check and fix C++ and CMake source style.
+This requires _clang-format_, _cmake-format_ and _pyyaml_ to be installed on the current system.
 
 ```bash
 cmake -Htest -Bbuild/test
@@ -80,7 +81,7 @@ cmake --build build/test --target format
 cmake --build build/test --target fix-format
 ```
 
-See [Format.cmake](https://github.com/TheLartians/Format.cmake) for more options.
+See [Format.cmake](https://github.com/TheLartians/Format.cmake) for details.
 
 ### Build the documentation
 

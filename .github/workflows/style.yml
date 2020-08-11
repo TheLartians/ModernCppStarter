@@ -16,8 +16,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     
-    - name: Install clang-format
-      run: brew install clang-format
+    - name: Install format dependencies
+      run: |
+        brew install clang-format
+        pip install cmake_format pyyaml
 
     - name: configure
       run: cmake -Htest -Bbuild
