@@ -69,7 +69,7 @@ To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE
 ### Run clang-format
 
 Use the following commands from the project's root directory to check and fix C++ and CMake source style.
-The targets require clang-format, cmake-format and pyyaml to be installed on the current system.
+This requires _clang-format_, _cmake-format_ and _pyyaml_ to be installed on the current system.
 
 ```bash
 cmake -Htest -Bbuild/test
@@ -81,7 +81,7 @@ cmake --build build/test --target format
 cmake --build build/test --target fix-format
 ```
 
-See [Format.cmake](https://github.com/TheLartians/Format.cmake) for details and additional options.
+See [Format.cmake](https://github.com/TheLartians/Format.cmake) for details.
 
 ### Build the documentation
 
