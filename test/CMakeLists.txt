@@ -33,8 +33,6 @@ CPMAddPackage(
   VERSION 1.6
   OPTIONS # enable cmake formatting
           "FORMAT_CHECK_CMAKE ON"
-          # skip CPM.cmake
-          "CMAKE_FORMAT_EXCLUDE cmake/CPM.cmake"
 )
 
 # ---- Create binary ----
