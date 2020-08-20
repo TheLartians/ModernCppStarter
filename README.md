@@ -41,6 +41,9 @@ This template is the result of learnings from many previous projects and should 
 Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
 Feel free to replace the License with one suited for your project.
 
+To cleanly separate the library and subproject code, the outer `CMakeList.txt` only defines the library itself while the tests and other subprojects are self-contained in their own directories. 
+During development it is usually convenient to [build all subprojects at once](#build-everything-at-once).
+
 ### Build and run the standalone target
 
 Use the following command to build and run the executable target.
@@ -97,6 +100,25 @@ open build/doc/doxygen/html/index.html
 
 To build the documentation locally, you will need Doxygen, jinja2 and Pygments on installed your system.
 
+### Build everything at once
+
+The project also includes an `all` directory that allows building all targets at the same time.
+This is useful during development, as it exposes all subprojects to your IDE and avoids redundant builds of the library.
+
+```bash
+cmake -Hall -Bbuild
+cmake --build build
+
+# run tests
+./build/test/GreeterTests
+# format code
+cmake --build build --target fix-format
+# run standalone
+./build/standalone/Greeter --help
+# build docs
+cmake --build build --target GenerateDocs
+```
+
 ### Additional tools
 
 The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
@@ -127,11 +149,12 @@ See [here](https://github.com/TheLartians/StaticTypeInfo) for an example header-
 
 Simply remove the standalone / documentation directory and according github workflow file.
 
-> Can I build the standalone and tests at the same time?
+> Can I build the standalone and tests at the same time? / How can I tell my IDE about all subprojects?
 
-To keep the template modular, projects have been separated into their own CMake modules.
-However it's easy to create a new directory, say `all`, that uses `CPMAddProject` to add both the standalone and the tests as well as any other subprojects to a single build.
-Note, that it's not recommended to include the standalone or tests from the main CMakeLists, as it will make the project more difficult for others to use as a library.
+To keep the template modular, all subprojects derived from the library have been separated into their own CMake modules.
+This approach makes it trivial for third-party projects to re-use the projects library code.
+To allow IDEs to see the full scope of the project, the template includes the `all` directory that will create a single build for all subprojects.
+Use this as the main directory for best IDE support.
 
 > I see you are using `GLOB` to add source files in CMakeLists.txt. Isn't that evil?
 
