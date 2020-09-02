@@ -1,10 +1,7 @@
 # this file contains a list of tools that can be activated and downloaded on-demand each tool is
 # enabled during configuration by passing an additional `-DUSE_<TOOL>=<VALUE>` argument to CMake
 
-# only activate tools for top level project
-if(NOT PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
-  return()
-endif()
+include_guard(DIRECTORY)
 
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
