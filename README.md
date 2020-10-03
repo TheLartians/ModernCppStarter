@@ -119,6 +119,48 @@ cmake --build build --target fix-format
 cmake --build build --target GenerateDocs
 ```
 
+### Build and Run Docker image
+
+The project has support to Docker, that allows building and running tests inside a container.
+This container builds all targets, so you can run any of them passing a command after "sh -c".
+
+```bash
+docker build . -t modern-cpp-starter
+
+docker run modern-cpp-starter
+```
+
+Running tests
+
+```bash
+docker build . -t modern-cpp-starter
+
+docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
+```
+
+### Build and Run Docker Compose
+
+The project has support to Docker Compose, that allows building and running your project with other containers.
+This container builds all targets, so you can run any of them passing a command after "sh -c".
+
+Running all containers
+
+```bash
+docker-compose up --build
+```
+
+Running only your project
+
+```bash
+docker-compose run application
+```
+
+Runing tests
+
+```bash
+docker-compose run application sh -c "./build/test/GreeterTests"
+```
+
 ### Additional tools
 
 The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
