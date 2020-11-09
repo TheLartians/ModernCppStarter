@@ -666,8 +666,10 @@ if(typeof document !== 'undefined') {
             } else if(event.key == 'Tab' && !event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
                 /* But only if the input has selection at the end */
                 let input = document.getElementById('search-input');
-                if(input.selectionEnd == input.value.length && input.selectionStart != input.selectionEnd)
+                if(input.selectionEnd == input.value.length && input.selectionStart != input.selectionEnd) {
                     input.setSelectionRange(input.value.length, input.value.length);
+                    return false; /* so input won't lose focus */
+                }
 
             /* Select next item */
             } else if(event.key == 'ArrowDown') {
