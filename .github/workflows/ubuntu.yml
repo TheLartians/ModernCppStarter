@@ -21,10 +21,10 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: configure
-      run: cmake -Htest -Bbuild -DENABLE_TEST_COVERAGE=1
+      run: cmake -Htest -Bbuild -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
 
     - name: build
-      run: cmake --build build --config Debug -j4
+      run: cmake --build build -j4
 
     - name: test
       run: |
