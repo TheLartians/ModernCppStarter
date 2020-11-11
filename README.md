@@ -149,7 +149,7 @@ docker build . -t modern-cpp-starter
 docker run modern-cpp-starter
 ```
 
-Running tests
+Running tests.
 
 ```bash
 docker build . -t modern-cpp-starter
@@ -157,23 +157,21 @@ docker build . -t modern-cpp-starter
 docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
 ```
 
-### Build and Run Docker Compose
-
 The docker-compose can be used to manage a multi-container applications. Since this container builds all targets, you can build any specific targer passing its name after "sh -c".
 
-Running all containers
+Running all containers.
 
 ```bash
 docker-compose up --build
 ```
 
-Running only your project
+Running only your project.
 
 ```bash
 docker-compose run application
 ```
 
-Runing tests
+Runing tests.
 
 ```bash
 docker-compose run application sh -c "./build/test/GreeterTests"
