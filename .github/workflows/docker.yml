@@ -16,8 +16,8 @@ jobs:
       steps:
       - uses: actions/checkout@v2
 
-      - name: Build
+      - name: build
         run: docker-compose build
 
-      - name: Run
+      - name: run
         run: docker-compose run application
