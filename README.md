@@ -119,7 +119,26 @@ cmake --build build --target fix-format
 cmake --build build --target GenerateDocs
 ```
 
-### Build and Run Docker image
+### Additional tools
+
+The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
+The following are currently supported.
+
+#### Sanitizers
+
+Sanitizers can be enabled by configuring CMake with `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
+
+#### Static Analyzers
+
+Static Analyzers can be enabled by setting `-DUSE_STATIC_ANALYZER=<clang-tidy | iwyu | cppcheck>`, or a combination of those in quotation marks, separated by semicolons.
+By default, analyzers will automatically find configuration files such as `.clang-format`.
+Additional arguments can be passed to the analyzers by setting the `CLANG_TIDY_ARGS`, `IWYU_ARGS` or `CPPCHECK_ARGS` variables.
+
+#### Ccache
+
+Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
+
+## Docker
 
 The project has support to Docker, that allows building and running tests inside a container.
 This container builds all targets, so you can run any of them passing a command after `sh -c`.
@@ -140,8 +159,7 @@ docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
 
 ### Build and Run Docker Compose
 
-The project has support to Docker Compose, that allows building and running your project with other containers.
-This container builds all targets, so you can run any of them passing a command after "sh -c".
+The docker-compose can be used to manage a multi-container applications. Since this container builds all targets, you can build any specific targer passing its name after "sh -c".
 
 Running all containers
 
@@ -160,25 +178,6 @@ Runing tests
 ```bash
 docker-compose run application sh -c "./build/test/GreeterTests"
 ```
-
-### Additional tools
-
-The test and standalone subprojects include the [tools.cmake](cmake/tools.cmake) file which is used to import additional tools on-demand through CMake configuration arguments.
-The following are currently supported.
-
-#### Sanitizers
-
-Sanitizers can be enabled by configuring CMake with `-DUSE_SANITIZER=<Address | Memory | MemoryWithOrigins | Undefined | Thread | Leak | 'Address;Undefined'>`.
-
-#### Static Analyzers
-
-Static Analyzers can be enabled by setting `-DUSE_STATIC_ANALYZER=<clang-tidy | iwyu | cppcheck>`, or a combination of those in quotation marks, separated by semicolons.
-By default, analyzers will automatically find configuration files such as `.clang-format`.
-Additional arguments can be passed to the analyzers by setting the `CLANG_TIDY_ARGS`, `IWYU_ARGS` or `CPPCHECK_ARGS` variables.
-
-#### Ccache
-
-Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
 
 ## FAQ
 
