@@ -3,5 +3,5 @@ version: "3.8"
 services:
     application:
         build: .
-        image: moder-cpp-starter
-        container_name: modern-cpp-starter
+        image: greeter
+        container_name: greeter
