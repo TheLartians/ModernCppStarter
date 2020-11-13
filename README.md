@@ -140,42 +140,38 @@ Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
 
 ## Docker
 
-The project has support to Docker, that allows building and running tests inside a container.
-This container builds all targets, so you can run any of them passing a command after `sh -c`.
+The project supports [Docker](https://www.docker.com) out-of-the-box, which allows building and running the project inside a container.
+The container builds all targets, so you can run any of them passing a command after `sh -c`.
+
+### Docker Workflow
 
 ```bash
+# build
 docker build . -t modern-cpp-starter
-
+# run tests
+docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
+# run standalone
 docker run modern-cpp-starter
 ```
 
-Running tests.
+### Docker Compose Workflow
 
 ```bash
-docker build . -t modern-cpp-starter
-
-docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
-```
-
-The docker-compose can be used to manage a multi-container applications. Since this container builds all targets, you can build any specific targer passing its name after "sh -c".
-
-Running all containers.
-
-```bash
+# build
 docker-compose up --build
-```
-
-Running only your project.
-
-```bash
+# run tests
+docker-compose run application sh -c "./build/test/GreeterTests"
+# run standalone
 docker-compose run application
 ```
 
-Runing tests.
+### Removing Docker Support
 
-```bash
-docker-compose run application sh -c "./build/test/GreeterTests"
-```
+Docker support is optional, if you don't need it simply remove the following files from the starter:
+
+- `.github/workflows/docker.yml`
+- `Dockerfile`
+- `docker-compose.yml`
 
 ## FAQ
 
