@@ -27,4 +27,4 @@ add_executable(GreeterStandalone ${sources})
 
 set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
 
-target_link_libraries(GreeterStandalone Greeter cxxopts)
+target_link_libraries(GreeterStandalone Greeter::Greeter cxxopts)
