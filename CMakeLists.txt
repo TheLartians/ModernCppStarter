@@ -27,7 +27,7 @@ include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME PackageProject.cmake
   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.3
+  VERSION 1.4
 )
 
 # ---- Add source files ----
@@ -67,6 +67,7 @@ string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 packageProject(
   NAME ${PROJECT_NAME}
   VERSION ${PROJECT_VERSION}
+  NAMESPACE ${PROJECT_NAME}
   BINARY_DIR ${PROJECT_BINARY_DIR}
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
