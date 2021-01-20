@@ -23,6 +23,8 @@ jobs:
           pip3 install jinja2 Pygments
 
       - name: Build
+        env:
+           CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: |
           cmake -Sdocumentation -Bbuild
           cmake --build build --target GenerateDocs

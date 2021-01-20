@@ -32,7 +32,7 @@ jobs:
 
       - name: configure
         env:
-          CPM_SOURCE_CACHE: ${{ env.GITHUB_WORKSPACE }}/cpm_modules
+          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
 
       - name: build
