@@ -26,7 +26,9 @@ jobs:
           key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
+        env:
+          CPM_SOURCE_CACHE: ${{ env.GITHUB_WORKSPACE }}/cpm_modules
+        run: cmake -Stest -Bbuild -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
 
       - name: build
         run: cmake --build build -j4

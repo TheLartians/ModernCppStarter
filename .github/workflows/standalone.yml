@@ -22,6 +22,8 @@ jobs:
           key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
+        env:
+          CPM_SOURCE_CACHE: ${{ env.GITHUB_WORKSPACE }}/cpm_modules
         run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug -DCMAKE_BUILD_TYPE=Debug
 
       - name: build

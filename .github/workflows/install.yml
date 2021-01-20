@@ -31,7 +31,9 @@ jobs:
           rm -rf build
 
       - name: configure
-        run: cmake -Stest -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules -DTEST_INSTALLED_VERSION=1
+        env:
+          CPM_SOURCE_CACHE: ${{ env.GITHUB_WORKSPACE }}/cpm_modules
+        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
 
       - name: build
         run: cmake --build build --config Debug -j4

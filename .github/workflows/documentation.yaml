@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-          cmake -Sdocumentation -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules
+          cmake -Sdocumentation -Bbuild
           cmake --build build --target GenerateDocs
 
       - name: Publish

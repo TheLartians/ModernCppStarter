@@ -27,7 +27,9 @@ jobs:
           pip3 install cmake_format==0.6.11 pyyaml
 
       - name: configure
-        run: cmake -Stest -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules
+        env:
+          CPM_SOURCE_CACHE: ${{ env.GITHUB_WORKSPACE }}/cpm_modules
+        run: cmake -Stest -Bbuild
 
       - name: check style
         run: cmake --build build --target check-format
