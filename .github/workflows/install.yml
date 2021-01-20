@@ -22,7 +22,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: '**/cpm_modules'
-          key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          key: ${{ runner.os }}-cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: build and install library
         run: |
