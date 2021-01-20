@@ -25,9 +25,9 @@ jobs:
           key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: |
-          mkdir -p cpm_modules
-          cmake -Stest -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules
+        env:
+          CPM_SOURCE_CACHE: ${{GITHUB_WORKSPACE}}/cpm_modules
+        run: cmake -Stest -Bbuild
 
       - name: build
         run: cmake --build build --config Debug -j4
