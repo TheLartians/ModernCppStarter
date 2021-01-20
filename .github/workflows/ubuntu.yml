@@ -18,18 +18,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: configure
-      run: cmake -Htest -Bbuild -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
+      - uses: actions/checkout@v1
 
-    - name: build
-      run: cmake --build build -j4
+      - uses: actions/cache@v2
+        with:
+          path: '**/cpm_modules'
+          key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-    - name: test
-      run: |
-        cd build
-        ctest --build-config Debug
+      - name: configure
+        run: cmake -Stest -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
 
-    - name: collect code coverage
-      run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      - name: build
+        run: cmake --build build -j4
+
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug
+
+      - name: collect code coverage
+        run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

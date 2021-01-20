@@ -12,6 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - uses: actions/cache@v2
+        with:
+          path: '**/cpm_modules'
+          key: cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+
       - name: Install dependencies
         run: |
           brew install doxygen
@@ -19,7 +24,7 @@ jobs:
 
       - name: Build
         run: |
-          cmake -Hdocumentation -Bbuild
+          cmake -Sdocumentation -Bbuild -DCPM_SOURCE_CACHE=$(pwd)/cpm_modules
           cmake --build build --target GenerateDocs
 
       - name: Publish
