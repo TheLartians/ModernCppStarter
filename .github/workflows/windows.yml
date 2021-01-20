@@ -13,19 +13,25 @@ env:
 
 jobs:
   build:
-
     runs-on: windows-latest
-    
+
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: configure
-      run: cmake -Htest -Bbuild
+      - uses: actions/checkout@v1
 
-    - name: build
-      run: cmake --build build --config Debug -j4
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.action }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-    - name: test
-      run: |
-        cd build
-        ctest --build-config Debug
+      - name: configure
+        env:
+          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+        run: cmake -Stest -Bbuild
+
+      - name: build
+        run: cmake --build build --config Debug -j4
+
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug
