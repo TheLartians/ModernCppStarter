@@ -18,7 +18,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: "**/cpm_modules"
-          key: ${{ github.action }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
         env:
