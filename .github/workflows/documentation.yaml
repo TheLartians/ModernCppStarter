@@ -3,7 +3,7 @@ name: Documentation
 on:
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
 
       - uses: actions/cache@v2
         with:
-          path: '**/cpm_modules'
+          path: "**/cpm_modules"
           key: ${{ runner.os }}-cpm-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: Install dependencies
@@ -24,7 +24,7 @@ jobs:
 
       - name: Build
         env:
-           CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: |
           cmake -Sdocumentation -Bbuild
           cmake --build build --target GenerateDocs
