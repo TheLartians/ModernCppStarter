@@ -24,8 +24,10 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: build and install library
+        env:
+          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: |
-          cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
           sudo cmake --build build --target install
           rm -rf build
 
