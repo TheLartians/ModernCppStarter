@@ -8,6 +8,9 @@ on:
     branches:
       - master
 
+env:
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+
 jobs:
   build:
     runs-on: macos-latest
@@ -26,8 +29,6 @@ jobs:
           pip3 install cmake_format==0.6.11 pyyaml
 
       - name: configure
-        env:
-          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: cmake -Stest -Bbuild
 
       - name: check style

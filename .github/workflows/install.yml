@@ -10,6 +10,7 @@ on:
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
   build:
@@ -25,13 +26,11 @@ jobs:
 
       - name: build and install library
         run: |
-          cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
           sudo cmake --build build --target install
           rm -rf build
 
       - name: configure
-        env:
-          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
 
       - name: build

@@ -10,6 +10,7 @@ on:
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
   build:
@@ -24,8 +25,6 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        env:
-          CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
         run: cmake -Stest -Bbuild
 
       - name: build
