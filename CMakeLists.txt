@@ -66,10 +66,11 @@ target_compile_features(Greeter PUBLIC cxx_std_17)
 target_sources(Greeter PRIVATE ${headers} ${sources})
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
+# this should not exported on UNIX! CK
+# FIXME target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
 
 # Link dependencies (if required)
-target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
+target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -91,6 +92,5 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  # semicolon separated list of the project's dependencies
-  # XXX DEPENDENCIES fmt
+  DEPENDENCIES fmt
 )
