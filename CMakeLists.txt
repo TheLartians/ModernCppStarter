@@ -20,9 +20,11 @@ endif()
 
 # ---- Project settings ----
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS NO)
+if(NOT DEFINED CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD_REQUIRED ON)
+  set(CMAKE_CXX_EXTENSIONS NO)
+endif()
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
@@ -36,8 +38,8 @@ CPMAddPackage(
   VERSION 1.4
 )
 
-find_package(fmt)
-if(NOT TARGET fmt::fmt)
+find_package(fmt 6)
+if(NOT TARGET fmt::fmt-header-only)
   # FIXME this add a target without namespace! CK
   CPMAddPackage(
     NAME fmt
@@ -67,7 +69,7 @@ target_sources(Greeter PRIVATE ${headers} ${sources})
 target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
 
 # Link dependencies (if required)
-target_link_libraries(Greeter PRIVATE fmt::fmt)
+target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -90,7 +92,5 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   # semicolon separated list of the project's dependencies
-  DEPENDENCIES fmt
-  # install your library with a namespace! (do NOT add extra '::')
-  NAMESPACE ${PROJECT_NAME}
+  # XXX DEPENDENCIES fmt
 )
