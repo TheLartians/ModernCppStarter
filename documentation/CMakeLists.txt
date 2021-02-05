@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14...3.19 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 project(GreeterDocs)
 

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14...3.19 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 project(GreeterTests LANGUAGES CXX)
 
@@ -15,15 +15,11 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-find_package(doctest)
-if(NOT TARGET doctest::doctest)
-  # FIXME this add a target without namespace! CK
-  CPMAddPackage(
-    NAME doctest
-    GITHUB_REPOSITORY onqtam/doctest
-    GIT_TAG 2.3.7
-  )
-endif()
+CPMAddPackage(
+  NAME doctest
+  GITHUB_REPOSITORY onqtam/doctest
+  GIT_TAG 2.3.7
+)
 
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
@@ -49,10 +45,10 @@ target_compile_features(GreeterTests PUBLIC cxx_std_17)
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Greeter PUBLIC -Wall -pedantic -Wextra -Werror)
+    target_compile_options(Greeter PRIVATE -Wall -pedantic -Wextra -Werror)
   elseif(MSVC)
-    target_compile_options(Greeter PUBLIC /W4 /WX)
-    target_compile_definitions(GreeterTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
+    target_compile_options(Greeter PRIVATE /W4 /WX)
+    target_compile_definitions(GreeterTests PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
 
@@ -70,6 +66,6 @@ add_test(NAME GreeterTests COMMAND GreeterTests --success=false)
 # ---- code coverage ----
 
 if(ENABLE_TEST_COVERAGE AND NOT TEST_INSTALLED_VERSION)
-  target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
+  target_compile_options(Greeter PRIVATE -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(Greeter PRIVATE -fprofile-arcs -ftest-coverage)
 endif()

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14...3.19 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 # ---- Project ----
 
@@ -38,15 +38,11 @@ CPMAddPackage(
   VERSION 1.4
 )
 
-find_package(fmt 6)
-if(NOT TARGET fmt::fmt-header-only)
-  # FIXME this add a target without namespace! CK
-  CPMAddPackage(
-    NAME fmt
-    GIT_TAG 7.1.3
-    GITHUB_REPOSITORY fmtlib/fmt
-  )
-endif()
+CPMAddPackage(
+  NAME fmt
+  GIT_TAG 7.1.3
+  GITHUB_REPOSITORY fmtlib/fmt
+)
 
 # ---- Add source files ----
 
@@ -70,7 +66,7 @@ target_sources(Greeter PRIVATE ${headers} ${sources})
 # FIXME target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
 
 # Link dependencies (if required)
-target_link_libraries(Greeter PUBLIC fmt::fmt)
+target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -92,5 +88,5 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  DEPENDENCIES fmt
+  # XXX DEPENDENCIES fmt
 )
