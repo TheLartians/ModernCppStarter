@@ -8,21 +8,28 @@ on:
     branches:
       - master
 
+env:
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
+
 jobs:
   build:
-
     runs-on: macos-latest
-    
+
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: Install format dependencies
-      run: |
-        brew install clang-format
-        pip3 install cmake_format==0.6.11 pyyaml
+      - uses: actions/checkout@v2
 
-    - name: configure
-      run: cmake -Htest -Bbuild
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-    - name: check style
-      run: cmake --build build --target check-format
+      - name: Install format dependencies
+        run: |
+          brew install clang-format
+          pip3 install cmake_format==0.6.11 pyyaml
+
+      - name: configure
+        run: cmake -Stest -Bbuild
+
+      - name: check style
+        run: cmake --build build --target check-format

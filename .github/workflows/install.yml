@@ -10,28 +10,33 @@ on:
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v1
-    
-    - name: build and install library
-      run: |
-        cmake -H. -Bbuild -DCMAKE_BUILD_TYPE=Release
-        sudo cmake --build build --target install
-        rm -rf build
+      - uses: actions/checkout@v2
 
-    - name: configure
-      run: cmake -Htest -Bbuild -DTEST_INSTALLED_VERSION=1
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
-    - name: build
-      run: cmake --build build --config Debug -j4
+      - name: build and install library
+        run: |
+          cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release
+          sudo cmake --build build --target install
+          rm -rf build
 
-    - name: test
-      run: |
-        cd build
-        ctest --build-config Debug
+      - name: configure
+        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
+
+      - name: build
+        run: cmake --build build --config Debug -j4
+
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug

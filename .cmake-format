@@ -48,6 +48,7 @@ parse:
       kwargs:
         NAME: 1
         VERSION: 1
+        NAMESPACE: 1
         INCLUDE_DIR: 1
         INCLUDE_DESTINATION: 1
         BINARY_DIR: 1

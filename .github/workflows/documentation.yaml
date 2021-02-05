@@ -3,14 +3,22 @@ name: Documentation
 on:
   push:
     tags:
-      - '*'
+      - "*"
+
+env:
+  CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
 
 jobs:
   build:
     name: Build and publish documentation
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/cpm_modules"
+          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: Install dependencies
         run: |
@@ -19,7 +27,7 @@ jobs:
 
       - name: Build
         run: |
-          cmake -Hdocumentation -Bbuild
+          cmake -Sdocumentation -Bbuild
           cmake --build build --target GenerateDocs
 
       - name: Publish
