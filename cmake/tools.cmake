@@ -8,6 +8,8 @@ endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
+set(USE_STATIC_ANALYZER "" CACHE STRING "clang-tidy;cppcheck;iwyu")
+
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
 if(USE_SANITIZER OR USE_STATIC_ANALYZER)
@@ -65,10 +67,11 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
 endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
+option(USE_CCACHE "enable ccache usages" ON)
 if(USE_CCACHE)
   CPMAddPackage(
     NAME Ccache.cmake
     GITHUB_REPOSITORY TheLartians/Ccache.cmake
-    VERSION 1.2.1
+    VERSION 1.2.2
   )
 endif()

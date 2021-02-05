@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19 FATAL_ERROR)
 
 project(GreeterTests LANGUAGES CXX)
 
@@ -15,11 +15,15 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-CPMAddPackage(
-  NAME doctest
-  GITHUB_REPOSITORY onqtam/doctest
-  GIT_TAG 2.3.7
-)
+find_package(doctest)
+if(NOT TARGET doctest::doctest)
+  # FIXME this add a target without namespace! CK
+  CPMAddPackage(
+    NAME doctest
+    GITHUB_REPOSITORY onqtam/doctest
+    GIT_TAG 2.3.7
+  )
+endif()
 
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
@@ -37,9 +41,9 @@ CPMAddPackage(
 
 # ---- Create binary ----
 
-file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 add_executable(GreeterTests ${sources})
-target_link_libraries(GreeterTests doctest Greeter)
+target_link_libraries(GreeterTests doctest::doctest Greeter::Greeter)
 
 set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
 
@@ -57,15 +61,16 @@ endif()
 
 enable_testing()
 
-# Note: doctest and similar testing frameworks can automatically configure CMake tests For other
-# testing frameworks add the tests target instead: ADD_TEST(GreeterTests GreeterTests)
+# Note: doctest and similar testing frameworks can automatically configure CMake tests.
+# include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
+# doctest_discover_tests(GreeterTests)
 
-include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-doctest_discover_tests(GreeterTests)
+# For other testing frameworks add the tests target instead:
+ADD_TEST(GreeterTests GreeterTests)
 
 # ---- code coverage ----
 
-if(ENABLE_TEST_COVERAGE)
+if(ENABLE_TEST_COVERAGE AND NOT TEST_INSTALLED_VERSION)
   target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
 endif()
