@@ -45,7 +45,7 @@ target_compile_features(GreeterTests PUBLIC cxx_std_17)
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Greeter PRIVATE -Wall -pedantic -Wextra -Werror)
+    target_compile_options(Greeter PRIVATE -Wall -Wpedantic -Wextra -Werror)
   elseif(MSVC)
     target_compile_options(Greeter PRIVATE /W4 /WX)
     target_compile_definitions(GreeterTests PRIVATE DOCTEST_CONFIG_USE_STD_HEADERS)

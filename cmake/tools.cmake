@@ -67,7 +67,7 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
 endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
-option(USE_CCACHE "enable ccache usages" ON)
+option(USE_CCACHE "enable ccache usages" NO)
 if(USE_CCACHE)
   CPMAddPackage(
     NAME Ccache.cmake

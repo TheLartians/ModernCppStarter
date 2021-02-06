@@ -41,7 +41,7 @@ CPMAddPackage(
 # NOTE: If fmt is not imported, this is needed to prevent:
 #   CMake Error: install(EXPORT "GreeterTargets" ...) includes target
 #   "Greeter" which requires target "fmt" that is not in any export set.
-option(FMT_INSTALL "" YES)
+option(FMT_INSTALL "needed!" YES)
 
 CPMAddPackage(
   NAME fmt
