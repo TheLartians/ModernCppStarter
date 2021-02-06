@@ -68,7 +68,7 @@ target_sources(Greeter PRIVATE ${headers} ${sources})
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 # this should not exported on UNIX! CK
-# FIXME target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
+target_compile_options(Greeter PUBLIC "$<$<CXX_COMPILER_ID:MSVC>:/permissive->")
 
 # Link dependencies (if required)
 target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
@@ -94,5 +94,5 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  #XXX DEPENDENCIES fmt
+  DEPENDENCIES fmt
 )
