@@ -39,7 +39,7 @@ CPMAddPackage(
 
 file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 add_executable(GreeterTests ${sources})
-target_link_libraries(GreeterTests doctest::doctest Greeter::Greeter)
+target_link_libraries(GreeterTests PRIVATE doctest::doctest Greeter::Greeter)
 target_compile_features(GreeterTests PUBLIC cxx_std_17)
 
 # enable compiler warnings

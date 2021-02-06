@@ -66,7 +66,8 @@ target_sources(Greeter PRIVATE ${headers} ${sources})
 # FIXME target_compile_options(Greeter PUBLIC "$<$<BOOL:${MSVC}>:/permissive->")
 
 # Link dependencies (if required)
-target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
+target_link_libraries(Greeter PUBLIC fmt::fmt-header-only)
+# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -80,13 +81,16 @@ target_include_directories(
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
 
-packageProject(
-  NAME ${PROJECT_NAME}
-  VERSION ${PROJECT_VERSION}
-  NAMESPACE ${PROJECT_NAME}
-  BINARY_DIR ${PROJECT_BINARY_DIR}
-  INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
-  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
-  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  # XXX DEPENDENCIES fmt
-)
+# FIXME: CMake Error: install(EXPORT "GreeterTargets" ...) includes target
+#    "Greeter" which requires target "fmt" that is not in any export set.
+
+# packageProject(
+#   NAME ${PROJECT_NAME}
+#   VERSION ${PROJECT_VERSION}
+#   NAMESPACE ${PROJECT_NAME}
+#   BINARY_DIR ${PROJECT_BINARY_DIR}
+#   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
+#   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+#   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
+#   # XXX DEPENDENCIES fmt
+# )
