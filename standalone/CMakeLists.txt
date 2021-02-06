@@ -26,7 +26,7 @@ file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 add_executable(GreeterStandalone ${sources})
 
 # FIXME: WHY rename executable this way? CK
-set_target_properties(GreeterStandalone CXX_STANDARD 17 OUTPUT_NAME "Greeter")
+set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
 # target_compile_features(GreeterStandalone PUBLIC cxx_std_17)
 
 target_link_libraries(GreeterStandalone PRIVATE Greeter::Greeter cxxopts)
