@@ -44,6 +44,7 @@ target_compile_features(GreeterTests PUBLIC cxx_std_17)
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
+  # NOTE: with this options the target should not installed! CK
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     target_compile_options(Greeter PRIVATE -Wall -Wpedantic -Wextra -Werror)
   elseif(MSVC)
@@ -65,7 +66,8 @@ add_test(NAME GreeterTests COMMAND GreeterTests --success=false)
 
 # ---- code coverage ----
 
+# NOTE: with this options the target should not installed! CK
 if(ENABLE_TEST_COVERAGE AND NOT TEST_INSTALLED_VERSION)
-  target_compile_options(Greeter PRIVATE -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(Greeter PRIVATE -fprofile-arcs -ftest-coverage)
+  target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
+  target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
 endif()

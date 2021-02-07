@@ -38,9 +38,9 @@ CPMAddPackage(
   VERSION 1.4
 )
 
-# NOTE: If fmt is not imported, this is needed to prevent:
-#   CMake Error: install(EXPORT "GreeterTargets" ...) includes target
-#   "Greeter" which requires target "fmt" that is not in any export set.
+# NOTE: If fmt is not imported, this is needed to prevent: CMake Error: install(EXPORT
+# "GreeterTargets" ...) includes target "Greeter" which requires target "fmt" that is not in any
+# export set.
 option(FMT_INSTALL "needed!" YES)
 
 CPMAddPackage(
@@ -67,12 +67,13 @@ target_compile_features(Greeter PUBLIC cxx_std_17)
 target_sources(Greeter PRIVATE ${headers} ${sources})
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-# this should not exported on UNIX! CK
-target_compile_options(Greeter PUBLIC "$<$<CXX_COMPILER_ID:MSVC>:/permissive->")
+if(MSVC)
+  target_compile_options(Greeter PUBLIC /permissive)
+endif()
 
 # Link dependencies (if required)
 target_link_libraries(Greeter PRIVATE fmt::fmt-header-only)
-#XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
+# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
