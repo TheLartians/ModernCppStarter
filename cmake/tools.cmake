@@ -8,7 +8,10 @@ endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
-set(USE_STATIC_ANALYZER "" CACHE STRING "clang-tidy;cppcheck;iwyu")
+set(USE_STATIC_ANALYZER
+    ""
+    CACHE STRING "clang-tidy;cppcheck;iwyu"
+)
 
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
