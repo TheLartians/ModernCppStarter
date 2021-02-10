@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(GreeterTests LANGUAGES CXX)
+project(
+  GreeterTests
+  VERSION 1.1
+  LANGUAGES CXX
+)
 
 # ---- Options ----
 
@@ -22,7 +26,7 @@ CPMAddPackage(
 )
 
 if(TEST_INSTALLED_VERSION)
-  find_package(Greeter REQUIRED)
+  find_package(Greeter ${PROJECT_VERSION} REQUIRED)
 else()
   CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
@@ -46,9 +50,9 @@ set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
   if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-    target_compile_options(Greeter PUBLIC -Wall -pedantic -Wextra -Werror)
+    target_compile_options(Greeter PRIVATE -Wall -pedantic -Wextra -Werror)
   elseif(MSVC)
-    target_compile_options(Greeter PUBLIC /W4 /WX)
+    target_compile_options(Greeter PRIVATE /W4 /WX)
     target_compile_definitions(GreeterTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
@@ -65,7 +69,7 @@ doctest_discover_tests(GreeterTests)
 
 # ---- code coverage ----
 
-if(ENABLE_TEST_COVERAGE)
+if(ENABLE_TEST_COVERAGE AND NOT TEST_INSTALLED_VERSION)
   target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
 endif()
