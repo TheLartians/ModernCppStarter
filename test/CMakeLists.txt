@@ -64,9 +64,8 @@ enable_testing()
 # Note: doctest and similar testing frameworks can automatically configure CMake tests For other
 # testing frameworks add the tests target instead:
 add_test(greeterTests GreeterTests)
-# include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-# doctest_discover_tests(GreeterTests)
-# Waning: if doctest is imported with find_package() this will fail! CK
+# include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake) doctest_discover_tests(GreeterTests)
+# Warning: if doctest is imported with find_package() this will fail! CK
 
 # ---- code coverage ----
 
