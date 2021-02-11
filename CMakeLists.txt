@@ -45,7 +45,7 @@ CPMAddPackage(
   NAME fmt
   GIT_TAG 7.1.3
   GITHUB_REPOSITORY fmtlib/fmt # to get an installable target
-                    OPTION "FMT_INSTALL YES"
+  OPTIONS "FMT_INSTALL YES"
 )
 
 # ---- Add source files ----
