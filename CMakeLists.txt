@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 # Note: update this to your new project's name and version
 project(
   Greeter
-  VERSION 1.1
+  VERSION 1.0
   LANGUAGES CXX
 )
 
@@ -41,12 +41,11 @@ CPMAddPackage(
 # Note: If fmt is not imported, this is needed to prevent: CMake Error: install(EXPORT
 # "GreeterTargets" ...) includes target "Greeter" which requires target "fmt" that is not in any
 # export set.  see too https://gitlab.kitware.com/cmake/cmake/-/issues/15415
-set(FMT_VERSION 7.1.3)
 CPMAddPackage(
   NAME fmt
-  GIT_TAG ${FMT_VERSION}
-  GITHUB_REPOSITORY fmtlib/fmt
-  # XXX OPTION "FMT_INSTALL YES"
+  GIT_TAG 7.1.3
+  GITHUB_REPOSITORY fmtlib/fmt # to get an installable target
+                    OPTION "FMT_INSTALL YES"
 )
 
 # ---- Add source files ----
@@ -59,11 +58,11 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target: add_library(Greeter INTERFACE)
-add_library(Greeter)
-target_compile_features(Greeter PUBLIC cxx_std_17)
+# target! EITHER: add_library(Greeter INTERFACE) OR:
+add_library(Greeter ${headers} ${sources})
 
-target_sources(Greeter PRIVATE ${headers} ${sources})
+set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
+# OR target_compile_features(Greeter PUBLIC cxx_std_17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 if(MSVC)
@@ -94,5 +93,6 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  # XXX DEPENDENCIES "fmt ${FMT_VERSION}"
+  # TODO COMPATIBILITY SameMajorVersion
+  DEPENDENCIES "fmt 7.1.3"
 )
