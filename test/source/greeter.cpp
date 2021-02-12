@@ -20,7 +20,7 @@ TEST_CASE("Greeter version") {
   static_assert(std::string_view(GREETER_VERSION).starts_with("1.0"));  // TBD C++20 only
   CHECK(std::string(GREETER_VERSION).starts_with("1.0"));               // SameMajorVersion
 #else
-  static_assert(std::string_view(GREETER_VERSION) == std::string_view("1.0"));
-  CHECK(std::string(GREETER_VERSION) == std::string("1.0"));
+  static_assert(std::string_view(GREETER_VERSION) == std::string_view("1.0.1"));
+  CHECK(std::string(GREETER_VERSION) == std::string("1.0.1"));
 #endif
 }

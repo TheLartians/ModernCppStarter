@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14...3.19)
 # Note: update this to your new project's name and version
 project(
   Greeter
-  VERSION 1.0
+  VERSION 1.0.1
   LANGUAGES CXX
 )
 
@@ -64,12 +64,12 @@ add_library(Greeter SHARED ${headers} ${sources})
 
 # EITHER:
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
-# OR target_compile_features(Greeter PUBLIC cxx_std_17)
+# OR: target_compile_features(Greeter PUBLIC cxx_std_17)
 
-# being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
+# being a cross-platform target, we enforce standards conformance on MSVC EITHER:
+# target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>") OR:
 if(MSVC)
-  # target_compile_options(Greeter PUBLIC /permissive)
+  target_compile_options(Greeter PUBLIC /permissive)
 endif()
 
 # Link dependencies EITHER:

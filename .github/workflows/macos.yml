@@ -3,10 +3,10 @@ name: MacOS
 on:
   push:
     branches:
-      - master
+      - develop
   pull_request:
     branches:
-      - master
+      - develop
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
