@@ -1,4 +1,4 @@
-#include <fmt/chrono.h>
+#include <fmt/format.h>
 #include <greeter/greeter.h>
 
 using namespace greeter;
@@ -9,17 +9,12 @@ std::string Greeter::greet(LanguageCode lang) const {
   switch (lang) {
     default:
     case LanguageCode::EN:
-      return "Hello, " + name + "!";
+      return fmt::format("Hello, {}!", name);
     case LanguageCode::DE:
-      return "Hallo " + name + "!";
+      return fmt::format("Hallo {}!", name);
     case LanguageCode::ES:
-      return "¡Hola " + name + "!";
+      return fmt::format("¡Hola {}!", name);
     case LanguageCode::FR:
-      return "Bonjour " + name + "!";
+      return fmt::format("Bonjour {}!", name);
   }
-}
-
-std::string Greeter::getIsoDate() const {
-  using namespace std::literals::chrono_literals;
-  return fmt::format("{:%H:%M:%S}", 3h + 15min + 30s);
 }

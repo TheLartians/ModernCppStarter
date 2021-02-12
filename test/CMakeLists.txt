@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 project(GreeterTests LANGUAGES CXX)
 
@@ -57,18 +57,11 @@ endif()
 
 enable_testing()
 
-# Note: doctest and similar testing frameworks can automatically configure CMake tests For other
-# testing frameworks add the tests target instead:
-if(DEFINED doctest_SOURCE_DIR)
-  include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-  doctest_discover_tests(GreeterTests)
-else()
-  add_test(greeterTests GreeterTests)
-endif()
+add_test(greeterTests GreeterTests)
 
 # ---- code coverage ----
 
-if(ENABLE_TEST_COVERAGE)
+if(ENABLE_TEST_COVERAGE AND NOT Greeter_FOUND)
   target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
   target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
 endif()

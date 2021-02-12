@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 project(GreeterStandalone LANGUAGES CXX)
 
@@ -27,4 +27,8 @@ add_executable(GreeterStandalone ${sources})
 
 set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
 
-target_link_libraries(GreeterStandalone Greeter::Greeter cxxopts)
+# WORKAROUND for ALIAS target is missing error! CK
+if(NOT TARGET cxxopts::cxxopts)
+  add_library(cxxopts::cxxopts ALIAS cxxopts)
+endif()
+target_link_libraries(GreeterStandalone Greeter::Greeter cxxopts::cxxopts)

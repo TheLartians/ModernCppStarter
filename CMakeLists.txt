@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.19)
 
 # ---- Project ----
 
@@ -21,15 +21,16 @@ endif()
 # ---- Project settings ----
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
+  set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_CXX_EXTENSIONS NO)
 endif()
 
 # ---- Add dependencies via CPM ----
-# see https://github.com/TheLartians/CPM.cmake for more info
+# see https://github.com/cpm-cmake/CPM.cmake for more info
 
 include(cmake/CPM.cmake)
+cpmusepackagelock(package-lock.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage(
@@ -59,8 +60,9 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target! EITHER: add_library(Greeter INTERFACE) OR:
-add_library(Greeter ${headers} ${sources})
+add_library(Greeter SHARED ${headers} ${sources})
 
+# EITHER:
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 # OR target_compile_features(Greeter PUBLIC cxx_std_17)
 
@@ -69,9 +71,9 @@ if(MSVC)
   target_compile_options(Greeter PUBLIC /permissive)
 endif()
 
-# Link dependencies (if required)
+# Link dependencies EITHER:
 target_link_libraries(Greeter PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
-# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
+# OR: target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -93,6 +95,6 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  # TODO COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 7.1.3"
+  COMPATIBILITY SameMajorVersion
+  # NOTE: not needed DEPENDENCIES "fmt 7.1.3"
 )
