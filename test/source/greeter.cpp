@@ -24,8 +24,3 @@ TEST_CASE("Greeter version") {
   CHECK(std::string(GREETER_VERSION) == std::string("1.0"));
 #endif
 }
-
-TEST_CASE("Greeter date") {
-  const greeter::Greeter greeter("Tests");
-  CHECK(greeter.getIsoDate() == std::string("03:15:30"));
-}

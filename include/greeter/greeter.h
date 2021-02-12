@@ -26,9 +26,6 @@ namespace greeter {
      * @return a string containing the greeting
      */
     std::string greet(LanguageCode lang = LanguageCode::EN) const;
-
-    /// @brief Return an iso date string
-    std::string getIsoDate() const;
   };
 
 }  // namespace greeter

@@ -18,14 +18,6 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   )
 endif()
 
-# ---- Project settings ----
-
-if(NOT DEFINED CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
-  set(CMAKE_CXX_STANDARD_REQUIRED ON)
-  set(CMAKE_CXX_EXTENSIONS NO)
-endif()
-
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
 
@@ -61,17 +53,17 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # target! EITHER: add_library(Greeter INTERFACE) OR:
 add_library(Greeter ${headers} ${sources})
 
-set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
-# OR target_compile_features(Greeter PUBLIC cxx_std_17)
+# EITHER: set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD}) # OR
+target_compile_features(Greeter PUBLIC cxx_std_17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 if(MSVC)
   target_compile_options(Greeter PUBLIC /permissive)
 endif()
 
-# Link dependencies (if required)
-target_link_libraries(Greeter PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
-# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
+# Link dependencies EITHER: target_link_libraries(Greeter PRIVATE
+# $<BUILD_INTERFACE:fmt::fmt-header-only>) # OR:
+target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
   Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
@@ -93,6 +85,7 @@ packageProject(
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
-  # TODO COMPATIBILITY SameMajorVersion
+  COMPATIBILITY ExactVersion
+  # TBD COMPATIBILITY SameMajorVersion
   DEPENDENCIES "fmt 7.1.3"
 )

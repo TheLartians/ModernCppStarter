@@ -6,15 +6,20 @@
 #include <string>
 #include <unordered_map>
 
-const std::unordered_map<std::string, greeter::LanguageCode> languages{
-    {"en", greeter::LanguageCode::EN},
-    {"de", greeter::LanguageCode::DE},
-    {"es", greeter::LanguageCode::ES},
-    {"fr", greeter::LanguageCode::FR},
-};
-
+// NOLINTNEXTLINE(modernize-use-trailing-return-type)
 int main(int argc, char** argv) {
-  cxxopts::Options options(argv[0], "A program to welcome the world!");
+  // prevent warning: initialization of 'languages' with static storage duration may throw an
+  // exception that cannot be caught [cert-err58-cpp]
+  const std::unordered_map<std::string, greeter::LanguageCode> languages{
+      {"en", greeter::LanguageCode::EN},
+      {"de", greeter::LanguageCode::DE},
+      {"es", greeter::LanguageCode::ES},
+      {"fr", greeter::LanguageCode::FR},
+  };
+
+  // prevent warning: do not use pointer arithmetic
+  // [cppcoreguidelines-pro-bounds-pointer-arithmetic]
+  cxxopts::Options options(*argv, "A program to welcome the world!");
 
   std::string language;
   std::string name;
@@ -33,7 +38,10 @@ int main(int argc, char** argv) {
   if (result["help"].as<bool>()) {
     std::cout << options.help() << std::endl;
     return 0;
-  } else if (result["version"].as<bool>()) {
+  }
+
+  // prevent warning: do not use 'else' after 'return' [readability-else-after-return]
+  if (result["version"].as<bool>()) {
     std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
     return 0;
   }
