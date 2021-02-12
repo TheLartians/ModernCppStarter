@@ -9,6 +9,7 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
+CPMUsePackageLock(package-lock.cmake)
 
 CPMAddPackage(
   NAME cxxopts
@@ -21,10 +22,11 @@ CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Create standalone executable ----
 
-file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
+file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 
 add_executable(GreeterStandalone ${sources})
 
+# TODO: why rename in this way?
 set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
 
 # WORKAROUND for ALIAS target is missing error! CK

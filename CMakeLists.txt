@@ -30,7 +30,7 @@ endif()
 # see https://github.com/cpm-cmake/CPM.cmake for more info
 
 include(cmake/CPM.cmake)
-cpmusepackagelock(package-lock.cmake)
+CPMUsePackageLock(package-lock.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage(
@@ -53,8 +53,8 @@ CPMAddPackage(
 
 # Note: globbing sources is considered bad practice as CMake's generators may not detect new files
 # automatically. Keep that in mind when changing files, or explicitly mention them here.
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.h")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
+file(GLOB_RECURSE headers CONFIGURE_DEPENDS include/*.h)
+file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 
 # ---- Create library ----
 
@@ -67,8 +67,9 @@ set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 # OR target_compile_features(Greeter PUBLIC cxx_std_17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
+target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 if(MSVC)
-  target_compile_options(Greeter PUBLIC /permissive)
+  # target_compile_options(Greeter PUBLIC /permissive)
 endif()
 
 # Link dependencies EITHER:

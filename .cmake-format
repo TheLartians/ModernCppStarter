@@ -5,6 +5,10 @@ format:
 
 parse:
   additional_commands:
+    cpmdeclarepackage:
+      spelling: CPMDeclarePackage
+    cpmusepackagelock:
+      spelling: CPMUsePackageLock
     cpmaddpackage:
       pargs:
         nargs: '*'

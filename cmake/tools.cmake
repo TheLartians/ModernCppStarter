@@ -7,6 +7,13 @@ if(NOT PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
+CPMUsePackageLock(package-lock.cmake)
+
+# option: default not set
+set(USE_STATIC_ANALYZER
+    ""
+    CACHE STRING "clang-tidy;cppcheck;iwyu"
+)
 
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
@@ -65,6 +72,7 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
 endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
+option(USE_CCACHE "use ccache" YES)
 if(USE_CCACHE)
   CPMAddPackage(
     NAME Ccache.cmake

@@ -25,7 +25,7 @@ namespace greeter {
      * @param lang the language to greet in
      * @return a string containing the greeting
      */
-    [[nodiscard]] std::string greet(LanguageCode lang = LanguageCode::EN) const;
+    [[nodiscard]] auto greet(LanguageCode lang = LanguageCode::EN) const -> std::string;
   };
 
 }  // namespace greeter
