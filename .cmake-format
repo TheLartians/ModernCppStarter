@@ -5,10 +5,6 @@ format:
 
 parse:
   additional_commands:
-    cpmdeclarepackage:
-      spelling: CPMDeclarePackage
-    cpmusepackagelock:
-      spelling: CPMUsePackageLock
     cpmaddpackage:
       pargs:
         nargs: '*'
@@ -44,10 +40,16 @@ parse:
         flags: []
       spelling: CPMFindPackage
       kwargs: *cpmaddpackagekwargs
-    packageproject:
+    cpmdeclarepackage:
       pargs:
         nargs: '*'
         flags: []
+      spelling: CPMDeclarePackage
+      kwargs: *cpmaddpackagekwargs
+    packageproject:
+      pargs:
+        nargs: '*'
+        flags: [NO_VERSION_SUFFIX]
       spelling: packageProject
       kwargs:
         NAME: 1
@@ -59,3 +61,12 @@ parse:
         COMPATIBILITY: 1
         VERSION_HEADER: 1
         DEPENDENCIES: +
+    cpmusepackagelock:
+      pargs: 1
+      spelling: CPMUsePackageLock
+    cpmregisterpackage:
+      pargs: 1
+      spelling: CPMRegisterPackage
+    cpmgetpackageversion:
+      pargs: 2
+      spelling: CPMGetPackageVersion

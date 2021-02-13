@@ -20,6 +20,8 @@ endif()
 
 # ---- Project settings ----
 
+option(BUILD_SHARED_LIBS "Create shared libraries if ON" OFF)
+
 if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -60,11 +62,11 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target! EITHER: add_library(Greeter INTERFACE) OR:
-add_library(Greeter SHARED ${headers} ${sources})
+add_library(Greeter ${headers} ${sources})
 
 # EITHER:
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
-# OR: target_compile_features(Greeter PUBLIC cxx_std_17)
+# OR: target_compile_features(Greeter PUBLIC cxx_std_20)
 
 # being a cross-platform target, we enforce standards conformance on MSVC EITHER:
 # target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>") OR:

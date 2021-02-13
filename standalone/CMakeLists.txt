@@ -26,10 +26,12 @@ file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 
 add_executable(GreeterStandalone ${sources})
 
-# TODO: why rename in this way?
-set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
+# TODO: why rename in this way? Seems only for CI with GitHub actions! CK
+set_target_properties(
+  GreeterStandalone PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD} OUTPUT_NAME "Greeter"
+)
 
-# WORKAROUND for ALIAS target is missing error! CK
+# WORKAROUND missing ALIAS target error! CK
 if(NOT TARGET cxxopts::cxxopts)
   add_library(cxxopts::cxxopts ALIAS cxxopts)
 endif()

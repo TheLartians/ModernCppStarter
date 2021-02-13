@@ -1,4 +1,4 @@
-root/
+stagedir/
 build/
 /build*
 /.vscode
