@@ -20,13 +20,17 @@ endif()
 
 # ---- Project settings ----
 
-option(BUILD_SHARED_LIBS "Create shared libraries if ON" OFF)
+option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 20)
   set(CMAKE_CXX_STANDARD_REQUIRED ON)
   set(CMAKE_CXX_EXTENSIONS NO)
 endif()
+
+# Set default visibility to hidden for all targets
+set(CMAKE_CXX_VISIBILITY_PRESET hidden)
+set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/cpm-cmake/CPM.cmake for more info
@@ -78,9 +82,10 @@ endif()
 target_link_libraries(Greeter PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
 # OR: target_link_libraries(Greeter PUBLIC fmt::fmt)
 
+set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME}-${PROJECT_VERSION})
 target_include_directories(
-  Greeter PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-                 $<INSTALL_INTERFACE:include/${PROJECT_NAME}-${PROJECT_VERSION}>
+  Greeter BEFORE PUBLIC $<BUILD_INTERFACE: ${PROJECT_SOURCE_DIR}/include>
+                        $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>
 )
 
 # ---- Create an installable target ----
@@ -89,6 +94,14 @@ target_include_directories(
 # the location where the project's version header will be placed should match the project's regular
 # header paths
 string(TOLOWER ${PROJECT_NAME}/version.h VERSION_HEADER_LOCATION)
+string(TOLOWER ${PROJECT_NAME}/greeter_export.h EXPORT_HEADER_LOCATION)
+
+# TODO: should be done in packageProject()
+include(GenerateExportHeader)
+generate_export_header(
+  ${PROJECT_NAME} EXPORT_FILE_NAME PackageProjectInclude/${EXPORT_HEADER_LOCATION}
+)
+# Note: the export header will be installed while installing the version header! CK
 
 packageProject(
   NAME ${PROJECT_NAME}
@@ -96,8 +109,8 @@ packageProject(
   NAMESPACE ${PROJECT_NAME}
   BINARY_DIR ${PROJECT_BINARY_DIR}
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
-  INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
+  INCLUDE_DESTINATION ${INCLUDE_INSTALL_DIR}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  # NOTE: not needed DEPENDENCIES "fmt 7.1.3"
+  # Note: not needed DEPENDENCIES "fmt 7.1.3"
 )

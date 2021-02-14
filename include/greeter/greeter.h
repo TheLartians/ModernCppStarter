@@ -1,5 +1,7 @@
 #pragma once
 
+#include <greeter/greeter_export.h>
+
 #include <string>
 
 namespace greeter {
@@ -10,7 +12,7 @@ namespace greeter {
   /**
    * @brief A class for saying hello in multiple languages
    */
-  class Greeter {
+  class GREETER_EXPORT Greeter {
     std::string name;
 
   public:

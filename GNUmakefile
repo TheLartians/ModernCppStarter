@@ -1,25 +1,24 @@
 #
 # CURDIR=$(/bin/pwd)
-# On UNIX one can use the DESTDIR mechanism in order to relocate the whole installation.
-DESTDIR?=${CURDIR}/stagedir
-export DESTDIR
+ROOT?=${CURDIR}/stagedir
 
-# GENERATOR?="Unix Makefiles"
+#XXX GENERATOR?="Unix Makefiles"
 GENERATOR?=Ninja
 
-export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
+#XXX export CXX=clang++
 export CPM_USE_LOCAL_PACKAGES=1
+export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
 
-.PHONY: update format all test standalone check clean distclean lock
+.PHONY: update format all test standalone doc check clean distclean lock
 
-# the default target does just all
+# the default target does just all, but neither standalone nor doc
 all:
 
 clean:
 	find . -type d -name build | xargs rm -rf
 
 distclean: clean
-	rm -rf build ${DESTDIR}
+	rm -rf build ${ROOT}
 
 # update CPM.cmake
 update:
@@ -31,24 +30,26 @@ lock: standalone all
 	cmake --build build/install --target cpm-update-package-lock
 	cmake --build build/standalone --target cpm-update-package-lock
 
-# install the library
+# install the library to stagedir
 install:
-	cmake -S . -B build/install -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${DESTDIR} # --trace-expand
+	cmake -S . -B build/install -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DCMAKE_INSTALL_PREFIX=${ROOT} # --trace-expand
 	cmake --build build/install --target install
 
 # test the library
 test: install
-	cmake -S test -B build/test -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${DESTDIR} -DTEST_INSTALLED_VERSION=1
+	cmake -S test -B build/test -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1
 	cmake --build build/test
 	cmake --build build/test --target test
 
 # all together
 all: test
-	cmake -S all -B build/all -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${DESTDIR} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1
+	cmake -S all -B build/all -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1
 	cmake --build build/all
 	cmake --build build/all --target test
-	cmake --build build/all --target GenerateDocs
 	cmake --build build/all --target check-format
+
+doc: all
+	cmake --build build/all --target GenerateDocs
 
 format: distclean
 	find . -name CMakeLists.txt | xargs cmake-format -i
@@ -57,7 +58,7 @@ format: distclean
 	find . -name '*.h' | xargs clang-format -i
 
 standalone:
-	cmake -S standalone -B build/standalone -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${DESTDIR} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+	cmake -S standalone -B build/standalone -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
 	cmake --build build/standalone --target all
 
 # check the library
