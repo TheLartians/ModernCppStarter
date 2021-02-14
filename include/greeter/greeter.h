@@ -7,12 +7,13 @@
 namespace greeter {
 
   /**  Language codes to be used with the Greeter class */
-  enum class LanguageCode { EN, DE, ES, FR };
+  enum class GREETER_EXPORT LanguageCode { EN, DE, ES, FR };
 
   /**
    * @brief A class for saying hello in multiple languages
    */
   class GREETER_EXPORT Greeter {
+  private:
     std::string name;
 
   public:
