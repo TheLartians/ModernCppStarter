@@ -53,13 +53,11 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # target! EITHER: add_library(Greeter INTERFACE) OR:
 add_library(Greeter ${headers} ${sources})
 
-# EITHER: set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD}) # OR
+# EITHER: set_target_properties(Greeter PROPERTIES CXX_STANDARD 17) # OR:
 target_compile_features(Greeter PUBLIC cxx_std_17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-if(MSVC)
-  target_compile_options(Greeter PUBLIC /permissive)
-endif()
+target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 
 # Link dependencies EITHER: target_link_libraries(Greeter PRIVATE
 # $<BUILD_INTERFACE:fmt::fmt-header-only>) # OR:
