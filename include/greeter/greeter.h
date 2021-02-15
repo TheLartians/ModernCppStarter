@@ -14,7 +14,7 @@ namespace greeter {
    */
   class GREETER_EXPORT Greeter {
   protected:
-    std::string name;
+    std::string GREETER_EXPORT name;
 
   public:
     /**
