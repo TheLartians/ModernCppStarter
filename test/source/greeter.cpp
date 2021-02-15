@@ -14,7 +14,7 @@ TEST_CASE("Greeter") {
 }
 
 TEST_CASE("Greeter version") {
-#if (__APPLE__ || __cpp_lib_starts_ends_with)
+#if (__cpp_lib_starts_ends_with)
   static_assert(std::string_view(GREETER_VERSION).starts_with("1"));  // TBD C++20 only
   CHECK(std::string(GREETER_VERSION).starts_with("1"));               // SameMajorVersion
 #else
