@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.14...3.19)
 
-project(GreeterTests LANGUAGES CXX)
+project(
+  GreeterTests
+  VERSION 1
+  LANGUAGES CXX
+)
 
 # ---- Options ----
 

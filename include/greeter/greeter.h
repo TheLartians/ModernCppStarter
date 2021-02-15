@@ -13,7 +13,6 @@ namespace greeter {
    * @brief A class for saying hello in multiple languages
    */
   class GREETER_EXPORT Greeter {
-  private:
     std::string name;
 
   public:
