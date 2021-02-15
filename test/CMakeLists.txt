@@ -51,7 +51,7 @@ set_target_properties(GreeterTests PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD}
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
-  if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  if(CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
     target_compile_options(Greeter PUBLIC -Wall -Wextra -Werror)
   elseif(MSVC)
     target_compile_options(Greeter PUBLIC /W4 /WX)
