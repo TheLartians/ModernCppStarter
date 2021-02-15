@@ -13,6 +13,7 @@ namespace greeter {
    * @brief A class for saying hello in multiple languages
    */
   class GREETER_EXPORT Greeter {
+  protected:
     std::string name;
 
   public:
@@ -20,7 +21,7 @@ namespace greeter {
      * @brief Creates a new greeter
      * @param name the name to greet
      */
-    explicit Greeter(std::string name);
+    explicit Greeter(std::string _name);
 
     /**
      * @brief Creates a localized string containing the greeting
