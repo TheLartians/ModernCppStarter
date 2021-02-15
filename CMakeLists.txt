@@ -20,9 +20,9 @@ endif()
 
 # ---- Project settings ----
 
-# XXX if(NOT MSVC)
-option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
-# XXX endif()
+if(NOT MSVC)
+  option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
+endif()
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)

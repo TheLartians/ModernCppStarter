@@ -1,3 +1,4 @@
+---
 name: Windows
 
 on:
@@ -25,7 +26,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild -G "Visual Studio 16 2019" -T ClangCL
+        run: cmake -Stest -Bbuild   # XXX -G "Visual Studio 16 2019" -T ClangCL
 
       - name: build
         run: cmake --build build --config Debug -j4
