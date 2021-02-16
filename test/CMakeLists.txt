@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(GreeterTests LANGUAGES CXX)
+project(
+  GreeterTests
+  VERSION 1.0
+  LANGUAGES CXX
+)
 
 # ---- Options ----
 
@@ -22,7 +26,7 @@ CPMAddPackage(
 )
 
 if(TEST_INSTALLED_VERSION)
-  find_package(Greeter ${PROJECT_VERSION} REQUIRED)
+  find_package(Greeter ${PROJECT_VERSION} EXACT REQUIRED)
 else()
   CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
@@ -40,7 +44,6 @@ CPMAddPackage(
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
 add_executable(GreeterTests ${sources})
 target_link_libraries(GreeterTests doctest::doctest Greeter::Greeter)
-
 set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
@@ -57,14 +60,7 @@ endif()
 
 enable_testing()
 
-# Note: doctest and similar testing frameworks can automatically configure CMake tests For other
-# testing frameworks add the tests target instead:
-if(DEFINED doctest_SOURCE_DIR)
-  include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-  doctest_discover_tests(GreeterTests)
-else()
-  add_test(greeterTests GreeterTests)
-endif()
+add_test(NAME greeterTests COMMAND GreeterTests)
 
 # ---- code coverage ----
 

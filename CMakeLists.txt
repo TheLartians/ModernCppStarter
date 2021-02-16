@@ -27,12 +27,9 @@ include(cmake/CPM.cmake)
 CPMAddPackage(
   NAME PackageProject.cmake
   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.4.1
+  VERSION 1.5.0
 )
 
-# Note: If fmt is not imported, this is needed to prevent: CMake Error: install(EXPORT
-# "GreeterTargets" ...) includes target "Greeter" which requires target "fmt" that is not in any
-# export set.  see too https://gitlab.kitware.com/cmake/cmake/-/issues/15415
 CPMAddPackage(
   NAME fmt
   GIT_TAG 7.1.3
@@ -53,14 +50,12 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # target: add_library(Greeter INTERFACE)
 add_library(Greeter ${headers} ${sources})
 
-# EITHER: set_target_properties(Greeter PROPERTIES CXX_STANDARD 17) # OR:
-target_compile_features(Greeter PUBLIC cxx_std_17)
+set_target_properties(Greeter PROPERTIES CXX_STANDARD 17)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 
-# Link dependencies EITHER: target_link_libraries(Greeter PRIVATE
-# $<BUILD_INTERFACE:fmt::fmt-header-only>) # OR:
+# Link dependencies
 target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 target_include_directories(
@@ -84,6 +79,6 @@ packageProject(
   INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY ExactVersion
-  # TBD COMPATIBILITY SameMajorVersion
+  COMPATIBILITY SameMajorVersion
   DEPENDENCIES "fmt 7.1.3"
 )
