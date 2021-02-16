@@ -6,7 +6,7 @@ ROOT?=${CURDIR}/stagedir
 GENERATOR?=Ninja
 
 #XXX export CXX=clang++
-export CPM_USE_LOCAL_PACKAGES=1
+export CPM_USE_LOCAL_PACKAGES=0
 export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
 
 .PHONY: update format all test standalone doc check clean distclean lock

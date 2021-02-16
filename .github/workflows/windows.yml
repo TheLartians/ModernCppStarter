@@ -4,9 +4,11 @@ name: Windows
 on:
   push:
     branches:
+      - master
       - develop
   pull_request:
     branches:
+      - master
       - develop
 
 env:
@@ -26,7 +28,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild   # XXX -G "Visual Studio 16 2019" -T ClangCL
+        run: cmake -S test -B build   # XXX -G "Visual Studio 16 2019" -T ClangCL
 
       - name: build
         run: cmake --build build --config Debug -j4
@@ -34,8 +36,5 @@ jobs:
       - name: test
         run: |
           cd build
-          tree bin\Debug
-          tree x64\Debug
-          dir Debug
-          Debug/GreeterTests.exe -s
+          tree
           ctest --build-config Debug --verbose

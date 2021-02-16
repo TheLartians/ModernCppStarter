@@ -1,11 +1,14 @@
+---
 name: Style
 
 on:
   push:
     branches:
+      - master
       - develop
   pull_request:
     branches:
+      - master
       - develop
 
 env:
@@ -29,7 +32,7 @@ jobs:
           pip3 install cmake_format==0.6.11 pyyaml
 
       - name: configure
-        run: cmake -Stest -Bbuild
+        run: cmake -S test -B build
 
       - name: check style
         run: cmake --build build --target check-format

@@ -61,7 +61,7 @@ endif()
 
 enable_testing()
 
-add_test(greeterTests GreeterTests)
+add_test(NAME greeterTests COMMAND GreeterTests)
 
 # ---- code coverage ----
 
