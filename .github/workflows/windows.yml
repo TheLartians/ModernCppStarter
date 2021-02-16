@@ -34,8 +34,8 @@ jobs:
       - name: test
         run: |
           cd build
-          dir bin
-          dir x64
+          tree bin/Debug
+          tree x64/Debug
           dir Debug
           Debug/GreeterTests.exe -s
           ctest --build-config Debug --verbose
