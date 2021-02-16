@@ -50,7 +50,7 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target! EITHER: add_library(Greeter INTERFACE) OR:
+# target: add_library(Greeter INTERFACE)
 add_library(Greeter ${headers} ${sources})
 
 # EITHER: set_target_properties(Greeter PROPERTIES CXX_STANDARD 17) # OR:
