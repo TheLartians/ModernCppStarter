@@ -20,9 +20,9 @@ endif()
 
 # ---- Project settings ----
 
-if(NOT MSVC)
-  option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
-endif()
+# XXX if(NOT MSVC)
+option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
+# XXX endif()
 
 if(NOT DEFINED CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 17)
@@ -44,12 +44,9 @@ CPMUsePackageLock(package-lock.cmake)
 CPMAddPackage(
   NAME PackageProject.cmake
   GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.4.1
+  VERSION 1.5.0
 )
 
-# Note: If fmt is not imported, this is needed to prevent: CMake Error: install(EXPORT
-# "GreeterTargets" ...) includes target "Greeter" which requires target "fmt" that is not in any
-# export set.  see too https://gitlab.kitware.com/cmake/cmake/-/issues/15415
 CPMAddPackage(
   NAME fmt
   GIT_TAG 7.1.3
@@ -71,13 +68,10 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
 
-# EITHER:
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
-# OR: target_compile_features(Greeter PUBLIC cxx_std_20)
 
-# being a cross-platform target, we enforce standards conformance on MSVC EITHER:
+# being a cross-platform target, we enforce standards conformance on MSVC:
 target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
-# OR: if(MSVC) target_compile_options(Greeter PUBLIC /permissive) endif()
 
 # Link dependencies EITHER:
 target_link_libraries(Greeter PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
