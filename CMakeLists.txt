@@ -20,20 +20,7 @@ endif()
 
 # ---- Project settings ----
 
-option(BUILD_SHARED_LIBS "Create shared libraries if ON" YES)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-
-if(NOT DEFINED CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 17)
-  set(CMAKE_CXX_STANDARD_REQUIRED ON)
-  set(CMAKE_CXX_EXTENSIONS NO)
-endif()
-
-# Set default visibility to hidden for all targets
-set(CMAKE_CXX_VISIBILITY_PRESET hidden)
-set(CMAKE_VISIBILITY_INLINES_HIDDEN YES)
+include(cmake/options.cmake)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/cpm-cmake/CPM.cmake for more info
@@ -67,9 +54,10 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
 # target! EITHER: add_library(Greeter INTERFACE) OR:
 add_library(Greeter ${headers} ${sources})
-set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
-
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
+
+# for SameMajorVersion upgrade stategie
+set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
 
 # being a cross-platform target, we enforce standards conformance on MSVC:
 target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")

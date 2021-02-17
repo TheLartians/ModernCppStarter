@@ -25,14 +25,14 @@ CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 file(GLOB sources CONFIGURE_DEPENDS source/*.cpp)
 
 add_executable(GreeterStandalone ${sources})
-
-# TODO: why rename in this way? Seems only for CI with GitHub actions! CK
-set_target_properties(
-  GreeterStandalone PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD} OUTPUT_NAME "Greeter"
-)
+set_target_properties(GreeterStandalone PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
 # WORKAROUND missing ALIAS target error! CK
 if(NOT TARGET cxxopts::cxxopts)
   add_library(cxxopts::cxxopts ALIAS cxxopts)
 endif()
 target_link_libraries(GreeterStandalone Greeter::Greeter cxxopts::cxxopts)
+
+# ---- run the standalone executable ----
+enable_testing()
+add_test(NAME GreeterStandalone COMMAND GreeterStandalone)
