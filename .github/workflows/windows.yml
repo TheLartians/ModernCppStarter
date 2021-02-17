@@ -36,5 +36,4 @@ jobs:
       - name: test
         run: |
           cd build
-          tree
           ctest --build-config Debug --verbose
