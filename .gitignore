@@ -1,3 +1,5 @@
+stagedir/
+build/
 /build*
 /.vscode
 /cpm_modules

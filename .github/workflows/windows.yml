@@ -1,12 +1,15 @@
+---
 name: Windows
 
 on:
   push:
     branches:
       - master
+      - develop
   pull_request:
     branches:
       - master
+      - develop
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
@@ -25,7 +28,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild
+        run: cmake -S test -B build   # XXX -G "Visual Studio 16 2019" -T ClangCL
 
       - name: build
         run: cmake --build build --config Debug -j4
@@ -33,4 +36,4 @@ jobs:
       - name: test
         run: |
           cd build
-          ctest --build-config Debug
+          ctest --build-config Debug --verbose

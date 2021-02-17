@@ -8,8 +8,6 @@
 
 // NOLINTNEXTLINE(modernize-use-trailing-return-type)
 int main(int argc, char** argv) {
-  // prevent warning: initialization of 'languages' with static storage duration may throw an
-  // exception that cannot be caught [cert-err58-cpp]
   const std::unordered_map<std::string, greeter::LanguageCode> languages{
       {"en", greeter::LanguageCode::EN},
       {"de", greeter::LanguageCode::DE},
@@ -17,8 +15,6 @@ int main(int argc, char** argv) {
       {"fr", greeter::LanguageCode::FR},
   };
 
-  // prevent warning: do not use pointer arithmetic
-  // [cppcoreguidelines-pro-bounds-pointer-arithmetic]
   cxxopts::Options options(*argv, "A program to welcome the world!");
 
   std::string language;
@@ -40,7 +36,6 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  // prevent warning: do not use 'else' after 'return' [readability-else-after-return]
   if (result["version"].as<bool>()) {
     std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
     return 0;

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <greeter/greeter_export.h>
+
 #include <string>
 
 namespace greeter {
@@ -18,14 +20,15 @@ namespace greeter {
      * @brief Creates a new greeter
      * @param name the name to greet
      */
-    explicit Greeter(std::string name);
+    explicit GREETER_EXPORT Greeter(std::string _name);
 
     /**
      * @brief Creates a localized string containing the greeting
      * @param lang the language to greet in
      * @return a string containing the greeting
      */
-    [[nodiscard]] std::string greet(LanguageCode lang = LanguageCode::EN) const;
+    [[nodiscard]] auto GREETER_EXPORT greet(LanguageCode lang = LanguageCode::EN) const
+        -> std::string;
   };
 
 }  // namespace greeter
