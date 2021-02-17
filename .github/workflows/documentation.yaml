@@ -22,12 +22,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          brew install doxygen
+          brew install doxygen graphviz
           pip3 install jinja2 Pygments
 
       - name: Build
         run: |
-          cmake -Sdocumentation -Bbuild
+          cmake -S documentation -B build
           cmake --build build --target GenerateDocs
 
       - name: Publish

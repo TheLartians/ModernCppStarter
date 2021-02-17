@@ -7,6 +7,8 @@ project(GreeterDocs)
 include(../cmake/CPM.cmake)
 CPMUsePackageLock(package-lock.cmake)
 
+include(../cmake/options.cmake)
+
 CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 CPMAddPackage(

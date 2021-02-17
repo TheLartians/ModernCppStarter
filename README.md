@@ -17,6 +17,8 @@ This template is the result of learnings from many previous projects and should 
 ## Features
 
 - [Modern CMake practices](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/)
+- [CMake for library authors: Best practice](https://crascit.com/2019/10/16/cppcon-2019-deep-cmake-for-library-authors/)
+- [Modernize C++ using clang-tidy](https://www.kdab.com/clang-tidy-part-1-modernize-source-code-using-c11c14/)
 - Suited for single header libraries and projects of any scale
 - Clean separation of library and executable code
 - Integrated test suite
@@ -41,7 +43,7 @@ This template is the result of learnings from many previous projects and should 
 Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
 Feel free to replace the License with one suited for your project.
 
-To cleanly separate the library and subproject code, the outer `CMakeList.txt` only defines the library itself while the tests and other subprojects are self-contained in their own directories. 
+To cleanly separate the library and subproject code, the outer `CMakeList.txt` only defines the library itself while the tests and other subprojects are self-contained in their own directories.
 During development it is usually convenient to [build all subprojects at once](#build-everything-at-once).
 
 ### Build and run the standalone target
@@ -63,7 +65,7 @@ cmake -Htest -Bbuild/test
 cmake --build build/test
 CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
 
-# or simply call the executable: 
+# or simply call the executable:
 ./build/test/GreeterTests
 ```
 
