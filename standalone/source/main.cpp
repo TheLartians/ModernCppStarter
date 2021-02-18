@@ -28,7 +28,7 @@ auto main(int argc, char** argv) -> int {
   ;
   // clang-format on
 
-  auto result = options.parse(argc, argv); // TODO: may throw! CK
+  auto result = options.parse(argc, argv);  // TODO: may throw! CK
 
   if (result["help"].as<bool>()) {
     std::cout << options.help() << std::endl;
