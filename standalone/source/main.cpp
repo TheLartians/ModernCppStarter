@@ -6,8 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-// NOLINTNEXTLINE(modernize-use-trailing-return-type)
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   const std::unordered_map<std::string, greeter::LanguageCode> languages{
       {"en", greeter::LanguageCode::EN},
       {"de", greeter::LanguageCode::DE},
