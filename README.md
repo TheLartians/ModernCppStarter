@@ -34,7 +34,7 @@ This template is the result of learnings from many previous projects and should 
 
 - Use this repo [as a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template).
 - Replace all occurrences of "Greeter" in the relevant CMakeLists.txt with the name of your project
-  - Note that capitalization matters here: "Greeter" means the name of the project, while "greeter" is used in file names!
+  - Capitalization matters here: `Greeter` means the name of the project, while `greeter` is used in file names.
   - Change `#include <greeter/version.h>` to `#include <YourNewProjName/version.h>` in all .cpp files, if you're using them
 - Replace the source files with your own
 - For header-only libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
