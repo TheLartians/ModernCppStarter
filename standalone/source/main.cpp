@@ -6,8 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-// NOLINTNEXTLINE(modernize-use-trailing-return-type)
-int main(int argc, char** argv) {
+auto main(int argc, char** argv) -> int {
   const std::unordered_map<std::string, greeter::LanguageCode> languages{
       {"en", greeter::LanguageCode::EN},
       {"de", greeter::LanguageCode::DE},
@@ -29,7 +28,7 @@ int main(int argc, char** argv) {
   ;
   // clang-format on
 
-  auto result = options.parse(argc, argv);
+  auto result = options.parse(argc, argv); // TODO: may throw! CK
 
   if (result["help"].as<bool>()) {
     std::cout << options.help() << std::endl;
