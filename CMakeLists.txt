@@ -24,17 +24,13 @@ endif()
 include(cmake/CPM.cmake)
 
 # PackageProject.cmake will be used to make our target installable
-CPMAddPackage(
-  NAME PackageProject.cmake
-  GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.5.0
-)
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.4.1")
 
 CPMAddPackage(
   NAME fmt
   GIT_TAG 7.1.3
-  GITHUB_REPOSITORY fmtlib/fmt # to get an installable target
-  OPTIONS "FMT_INSTALL YES"
+  GITHUB_REPOSITORY fmtlib/fmt
+  OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
 # ---- Add source files ----
