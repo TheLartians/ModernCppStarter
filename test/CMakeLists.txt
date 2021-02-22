@@ -15,11 +15,7 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-CPMAddPackage(
-  NAME doctest
-  GITHUB_REPOSITORY onqtam/doctest
-  GIT_TAG 2.4.5
-)
+CPMAddPackage("gh:onqtam/doctest#2.4.5")
 
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
