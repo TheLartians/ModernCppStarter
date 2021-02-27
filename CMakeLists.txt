@@ -29,17 +29,13 @@ include(cmake/CPM.cmake)
 CPMUsePackageLock(package-lock.cmake)
 
 # PackageProject.cmake will be used to make our target installable
-CPMAddPackage(
-  NAME PackageProject.cmake
-  GITHUB_REPOSITORY TheLartians/PackageProject.cmake
-  VERSION 1.5.0
-)
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.4.1")
 
 CPMAddPackage(
   NAME fmt
   GIT_TAG 7.1.3
-  GITHUB_REPOSITORY fmtlib/fmt # to get an installable target
-  OPTIONS "FMT_INSTALL YES"
+  GITHUB_REPOSITORY fmtlib/fmt
+  OPTIONS "FMT_INSTALL YES" # create an installable target
 )
 
 # ---- Add source files ----
@@ -52,19 +48,18 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 # ---- Create library ----
 
 # Note: for header-only libraries change all PUBLIC flags to INTERFACE and create an interface
-# target! EITHER: add_library(Greeter INTERFACE) OR:
+# target: add_library(Greeter INTERFACE)
 add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
 # for SameMajorVersion upgrade stategie
 set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
 
-# being a cross-platform target, we enforce standards conformance on MSVC:
+# being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 
-# Link dependencies EITHER:
-target_link_libraries(Greeter PRIVATE $<BUILD_INTERFACE:fmt::fmt-header-only>)
-# OR: target_link_libraries(Greeter PUBLIC fmt::fmt)
+# Link dependencies
+target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME}-${PROJECT_VERSION})
 target_include_directories(
@@ -96,5 +91,5 @@ packageProject(
   INCLUDE_DESTINATION ${INCLUDE_INSTALL_DIR}
   VERSION_HEADER "${VERSION_HEADER_LOCATION}"
   COMPATIBILITY SameMajorVersion
-  # Note: not needed DEPENDENCIES "fmt 7.1.3"
+  DEPENDENCIES "fmt 7.1.3"
 )
