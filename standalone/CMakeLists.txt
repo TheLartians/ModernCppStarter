@@ -11,6 +11,7 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 CPMUsePackageLock(package-lock.cmake)
 
+option(CXXOPTS_BUILD_TESTS "Not needed!" OFF)
 CPMAddPackage("gh:jarro2783/cxxopts@2.2.0")
 
 CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)

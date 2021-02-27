@@ -7,8 +7,6 @@ if(NOT PROJECT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
-CPMUsePackageLock(package-lock.cmake)
-
 include(${CMAKE_CURRENT_LIST_DIR}/options.cmake)
 
 # option: default not set

@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.14...3.19)
 # Note: update this to your new project's name and version
 project(
   Greeter
-  VERSION 1.0.1
+  VERSION 1.0
   LANGUAGES CXX
 )
 
@@ -58,8 +58,8 @@ set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
 
-# Link dependencies
-target_link_libraries(Greeter PUBLIC fmt::fmt)
+# Link dependencies, but Note: the fmt lib does not work with SHARED yet! CK
+target_link_libraries(Greeter PUBLIC fmt::fmt-header-only)
 
 set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME}-${PROJECT_VERSION})
 target_include_directories(
@@ -80,8 +80,8 @@ include(GenerateExportHeader)
 generate_export_header(
   ${PROJECT_NAME} EXPORT_FILE_NAME PackageProjectInclude/${EXPORT_HEADER_LOCATION}
 )
-# Note: the export header will be installed while installing the version header! CK
 
+# Note: the export header will be installed while installing the version header! CK
 packageProject(
   NAME ${PROJECT_NAME}
   VERSION ${PROJECT_VERSION}
