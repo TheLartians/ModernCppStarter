@@ -11,14 +11,10 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
 if(USE_SANITIZER OR USE_STATIC_ANALYZER)
-  CPMAddPackage(
-    NAME StableCoder-cmake-scripts
-    GITHUB_REPOSITORY StableCoder/cmake-scripts
-    GIT_TAG 3d2d5a9fb26f0ce24e3e4eaeeff686ec2ecfb3fb
-  )
+  CPMAddPackage("gh:StableCoder/cmake-scripts#3d2d5a9fb26f0ce24e3e4eaeeff686ec2ecfb3fb")
 
   if(USE_SANITIZER)
-    include(${StableCoder-cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
+    include(${cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
   endif()
 
   if(USE_STATIC_ANALYZER)
@@ -66,9 +62,5 @@ endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
 if(USE_CCACHE)
-  CPMAddPackage(
-    NAME Ccache.cmake
-    GITHUB_REPOSITORY TheLartians/Ccache.cmake
-    VERSION 1.2.1
-  )
+  CPMAddPackage("gh:TheLartians/Ccache.cmake@1.2.1")
 endif()

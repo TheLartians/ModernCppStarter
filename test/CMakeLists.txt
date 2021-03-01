@@ -23,13 +23,7 @@ else()
   CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
 
-CPMAddPackage(
-  NAME Format.cmake
-  GITHUB_REPOSITORY TheLartians/Format.cmake
-  VERSION 1.6
-  OPTIONS # enable cmake formatting
-          "FORMAT_CHECK_CMAKE ON"
-)
+CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
 
 # ---- Create binary ----
 

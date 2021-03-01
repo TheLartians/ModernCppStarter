@@ -6,14 +6,8 @@ project(GreeterDocs)
 
 include(../cmake/CPM.cmake)
 
+CPMAddPackage("gh:mosra/m.css#42d4a9a48f31f5df6e246c948403b54b50574a2a")
 CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
-
-CPMAddPackage(
-  NAME MCSS
-  DOWNLOAD_ONLY YES
-  GITHUB_REPOSITORY mosra/m.css
-  GIT_TAG 42d4a9a48f31f5df6e246c948403b54b50574a2a
-)
 
 # ---- Doxygen variables ----
 
