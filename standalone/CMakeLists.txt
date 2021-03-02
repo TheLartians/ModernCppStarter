@@ -10,7 +10,9 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
+set(CXXOPTS_BUILD_TESTS NO)
 CPMAddPackage("gh:jarro2783/cxxopts@2.2.0")
+
 CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Create standalone executable ----
