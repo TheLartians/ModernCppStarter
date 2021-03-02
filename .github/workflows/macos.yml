@@ -42,5 +42,5 @@ jobs:
         run: |
           cmake -S standalone -B build/standalone -DCMAKE_EXPORT_COMPILE_COMMANDS=1
           export PATH=/usr/local/opt/llvm/bin/:${PATH}
-          /usr/local/opt/llvm/share/clang/run-clang-tidy.py -p build/standalone examples ||
+          /usr/local/opt/llvm/share/clang/run-clang-tidy.py -p build/standalone standalone ||
           echo IGNORED
