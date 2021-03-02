@@ -1,9 +1,11 @@
 #
-# Note: make var CURDIR:=$(/bin/pwd)
-ROOT?=$(CURDIR)/stagedir
 
 #XXX GENERATOR?="Unix Makefiles"
 GENERATOR?=Ninja
+
+STAGEDIR?="${CURDIR}/stage"
+CMAKE_PRESET:=-G Ninja -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DCMAKE_BUILD_TYPE=Debug -DCMAKE_PREFIX_PATH=${STAGEDIR}
+
 
 #XXX export CXX=clang++
 export CPM_USE_LOCAL_PACKAGES=0
@@ -33,26 +35,27 @@ lock: all standalone doc
 
 # install the library to stagedir
 install:
-	cmake -S . -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DCMAKE_INSTALL_PREFIX=${ROOT} # --trace-expand
+	cmake -S . -B build/$@ ${CMAKE_PRESET} -DCMAKE_INSTALL_PREFIX=${STAGEDIR} -DCMAKE_CXX_STANDARD=20 # --trace-expand
 	cmake --build build/$@ --target $@
+	perl -i.bak -pe 's#$$CPM_SOURCE_CACHE-I#-isystem $$1#g' build/install/compile_commands.json
+	run-clang-tidy.py -p build/$@ source
 
 # test the library
 test: install
-	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1
+	cmake -S $@ -B build/$@ ${CMAKE_PRESET} -DTEST_INSTALLED_VERSION=1
 	cmake --build build/$@
 	cmake --build build/$@ --target $@
 
 # all together
 all: test
-	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DUSE_STATIC_ANALYZER=clang-tidy
+	cmake -S $@ -B build/$@ ${CMAKE_PRESET} -DENABLE_TEST_COVERAGE=1 -DUSE_STATIC_ANALYZER=clang-tidy
 	cmake --build build/$@
 	cmake --build build/$@ --target test
 	# cmake --build build/$@ --target check-format
-	# TODO builddriver run-clang-tidy.py -p build/$@ -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*'
 
 # GenerateDocs
 doc:
-	cmake -S documentation -B build/documentation -G "${GENERATOR}"
+	cmake -S documentation -B build/documentation "${CMAKE_PRESET}"
 	cmake --build build/documentation --target GenerateDocs
 
 format: distclean
@@ -62,10 +65,9 @@ format: distclean
 	find . -name '*.h' | xargs clang-format -i
 
 standalone:
-	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+	cmake -S $@ -B build/$@ ${CMAKE_PRESET}
 	cmake --build build/$@
 
 # check the library
 check: standalone
-	run-clang-tidy.py -p build/standalone standalone
-	# TODO builddriver run-clang-tidy.py -p build/standalone -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*' standalone
+	builddriver run-clang-tidy.py -p build/standalone -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*' standalone
