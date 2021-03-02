@@ -10,8 +10,12 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-option(CXXOPTS_BUILD_TESTS "" NO)
-CPMAddPackage("gh:jarro2783/cxxopts@2.2.0")
+CPMAddPackage(
+  GITHUB_REPOSITORY jarro2783/cxxopts
+  VERSION 2.2.0
+  OPTIONS "CXXOPTS_BUILD_TESTS NO"
+)
+
 CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 
 # ---- Create standalone executable ----
