@@ -40,4 +40,7 @@ jobs:
 
       - name: build standalone with clang-tidy
         run: |
-          cmake -S standalone -B build/standalone -DUSE_STATIC_ANALYZER=clang-tidy
+          cmake -S standalone -B build/standalone -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+          export PATH=/usr/local/opt/llvm/bin/:${PATH}
+          /usr/local/opt/llvm/share/clang/run-clang-tidy.py -p build/standalone examples ||
+          echo IGNORED
