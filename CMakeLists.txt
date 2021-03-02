@@ -52,18 +52,25 @@ file(GLOB_RECURSE sources CONFIGURE_DEPENDS source/*.cpp)
 add_library(Greeter ${headers} ${sources})
 set_target_properties(Greeter PROPERTIES CXX_STANDARD ${CMAKE_CXX_STANDARD})
 
-# for SameMajorVersion upgrade stategie
-set_target_properties(Greeter PROPERTIES SOVERSION 1 VERSION ${PROJECT_VERSION})
+# Note: for SameMajorVersion upgrade stategie
+set_target_properties(
+  Greeter
+  PROPERTIES SOVERSION 1
+             VERSION ${PROJECT_VERSION}
+             VISIBILITY_INLINES_HIDDEN ${BUILD_SHARED_LIBS}
+             CMAKE_VISIBILITY_INLINES_HIDDEN ${BUILD_SHARED_LIBS}
+)
 
 # being a cross-platform target, we enforce standards conformance on MSVC
-target_compile_options(Greeter PUBLIC "$<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>")
+target_compile_options(Greeter PUBLIC $<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>)
 
-# Link dependencies, but Note: the fmt lib does not work with SHARED yet! CK
-target_link_libraries(Greeter PUBLIC fmt::fmt-header-only)
+# Link dependencies
+target_link_libraries(Greeter PUBLIC $<BUILD_INTERFACE:fmt::fmt-header-only>)
+# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME}-${PROJECT_VERSION})
 target_include_directories(
-  Greeter BEFORE PUBLIC $<BUILD_INTERFACE: ${PROJECT_SOURCE_DIR}/include>
+  Greeter BEFORE PUBLIC $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
                         $<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}>
 )
 
@@ -89,7 +96,7 @@ packageProject(
   BINARY_DIR ${PROJECT_BINARY_DIR}
   INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include
   INCLUDE_DESTINATION ${INCLUDE_INSTALL_DIR}
-  VERSION_HEADER "${VERSION_HEADER_LOCATION}"
+  VERSION_HEADER ${VERSION_HEADER_LOCATION}
   COMPATIBILITY SameMajorVersion
-  DEPENDENCIES "fmt 7.1.3"
+  # XXX DEPENDENCIES "fmt 7.1.3"
 )

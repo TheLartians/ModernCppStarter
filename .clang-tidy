@@ -6,7 +6,7 @@ clang-analyzer-*,\
 cppcoreguidelines-*,\
 -cppcoreguidelines-macro-usage,\
 -cppcoreguidelines-owning-memory,\
--hicpp-*,\
+hicpp-*,\
 misc-*,\
 -misc-non-private-member-variables-in-classes,\
 -modernize-*,\

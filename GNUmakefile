@@ -44,7 +44,7 @@ test: install
 
 # all together
 all: test
-	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1
+	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1 -DUSE_STATIC_ANALYZER=clang-tidy
 	cmake --build build/$@
 	cmake --build build/$@ --target test
 	cmake --build build/$@ --target check-format
@@ -66,4 +66,5 @@ standalone:
 
 # check the library
 check: standalone
-	run-clang-tidy.py -p build/standalone -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*' standalone
+	run-clang-tidy.py -p build/standalone standalone
+	# TODO builddriver run-clang-tidy.py -p build/standalone -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*' standalone
