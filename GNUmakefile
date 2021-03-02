@@ -44,10 +44,11 @@ test: install
 
 # all together
 all: test
-	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1 -DUSE_STATIC_ANALYZER=clang-tidy
+	cmake -S $@ -B build/$@ -G "${GENERATOR}" -DCMAKE_PREFIX_PATH=${ROOT} -DTEST_INSTALLED_VERSION=1 -DENABLE_TEST_COVERAGE=1  -DCMAKE_EXPORT_COMPILE_COMMANDS=1 -DUSE_STATIC_ANALYZER=clang-tidy
 	cmake --build build/$@
 	cmake --build build/$@ --target test
-	cmake --build build/$@ --target check-format
+	# cmake --build build/$@ --target check-format
+	# TODO builddriver run-clang-tidy.py -p build/$@ -checks='-*,modernize-*,misc-*,hicpp-*,cert-*,readability-*,portability-*,performance-*,google-*'
 
 # GenerateDocs
 doc:
