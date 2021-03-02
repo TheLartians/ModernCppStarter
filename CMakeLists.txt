@@ -64,9 +64,9 @@ set_target_properties(
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(Greeter PUBLIC $<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>)
 
-# Link dependencies
-target_link_libraries(Greeter PUBLIC $<BUILD_INTERFACE:fmt::fmt-header-only>)
-# XXX target_link_libraries(Greeter PUBLIC fmt::fmt)
+# Link dependencies Note Either: target_link_libraries(Greeter PUBLIC
+# $<BUILD_INTERFACE:fmt::fmt-header-only>) Or:
+target_link_libraries(Greeter PUBLIC fmt::fmt)
 
 set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME}-${PROJECT_VERSION})
 target_include_directories(
@@ -98,5 +98,5 @@ packageProject(
   INCLUDE_DESTINATION ${INCLUDE_INSTALL_DIR}
   VERSION_HEADER ${VERSION_HEADER_LOCATION}
   COMPATIBILITY SameMajorVersion
-  # XXX DEPENDENCIES "fmt 7.1.3"
+  DEPENDENCIES "fmt 7.1.3"
 )

@@ -40,4 +40,4 @@ jobs:
 
       - name: build standalone with clang-tidy
         run: |
-	    cmake -S standalone -B build/standalone -DUSE_STATIC_ANALYZER=clang-tidy
+          cmake -S standalone -B build/standalone -DUSE_STATIC_ANALYZER=clang-tidy
