@@ -16,14 +16,13 @@ include(../cmake/tools.cmake)
 include(../cmake/CPM.cmake)
 
 CPMAddPackage("gh:onqtam/doctest#2.4.5")
+CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
 
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
 else()
   CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
 endif()
-
-CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
 
 # ---- Create binary ----
 
