@@ -20,7 +20,7 @@ clean:
 	find . -type d -name build | xargs rm -rf
 
 distclean: clean
-	rm -rf build ${ROOT}
+	rm -rf build ${STAGEDIR}
 
 # update CPM.cmake
 update:
@@ -37,21 +37,22 @@ lock: all standalone doc
 install:
 	cmake -S . -B build/$@ ${CMAKE_PRESET} -DCMAKE_INSTALL_PREFIX=${STAGEDIR} -DCMAKE_CXX_STANDARD=20 #NO! -DCMAKE_CXX_CLANG_TIDY=clang-tidy # --trace-expand
 	cmake --build build/$@ --target $@
-	perl -i.bak -pe 's#-I($$CPM_SOURCE_CACHE)#-isystem $$1#g' build/install/compile_commands.json
-	run-clang-tidy.py -p build/$@ source
+	perl -i.bak -pe 's#-I($$CPM_SOURCE_CACHE)#-isystem $$1#g' build/$@/compile_commands.json
+	run-clang-tidy.py -p build/$@ source    # Note: only local sources! CK
 
 # test the library
 test: install
 	cmake -S $@ -B build/$@ ${CMAKE_PRESET} -DTEST_INSTALLED_VERSION=1
+	perl -i.bak -pe 's#-I($$CPM_SOURCE_CACHE)#-isystem $$1#g' build/$@/compile_commands.json
 	cmake --build build/$@
 	cmake --build build/$@ --target $@
+	run-clang-tidy.py -p build/$@ test/source    # Note: only local sources! CK
 
 # all together
-all: #XXX test
-	cmake -S $@ -B build/$@ ${CMAKE_PRESET} -DENABLE_TEST_COVERAGE=1 -DUSE_STATIC_ANALYZER=clang-tidy
+all: format
+	cmake -S $@ -B build/$@ ${CMAKE_PRESET} -DENABLE_TEST_COVERAGE=1 # Note: NO! -DUSE_STATIC_ANALYZER=clang-tidy CK
 	cmake --build build/$@
 	cmake --build build/$@ --target test
-	#XXX cmake --build build/$@ --target check-format
 
 # GenerateDocs
 doc:
@@ -66,6 +67,7 @@ format: distclean
 
 standalone:
 	cmake -S $@ -B build/$@ ${CMAKE_PRESET}
+	perl -i.bak -pe 's#-I($$CPM_SOURCE_CACHE)#-isystem $$1#g' build/$@/compile_commands.json
 	cmake --build build/$@
 
 # check the library
