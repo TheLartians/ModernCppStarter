@@ -15,7 +15,7 @@ export CPM_SOURCE_CACHE=${HOME}/.cache/CPM
 PROJECT_NAME:=$(shell basename $(CURDIR))
 BUILD_DIR?=../build-$(PROJECT_NAME)-$(CXX)-$(BUILD_TYPE)
 
-.PHONY: update format all test standalone doc check clean distclean lock
+.PHONY: update format all test standalone doc check clean distclean
 
 # the default target does just all, but neither standalone nor doc
 test:
@@ -30,13 +30,6 @@ distclean: clean
 update:
 	wget -q -O cmake/CPM.cmake https://github.com/cpm-cmake/CPM.cmake/releases/latest/download/get_cpm.cmake
 	wget -q -O cmake/WarningsAsErrors.cmake https://raw.githubusercontent.com/approvals/ApprovalTests.cpp/master/CMake/WarningsAsErrors.cmake
-
-lock: all standalone doc
-	cmake --build $(BUILD_DIR)/all --target cpm-update-package-lock
-	cmake --build $(BUILD_DIR)/test --target cpm-update-package-lock
-	cmake --build $(BUILD_DIR)/install --target cpm-update-package-lock
-	cmake --build $(BUILD_DIR)/standalone --target cpm-update-package-lock
-	cmake --build $(BUILD_DIR)/documentation --target cpm-update-package-lock
 
 # install the library to stagedir
 install:
@@ -61,7 +54,7 @@ all:
 
 # GenerateDocs
 doc:
-	cmake -S documentation -B $(BUILD_DIR)/documentation "${CMAKE_PRESET}"
+	cmake -S documentation -B $(BUILD_DIR)/documentation ${CMAKE_PRESET}
 	cmake --build $(BUILD_DIR)/documentation --target GenerateDocs
 
 format: distclean
