@@ -18,7 +18,6 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-CPMUsePackageLock(package-lock.cmake)
 
 CPMAddPackage("gh:onqtam/doctest#2.4.5")
 

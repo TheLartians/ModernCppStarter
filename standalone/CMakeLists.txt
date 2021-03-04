@@ -9,7 +9,6 @@ include(../cmake/tools.cmake)
 # ---- Dependencies ----
 
 include(../cmake/CPM.cmake)
-CPMUsePackageLock(package-lock.cmake)
 
 option(CXXOPTS_BUILD_TESTS "Not needed!" OFF)
 CPMAddPackage("gh:jarro2783/cxxopts@2.2.0")

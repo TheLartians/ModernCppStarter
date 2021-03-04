@@ -26,7 +26,6 @@ include(cmake/options.cmake)
 # see https://github.com/cpm-cmake/CPM.cmake for more info
 
 include(cmake/CPM.cmake)
-CPMUsePackageLock(package-lock.cmake)
 
 # PackageProject.cmake will be used to make our target installable
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.4.1")
@@ -60,6 +59,11 @@ set_target_properties(
              VISIBILITY_INLINES_HIDDEN ${BUILD_SHARED_LIBS}
              CMAKE_VISIBILITY_INLINES_HIDDEN ${BUILD_SHARED_LIBS}
 )
+
+option(WarningsAsErrors "Be realy pedantic!" YES)
+if(WarningsAsErrors)
+  include(${CMAKE_CURRENT_LIST_DIR}/cmake/WarningsAsErrors.cmake)
+endif()
 
 # being a cross-platform target, we enforce standards conformance on MSVC
 target_compile_options(Greeter PUBLIC $<$<COMPILE_LANG_AND_ID:CXX,MSVC>:/permissive>)
