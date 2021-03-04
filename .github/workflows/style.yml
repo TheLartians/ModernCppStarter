@@ -29,7 +29,7 @@ jobs:
       - name: Install format dependencies
         run: |
           brew install clang-format
-          pip3 install cmake_format==0.6.11 pyyaml
+          pip3 install cmake_format==0.6.13 pyyaml
 
       - name: configure
         run: cmake -S test -B build
