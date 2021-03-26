@@ -171,19 +171,17 @@ Instead, create a new directory or project with a CMakeLists that adds the libra
 Depending type it might make sense move these components into a separate repositories and reference a specific commit or version of the library.
 This has the advantage that individual libraries and components can be improved and updated independently.
 
-> You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM as well?
+> You recommend to add external dependencies using CPM.cmake. Will this force users of my library to use CPM.cmake as well?
 
 [CPM.cmake](https://github.com/TheLartians/CPM.cmake) should be invisible to library users as it's a self-contained CMake Script.
-If problems do arise, users can always opt-out by defining `CPM_USE_LOCAL_PACKAGES`, which will override all calls to `CPMAddPackage` with `find_package`.
-Alternatively, you could use `CPMFindPackage` instead of `CPMAddPackage`, which will try to use `find_package` before calling `CPMAddPackage` as a fallback.
-Both approaches should be compatible with common C++ package managers without modifications, however come with the cost of reproducible builds.
+If problems do arise, users can always opt-out by defining the CMake or env variable [`CPM_USE_LOCAL_PACKAGES`](https://github.com/cpm-cmake/CPM.cmake#options), which will override all calls to `CPMAddPackage` with the according `find_package` call.
+This should also enable users to use the project with their favorite external C++ dependency manager, such as vcpkg or Conan.
 
 > Can I configure and build my project offline?
 
-Using CPM, all missing dependencies are downloaded at configure time.
-To avoid redundant downloads, it's recommended to set a CPM cache directory, e.g.: `export CPM_SOURCE_CACHE=$HOME/.cache/CPM`.
-This will also allow offline configurations if all dependencies are present.
-No internet connection is required for building.
+No internet connection is required for building the project, however when using CPM missing dependencies are downloaded at configure time.
+To avoid redundant downloads, it's highly recommended to set a CPM.cmake cache directory, e.g.: `export CPM_SOURCE_CACHE=$HOME/.cache/CPM`.
+This will enable shallow clones and allow offline configurations dependencies are already available in the cache.
 
 > Can I use CPack to create a package installer for my project?
 
