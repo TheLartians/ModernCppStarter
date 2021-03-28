@@ -24,7 +24,7 @@ endif()
 include(cmake/CPM.cmake)
 
 # PackageProject.cmake will be used to make our target installable
-CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.4.1")
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.6.0")
 
 CPMAddPackage(
   NAME fmt
