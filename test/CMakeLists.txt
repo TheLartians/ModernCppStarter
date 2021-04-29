@@ -7,6 +7,8 @@ project(GreeterTests LANGUAGES CXX)
 option(ENABLE_TEST_COVERAGE "Enable test coverage" OFF)
 option(TEST_INSTALLED_VERSION "Test the version found by find_package" OFF)
 
+set(CODE_COVERAGE ${ENABLE_TEST_COVERAGE})
+
 # --- Import tools ----
 
 include(../cmake/tools.cmake)
@@ -54,6 +56,13 @@ doctest_discover_tests(GreeterTests)
 # ---- code coverage ----
 
 if(ENABLE_TEST_COVERAGE)
-  target_compile_options(Greeter PUBLIC -O0 -g -fprofile-arcs -ftest-coverage)
-  target_link_options(Greeter PUBLIC -fprofile-arcs -ftest-coverage)
+  if(DEFINED ENV{CPM_SOURCE_CACHE})
+    set(CCOV_EXCLUDES $ENV{CPM_SOURCE_CACHE}/.* $ENV{CPM_SOURCE_CACHE}/*)
+  endif()
+  set(CCOV_EXCLUDES ${CMAKE_BINARY_DIR}/.* ${CMAKE_BINARY_DIR}/*)
+
+  add_code_coverage_all_targets(EXCLUDE ${CCOV_EXCLUDES})
+
+  target_code_coverage(Greeter EXCLUDE ${CCOV_EXCLUDES})
+  target_code_coverage(GreeterTests AUTO EXCLUDE ${CCOV_EXCLUDES})
 endif()
