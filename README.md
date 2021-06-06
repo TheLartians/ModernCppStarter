@@ -39,7 +39,6 @@ This template is the result of learnings from many previous projects and should 
 - Replace the source files with your own
 - For header-only libraries: see the comments in [CMakeLists.txt](CMakeLists.txt)
 - Add [your project's codecov token](https://docs.codecov.io/docs/quick-start) to your project's github secrets under `CODECOV_TOKEN`
-- Update the branch triggers in the [.github/workflows](.github/workflows) to be your main branch (the default is "master" and if your main branch is "main" the workflows will not trigger)
 - Happy coding!
 
 Eventually, you can remove any unused files, such as the standalone directory or irrelevant github workflows for your project.
