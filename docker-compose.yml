@@ -1,0 +1,7 @@
+version: "3.8"
+
+services:
+    application:
+        build: .
+        image: greeter
+        container_name: greeter

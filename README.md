@@ -27,6 +27,7 @@ This template is the result of learnings from many previous projects and should 
 - Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
+- Built-in [Docker support](#docker)
 
 ## Usage
 
@@ -140,6 +141,41 @@ Additional arguments can be passed to the analyzers by setting the `CLANG_TIDY_A
 #### Ccache
 
 Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
+
+## Docker
+
+The project supports [Docker](https://www.docker.com) out-of-the-box, which allows building and running the project inside a container.
+The container builds all targets, so you can run any of them passing a command after `sh -c`.
+
+### Docker Workflow
+
+```bash
+# build
+docker build . -t modern-cpp-starter
+# run tests
+docker run modern-cpp-starter sh -c "./build/test/GreeterTests"
+# run standalone
+docker run modern-cpp-starter
+```
+
+### Docker Compose Workflow
+
+```bash
+# build
+docker-compose up --build
+# run tests
+docker-compose run application sh -c "./build/test/GreeterTests"
+# run standalone
+docker-compose run application
+```
+
+### Removing Docker Support
+
+Docker support is optional, if you don't need it simply remove the following files from the starter:
+
+- `.github/workflows/docker.yml`
+- `Dockerfile`
+- `docker-compose.yml`
 
 ## FAQ
 
