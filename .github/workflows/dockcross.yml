@@ -68,6 +68,8 @@ jobs:
         with:
           submodules: "recursive"
           fetch-depth: 0
+      - name: "Install dependency"
+        run: sudo apt-get update && sudo apt-get install -y ninja-build  
       - name: "Pull ${{ matrix.image_name }}..."
         run: docker pull dockcross/${{ matrix.image_name }}
       - name: "Make script"
