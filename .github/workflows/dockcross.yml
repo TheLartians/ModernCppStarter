@@ -67,18 +67,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: "recursive"
-          fetch-depth: 0
-      - name: "Install dependency"
-        run: sudo apt-get update && sudo apt-get install -y ninja-build  
+          fetch-depth: 0 
       - name: "Pull ${{ matrix.image_name }}..."
         run: docker pull dockcross/${{ matrix.image_name }}
       - name: "Make script"
         run: docker run --rm dockcross/${{ matrix.image_name }} > ./dockcross-${{ matrix.image_name }}
       - name: "Config CMakefile"
-        run: cmake -B dockcross-${{ matrix.image_name }} -S . -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        run: ./dockcross-${{ matrix.image_name }} cmake -B dockcross-${{ matrix.image_name }} -S . -G Ninja -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
       - name: "Build"
-        run: ninja -C dockcross-${{ matrix.image_name }}
+        run: ./dockcross-${{ matrix.image_name }} ninja -C dockcross-${{ matrix.image_name }}
       - name: "Test"
         run: |
           cd dockcross-${{ matrix.image_name }}
-          ctest --build-config ${{ matrix.build_type }}
+          ./dockcross-${{ matrix.image_name }} ctest --build-config ${{ matrix.build_type }}
