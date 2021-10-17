@@ -27,9 +27,9 @@ endif()
 # ---- Create binary ----
 
 file(GLOB sources CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp)
-add_executable(GreeterTests ${sources})
-target_link_libraries(GreeterTests doctest::doctest Greeter::Greeter)
-set_target_properties(GreeterTests PROPERTIES CXX_STANDARD 17)
+add_executable(${PROJECT_NAME} ${sources})
+target_link_libraries(${PROJECT_NAME} doctest::doctest Greeter::Greeter)
+set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17)
 
 # enable compiler warnings
 if(NOT TEST_INSTALLED_VERSION)
@@ -37,7 +37,7 @@ if(NOT TEST_INSTALLED_VERSION)
     target_compile_options(Greeter PUBLIC -Wall -Wpedantic -Wextra -Werror)
   elseif(MSVC)
     target_compile_options(Greeter PUBLIC /W4 /WX)
-    target_compile_definitions(GreeterTests PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
+    target_compile_definitions(${PROJECT_NAME} PUBLIC DOCTEST_CONFIG_USE_STD_HEADERS)
   endif()
 endif()
 
@@ -46,10 +46,11 @@ endif()
 enable_testing()
 
 # Note: doctest and similar testing frameworks can automatically configure CMake tests. For other
-# testing frameworks add the tests target instead: add_test(NAME greeterTests COMMAND GreeterTests)
+# testing frameworks add the tests target instead: add_test(NAME ${PROJECT_NAME} COMMAND
+# ${PROJECT_NAME})
 
 include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-doctest_discover_tests(GreeterTests)
+doctest_discover_tests(${PROJECT_NAME})
 
 # ---- code coverage ----
 
