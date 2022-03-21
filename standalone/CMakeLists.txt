@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.22)
 
 project(GreeterStandalone LANGUAGES CXX)
 
@@ -12,7 +12,7 @@ include(../cmake/CPM.cmake)
 
 CPMAddPackage(
   GITHUB_REPOSITORY jarro2783/cxxopts
-  VERSION 2.2.1
+  VERSION 3.0.0
   OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES"
 )
 
