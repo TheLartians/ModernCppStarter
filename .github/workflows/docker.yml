@@ -1,0 +1,31 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - master
+      - main
+      - add-docker-build
+  pull_request:
+    branches:
+      - master
+      - main
+
+jobs:
+  build:
+    name: Build docker images
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: build-test-image
+        run: docker build -f ./docker/Dockerfile -t modern-cpp-starter/greeter-test:1.0 --target test .
+
+      - name: build-app-image
+        run: docker build -f ./docker/Dockerfile -t modern-cpp-starter/greeter-app:1.0 .
+
+      - name: run-test-image
+        run: docker run modern-cpp-starter/greeter-test:1.0
+
+      - name: run-app-image
+        run: docker run modern-cpp-starter/greeter-app:1.0
