@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14...3.22)
 
 project(GreeterTests LANGUAGES CXX)
 
@@ -15,8 +15,8 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-CPMAddPackage("gh:onqtam/doctest#2.4.5")
-CPMAddPackage("gh:TheLartians/Format.cmake@1.7.0")
+CPMAddPackage("gh:onqtam/doctest@2.4.8")
+CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
