@@ -27,7 +27,7 @@ add_executable(${PROJECT_NAME} ${sources})
 # enable pedantic compiler warnings
 include(../cmake/WarningsAsErrors.cmake)
 
-# TODO(CK): why is this needed on CI?
+# TODO(CK): why is this name used on CI?
 set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME Greeter)
 
 target_link_libraries(${PROJECT_NAME} Greeter::Greeter cxxopts)
