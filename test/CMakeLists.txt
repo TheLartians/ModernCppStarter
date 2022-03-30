@@ -31,7 +31,7 @@ add_executable(${PROJECT_NAME} ${sources})
 target_link_libraries(${PROJECT_NAME} doctest::doctest Greeter::Greeter)
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
-# enable compiler warnings
+# enable pedantic compiler warnings
 include(../cmake/WarningsAsErrors.cmake)
 
 # ---- Add GreeterTests ----

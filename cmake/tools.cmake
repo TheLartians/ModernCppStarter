@@ -10,6 +10,10 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
+set(USE_SANITIZER
+    "Address;Undefined"
+    CACHE STRING "one or more of: Address, Memory, MemoryWithOrigins, Undefined, Thread, Leak"
+)
 if(USE_SANITIZER OR USE_STATIC_ANALYZER)
   CPMAddPackage("gh:StableCoder/cmake-scripts#1f822d1fc87c8d7720c074cde8a278b44963c354")
 
@@ -17,6 +21,10 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
     include(${cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
   endif()
 
+  set(USE_STATIC_ANALYZER
+      ""
+      CACHE STRING "one or more of: clang-tidy, iwyu, cppcheck"
+  )
   if(USE_STATIC_ANALYZER)
     if("clang-tidy" IN_LIST USE_STATIC_ANALYZER)
       set(CLANG_TIDY
@@ -61,6 +69,7 @@ if(USE_SANITIZER OR USE_STATIC_ANALYZER)
 endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
+option(USE_CCACHE "enables ccache support" YES)
 if(USE_CCACHE)
   CPMAddPackage("gh:TheLartians/Ccache.cmake@1.2.3")
 endif()
