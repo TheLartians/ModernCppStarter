@@ -5,7 +5,7 @@ RUN set -eux; \
     apt-get install -y --no-install-recommends \
     cmake \
     ninja-build \
-    # build with Boost as system lib - this should be orders of magnitude faster to configure than
+    # configure/build with Boost as system lib - this should be orders of magnitude faster to configure than
     # downloading via CPM.cmake while Boost's CMake support is still experimental
     libboost-all-dev \
     ;
