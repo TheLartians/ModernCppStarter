@@ -14,7 +14,8 @@ include(../cmake/tools.cmake)
 
 include(../cmake/CPM.cmake)
 
-# Crow needs Boost 1.64 and does not provide CPM.cmake integration itself, so we have to get Boost first
+# Crow needs Boost 1.64 and does not provide CPM.cmake integration itself, so we have to get Boost
+# first
 find_package(Boost 1.64 QUIET)
 if(NOT Boost_FOUND)
   # Use CPM.cmake to get Boost from the official repo if not provided as system lib
@@ -25,10 +26,9 @@ if(NOT Boost_FOUND)
     GIT_TAG boost-1.78.0
     VERSION 1.78.0
   )
-  # Ugly workaround:
-  # Boost cmake support is still experimental, the Boost::boost target is not provided if downloaded via
-  # FetchContent_declare / CPM.cmake
-  # Crow uses it for asio, so we fake the Boost:boost target as asio
+  # Ugly workaround: Boost cmake support is still experimental, the Boost::boost target is not
+  # provided if downloaded via FetchContent_declare / CPM.cmake. Crow uses it for asio, so we fake
+  # the Boost:boost target as asio
   if(NOT TARGET Boost::boost)
     add_library(Boost::boost INTERFACE IMPORTED)
     target_link_libraries(Boost::boost INTERFACE Boost::asio)
@@ -38,17 +38,11 @@ else()
 endif()
 # add Crow
 CPMAddPackage(
-<<<<<<< HEAD
-  GITHUB_REPOSITORY jarro2783/cxxopts
-  VERSION 3.0.0
-  OPTIONS "CXXOPTS_BUILD_EXAMPLES NO" "CXXOPTS_BUILD_TESTS NO" "CXXOPTS_ENABLE_INSTALL YES"
-=======
   NAME Crow
   GITHUB_REPOSITORY CrowCpp/Crow
   GIT_TAG v1.0+1
   VERSION 1.0.1
   OPTIONS "CROW_INSTALL OFF"
->>>>>>> a42d7c5 (add boost, make boost work in docker)
 )
 
 # get the Greeter lib
