@@ -58,6 +58,6 @@ jobs:
           file: ./standalone/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: false
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/webapi:ci
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/greeter-webapi:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
