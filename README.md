@@ -106,7 +106,7 @@ cmake --build build/doc --target GenerateDocs
 open build/doc/doxygen/html/index.html
 ```
 
-To build the documentation locally, you will need Doxygen, jinja2 and Pygments on installed your system.
+To build the documentation locally, you will need Doxygen, jinja2 and Pygments installed on your system.
 
 ### Build everything at once
 
