@@ -1,4 +1,4 @@
-name: Ubuntu
+name: Test
 
 on:
   push:
@@ -17,7 +17,11 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +29,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: "**/cpm_modules"
-          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          key: ${{ matrix.os }}-${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
         run: cmake -Stest -Bbuild -DENABLE_TEST_COVERAGE=1 -DCMAKE_BUILD_TYPE=Debug
@@ -38,5 +42,6 @@ jobs:
           cd build
           ctest --build-config Debug
 
-      - name: collect code coverage
+      - name: collect code coverage on ubuntu
+        if: startsWith(matrix.os,'ubuntu')
         run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

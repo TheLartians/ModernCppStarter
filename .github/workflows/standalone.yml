@@ -15,7 +15,11 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
 
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +27,7 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: "**/cpm_modules"
-          key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
+          key: ${{ matrix.os }}-${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
         run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug
@@ -31,5 +35,10 @@ jobs:
       - name: build
         run: cmake --build build -j4
 
-      - name: run
+      - name: run on unix-like
+        if: startsWith(matrix.os, 'macOS') || startsWith(matrix.os,'ubuntu')
         run: ./build/Greeter
+
+      - name: run on windows
+        if: startsWith(matrix.os, 'windows')
+        run: ./build/Debug/Greeter.exe
