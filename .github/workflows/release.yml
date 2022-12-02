@@ -2,6 +2,8 @@ name: Release
 
 on:
   push:
+    tags:
+      - '*'
     branches:
       - master
       - main
@@ -35,6 +37,10 @@ jobs:
       - name: build
         run: cmake --build build -j4 --config Release
 
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - name: zip
         uses: thedoctor0/zip-release@main
         with:
@@ -42,17 +48,8 @@ jobs:
           filename: ${{ matrix.os }}.zip
           directory: build/out/
 
-      - name: ls
-        run: ls
-
-      - name: ls
-        run: ls build
-
-      - name: ls
-        run: ls build/out
-
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
           artifacts: build/out/${{ matrix.os }}.zip
-          tag: latest
+          tag: nightly-${{ steps.date.outputs.date }}
