@@ -28,7 +28,7 @@ CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.8.0")
 
 CPMAddPackage(
   NAME fmt
-  GIT_TAG 8.1.1
+  GIT_TAG 9.1.0
   GITHUB_REPOSITORY fmtlib/fmt
   OPTIONS "FMT_INSTALL YES" # create an installable target
 )
