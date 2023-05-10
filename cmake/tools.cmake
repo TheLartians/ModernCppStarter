@@ -11,7 +11,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 # enables sanitizers support using the the `USE_SANITIZER` flag available values are: Address,
 # Memory, MemoryWithOrigins, Undefined, Thread, Leak, 'Address;Undefined'
 if(USE_SANITIZER OR USE_STATIC_ANALYZER)
-  CPMAddPackage("gh:StableCoder/cmake-scripts#1f822d1fc87c8d7720c074cde8a278b44963c354")
+  CPMAddPackage("gh:StableCoder/cmake-scripts@23.04")
 
   if(USE_SANITIZER)
     include(${cmake-scripts_SOURCE_DIR}/sanitizers.cmake)
