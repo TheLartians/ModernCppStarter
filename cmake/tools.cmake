@@ -62,5 +62,5 @@ endif()
 
 # enables CCACHE support through the USE_CCACHE flag possible values are: YES, NO or equivalent
 if(USE_CCACHE)
-  CPMAddPackage("gh:TheLartians/Ccache.cmake@1.2.3")
+  CPMAddPackage("gh:TheLartians/Ccache.cmake@1.2.4")
 endif()
