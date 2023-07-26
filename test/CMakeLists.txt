@@ -21,7 +21,11 @@ CPMAddPackage("gh:TheLartians/Format.cmake@1.7.3")
 if(TEST_INSTALLED_VERSION)
   find_package(Greeter REQUIRED)
 else()
-  CPMAddPackage(NAME Greeter SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..)
+  CPMAddPackage(
+    NAME Greeter
+    SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/..
+    FORCE ON
+  )
 endif()
 
 # ---- Create binary ----
@@ -46,11 +50,13 @@ endif()
 enable_testing()
 
 # Note: doctest and similar testing frameworks can automatically configure CMake tests. For other
-# testing frameworks add the tests target instead: add_test(NAME ${PROJECT_NAME} COMMAND
-# ${PROJECT_NAME})
-
-include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
-doctest_discover_tests(${PROJECT_NAME})
+# testing frameworks add the tests target instead:
+if(NOT doctest_SOURCE_DIR)
+  add_test(NAME ${PROJECT_NAME} COMMAND ${PROJECT_NAME})
+else()
+  include(${doctest_SOURCE_DIR}/scripts/cmake/doctest.cmake)
+  doctest_discover_tests(${PROJECT_NAME})
+endif()
 
 # ---- code coverage ----
 
