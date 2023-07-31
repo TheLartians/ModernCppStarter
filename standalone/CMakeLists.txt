@@ -43,9 +43,6 @@ endif()
 target_link_libraries(${PROJECT_NAME} Greeter::Greeter cxxopts::cxxopts)
 set_target_properties(${PROJECT_NAME} PROPERTIES UNITY_BUILD ${OPTION_ENABLE_UNITY})
 
-# TODO(CK): why is this used? This overrides the CMAKE_DEBUG_POSTFIX!
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME Greeter)
-
 # --- Test it ---
 
 enable_testing()
