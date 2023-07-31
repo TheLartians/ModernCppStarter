@@ -27,6 +27,7 @@ This template is the result of learnings from many previous projects and should 
 - Installable target with automatic versioning information and header generation via [PackageProject.cmake](https://github.com/TheLartians/PackageProject.cmake)
 - Automatic [documentation](https://thelartians.github.io/ModernCppStarter) and deployment with [Doxygen](https://www.doxygen.nl) and [GitHub Pages](https://pages.github.com)
 - Support for [sanitizer tools, and more](#additional-tools)
+- Supports [CMake Workflow Presets](https://cmake.org/cmake/help/v3.25/manual/cmake-presets.7.html#id10)
 
 ## Usage
 
@@ -52,6 +53,8 @@ During development it is usually convenient to [build all subprojects at once](#
 Use the following command to build and run the executable target.
 
 ```bash
+cd standalone && cmake --workflow --preset=default
+# or
 cmake -S standalone -B build/standalone
 cmake --build build/standalone
 ./build/standalone/Greeter --help
@@ -62,6 +65,8 @@ cmake --build build/standalone
 Use the following commands from the project's root directory to run the test suite.
 
 ```bash
+cd test && cmake --workflow --preset=default
+# or
 cmake -S test -B build/test
 cmake --build build/test
 CTEST_OUTPUT_ON_FAILURE=1 cmake --build build/test --target test
@@ -114,6 +119,8 @@ The project also includes an `all` directory that allows building all targets at
 This is useful during development, as it exposes all subprojects to your IDE and avoids redundant builds of the library.
 
 ```bash
+cd all && cmake --workflow --preset=default
+# or
 cmake -S all -B build
 cmake --build build
 

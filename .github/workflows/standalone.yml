@@ -1,14 +1,15 @@
+---
 name: Standalone
 
 on:
   push:
     branches:
       - master
-      - main
+      - develop
   pull_request:
     branches:
       - master
-      - main
+      - develop
 
 env:
   CPM_SOURCE_CACHE: ${{ github.workspace }}/cpm_modules
@@ -26,10 +27,12 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Sstandalone -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S standalone -B build -D CMAKE_BUILD_TYPE=Debug
 
       - name: build
         run: cmake --build build -j4
 
-      - name: run
-        run: ./build/Greeter
+      - name: test
+        run: |
+          cd build
+          ctest --build-config Debug

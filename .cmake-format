@@ -22,7 +22,9 @@ parse:
         SVN_REPOSITORY: 1
         SVN_REVISION: 1
         SOURCE_DIR: 1
+        SYSTEM: 1
         DOWNLOAD_COMMAND: 1
+        EXCLUDE_FROM_ALL: 1
         FIND_PACKAGE_ARGUMENTS: 1
         NO_CACHE: 1
         GIT_SHALLOW: 1

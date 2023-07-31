@@ -1,14 +1,15 @@
+---
 name: Install
 
 on:
   push:
     branches:
       - master
-      - main
+      - develop
   pull_request:
     branches:
       - master
-      - main
+      - develop
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
@@ -33,7 +34,7 @@ jobs:
           rm -rf build
 
       - name: configure
-        run: cmake -Stest -Bbuild -DTEST_INSTALLED_VERSION=1
+        run: cmake -S test -B build -D TEST_INSTALLED_VERSION=1
 
       - name: build
         run: cmake --build build --config Debug -j4

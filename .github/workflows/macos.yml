@@ -1,14 +1,15 @@
+---
 name: MacOS
 
 on:
   push:
     branches:
       - master
-      - main
+      - develop
   pull_request:
     branches:
       - master
-      - main
+      - develop
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
@@ -27,7 +28,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild -DCMAKE_BUILD_TYPE=Debug
+        run: cmake -S test -B build -D CMAKE_BUILD_TYPE=Debug
 
       - name: build
         run: cmake --build build -j4

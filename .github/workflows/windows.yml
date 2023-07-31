@@ -1,14 +1,15 @@
+---
 name: Windows
 
 on:
   push:
     branches:
       - master
-      - main
+      - develop
   pull_request:
     branches:
       - master
-      - main
+      - develop
 
 env:
   CTEST_OUTPUT_ON_FAILURE: 1
@@ -27,7 +28,7 @@ jobs:
           key: ${{ github.workflow }}-cpm-modules-${{ hashFiles('**/CMakeLists.txt', '**/*.cmake') }}
 
       - name: configure
-        run: cmake -Stest -Bbuild
+        run: cmake -S test -B build  #  -G "Visual Studio 17 2022" -D BUILD_SHARED_LIBS=NO
 
       - name: build
         run: cmake --build build --config Debug -j4
