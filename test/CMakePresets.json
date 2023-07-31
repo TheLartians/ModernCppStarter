@@ -27,7 +27,8 @@
       },
       "environment": {
         "CPM_USE_LOCAL_PACKAGES": "YES",
-        "PATH": "$env{HOME}/.local/bin${pathListSep}$penv{PATH}"
+        "PATH": "$env{HOME}/.local/bin${pathListSep}$penv{PATH}",
+        "LD_LIBRARY_PATH": "${sourceParentDir}/stagedir/lib${pathListSep}penv{LD_LIBRARY_PATH}"
       }
     },
     {

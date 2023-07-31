@@ -21,10 +21,10 @@
         "CMAKE_CXX_STANDARD": "20",
         "CMAKE_BUILD_TYPE": "Release",
         "CMAKE_DEBUG_POSTFIX": "D",
-        "BUILD_SHARED_LIBS": "NO"
+        "BUILD_SHARED_LIBS": "YES"
       },
       "environment": {
-        "CPM_USE_LOCAL_PACKAGES": "YES",
+        "CPM_USE_LOCAL_PACKAGES": "NO",
         "PATH": "$env{HOME}/.local/bin${pathListSep}$penv{PATH}"
       },
       "warnings": {
