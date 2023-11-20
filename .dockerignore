@@ -2,3 +2,5 @@
 /.vscode
 /cpm_modules
 .DS_Store
+/.github
+/standalone/Dockerfile
