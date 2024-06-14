@@ -1,53 +1,48 @@
+#include <crow.h>
 #include <greeter/greeter.h>
 #include <greeter/version.h>
 
-#include <cxxopts.hpp>
 #include <iostream>
 #include <string>
 #include <unordered_map>
 
-auto main(int argc, char** argv) -> int {
-  const std::unordered_map<std::string, greeter::LanguageCode> languages{
-      {"en", greeter::LanguageCode::EN},
-      {"de", greeter::LanguageCode::DE},
-      {"es", greeter::LanguageCode::ES},
-      {"fr", greeter::LanguageCode::FR},
-  };
+int main() {
+  crow::SimpleApp app;
 
-  cxxopts::Options options(*argv, "A program to welcome the world!");
+  CROW_ROUTE(app, "/hello")
+  ([](const crow::request& req) {
+    // check params
+    std::cout << "Params: " << req.url_params << "\n";
+    std::cout << "The key 'language' was "
+              << (req.url_params.get("language") == nullptr ? "not " : "") << "found.\n";
 
-  std::string language;
-  std::string name;
+    if (req.url_params.get("language") == nullptr) {
+      // return bad request
+      return crow::response(400, "please provide a 'language' argument");
+    }
+    const auto language = req.url_params.get("language");
 
-  // clang-format off
-  options.add_options()
-    ("h,help", "Show help")
-    ("v,version", "Print the current version number")
-    ("n,name", "Name to greet", cxxopts::value(name)->default_value("World"))
-    ("l,lang", "Language code to use", cxxopts::value(language)->default_value("en"))
-  ;
-  // clang-format on
+    // see if langauge was found
+    const std::unordered_map<std::string, greeter::LanguageCode> languages{
+        {"en", greeter::LanguageCode::EN},
+        {"de", greeter::LanguageCode::DE},
+        {"es", greeter::LanguageCode::ES},
+        {"fr", greeter::LanguageCode::FR},
+    };
+    const auto langIt = languages.find(language);
+    if (langIt == languages.end()) {
+      // return bad request
+      std::cout << "Greeting for language '" << language << "' is not available\n";
+      return crow::response(400, "language not recognized");
+    }
 
-  auto result = options.parse(argc, argv);
+    const greeter::Greeter greeter("Crow & Greeter");
+    std::cout << "Greeting for language '" << language << "' is available, returning message\n";
+    const auto message = greeter.greet(langIt->second);
 
-  if (result["help"].as<bool>()) {
-    std::cout << options.help() << std::endl;
-    return 0;
-  }
+    crow::json::wvalue ret({{"answer", message}});
+    return crow::response(200, ret);
+  });
 
-  if (result["version"].as<bool>()) {
-    std::cout << "Greeter, version " << GREETER_VERSION << std::endl;
-    return 0;
-  }
-
-  auto langIt = languages.find(language);
-  if (langIt == languages.end()) {
-    std::cerr << "unknown language code: " << language << std::endl;
-    return 1;
-  }
-
-  greeter::Greeter greeter(name);
-  std::cout << greeter.greet(langIt->second) << std::endl;
-
-  return 0;
+  app.port(3080).multithreaded().run();
 }
