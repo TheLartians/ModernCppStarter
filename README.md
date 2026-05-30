@@ -146,6 +146,10 @@ Additional arguments can be passed to the analyzers by setting the `CLANG_TIDY_A
 
 Ccache can be enabled by configuring with `-DUSE_CCACHE=<ON | OFF>`.
 
+#### Devcontainer
+
+The project includes a dockerfile along with a devcontainer file which allows for development in a docker container. Open the project folder in VS Code and you should be prompted to reopen the project in a container.
+
 ## FAQ
 
 > Can I use this for header-only libraries?

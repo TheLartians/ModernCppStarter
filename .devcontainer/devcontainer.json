@@ -1,0 +1,19 @@
+// .devcontainer/devcontainer.json
+{
+  "name": "ModernCppStarter",
+  "context": "..",
+  "dockerFile": "../Dockerfile",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "C_Cpp.default.compilerPath": "/usr/bin/clang++",
+        "cmake.generator": "Ninja"
+      },
+      "extensions": [
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools",
+        "twxs.cmake"
+      ]
+    }
+  }
+}
