@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.14...3.22)
 
 project(BuildAll LANGUAGES CXX)
 
+include(../cmake/options.cmake)
 include(../cmake/tools.cmake)
 
 # needed to generate test target

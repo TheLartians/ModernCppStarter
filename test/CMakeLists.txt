@@ -9,6 +9,7 @@ option(TEST_INSTALLED_VERSION "Test the version found by find_package" OFF)
 
 # --- Import tools ----
 
+include(../cmake/options.cmake)
 include(../cmake/tools.cmake)
 
 # ---- Dependencies ----

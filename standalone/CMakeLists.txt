@@ -4,6 +4,7 @@ project(GreeterStandalone LANGUAGES CXX)
 
 # --- Import tools ----
 
+include(../cmake/options.cmake)
 include(../cmake/tools.cmake)
 
 # ---- Dependencies ----
