@@ -31,5 +31,6 @@ jobs:
       - name: build
         run: cmake --build build -j4
 
-      - name: run
-        run: ./build/Greeter
+      - name: test
+        run: ctest --output-on-failure
+        working-directory: build

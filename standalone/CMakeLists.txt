@@ -27,3 +27,32 @@ add_executable(${PROJECT_NAME} ${sources})
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 17 OUTPUT_NAME "Greeter")
 
 target_link_libraries(${PROJECT_NAME} Greeter::Greeter cxxopts)
+
+# ---- Test standalone command-line behavior ----
+
+include(CTest)
+
+if(BUILD_TESTING)
+  add_test(NAME GreeterDefault COMMAND ${PROJECT_NAME})
+  set_tests_properties(GreeterDefault PROPERTIES PASS_REGULAR_EXPRESSION "Hello, World!")
+
+  add_test(NAME GreeterHelp COMMAND ${PROJECT_NAME} --help)
+  set_tests_properties(GreeterHelp PROPERTIES PASS_REGULAR_EXPRESSION "Show help")
+
+  add_test(NAME GreeterVersion COMMAND ${PROJECT_NAME} --version)
+  set_tests_properties(GreeterVersion PROPERTIES PASS_REGULAR_EXPRESSION "Greeter, version")
+
+  foreach(language IN ITEMS en de es fr)
+    add_test(NAME GreeterLanguage_${language} COMMAND ${PROJECT_NAME} --lang ${language})
+  endforeach()
+
+  set_tests_properties(
+    GreeterLanguage_en PROPERTIES PASS_REGULAR_EXPRESSION "Hello, World!"
+  )
+  set_tests_properties(GreeterLanguage_de PROPERTIES PASS_REGULAR_EXPRESSION "Hallo World!")
+  set_tests_properties(GreeterLanguage_es PROPERTIES PASS_REGULAR_EXPRESSION "¡Hola World!")
+  set_tests_properties(GreeterLanguage_fr PROPERTIES PASS_REGULAR_EXPRESSION "Bonjour World!")
+
+  add_test(NAME GreeterUnknownLanguage COMMAND ${PROJECT_NAME} --lang unknown)
+  set_tests_properties(GreeterUnknownLanguage PROPERTIES WILL_FAIL TRUE)
+endif()
